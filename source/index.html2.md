@@ -109,34 +109,215 @@ axios.get(`https://server.facturapi.com.py/api/test`).then( respuesta => {
 FacturAPI funciona.
 ```
 
-# Autorización
+# Authentication
 
-Para autorizar el uso de la API, se requiere que se envíe la API KEY en el Encabezado de la petición
-> Ejemplo para obtener autorizacion de los servicios:
+> To authorize, use this code:
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "https://server.facturapi.com.py/api/<tenantId>/test" \
-  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+curl "api_endpoint_here" \
+  -H "Authorization: meowmeowmeow"
 ```
 
 ```javascript
-import axios from 'axios';
+const kittn = require('kittn');
 
-axios.get(`https://server.facturapi.com.py/api/<tenantId>/test`).then( respuesta => {
-  console.log(respuesta);
-});
+let api = kittn.authorize('meowmeowmeow');
 ```
 
-> Asegurese de reemplazar `<hdiweuw-92jwwle...>` con la API key y el `<tenantId>` de la URL según lo que se proporciona en la Consola de Administración.
+> Make sure to replace `meowmeowmeow` with your API key.
 
-FacturApi utiliza unna API KEY para tener autorización a los servicios de la API. Para ello debes primeramente registrarte en la Consola con tus datos y añadir los datos de tu empresa en [Consola de Administración](https://www.facturapi.com.py).
+Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-FacturApi espera que se incluya la API key con la clave `Authorization`, en el siguiente formato:
+Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: Bearer api_key_<hdiweuw-92jwwle...>`
+`Authorization: meowmeowmeow`
 
 <aside class="notice">
-Debes reemplazar <code>&lt;hdiweuw-92jwwle...&gt;</code> con la API key específica de la Empresa.
+You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
+
+# Kittens
+
+## Get All Kittens
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get()
+```
+
+```shell
+curl "http://example.com/api/kittens" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Max",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
+  }
+]
+```
+
+This endpoint retrieves all kittens.
+
+### HTTP Request
+
+`GET http://example.com/api/kittens`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include_cats | false | If set to true, the result will also include cats.
+available | true | If set to false, the result will include kittens that have already been adopted.
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+## Get a Specific Kitten
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.get(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
+}
+```
+
+This endpoint retrieves a specific kitten.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to retrieve
+
+## Delete a Specific Kitten
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -X DELETE \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.delete(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "deleted" : ":("
+}
+```
+
+This endpoint deletes a specific kitten.
+
+### HTTP Request
+
+`DELETE http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to delete
 

@@ -1,0 +1,3 @@
+docker run --rm --name slate -v c:/users/marco/git/facturacionelectronicapy-docs/build:/srv/slate/build -v c:/users/marco/git/facturacionelectronicapy-docs/source:/srv/slate/source slatedocs/slate
+
+docker run --rm --name slate -p 4567:4567 -v c:/users/marco/git/facturacionelectronicapy-docs/build:/srv/slate/build -v c:/users/marco/git/facturacionelectronicapy-docs/source:/srv/slate/source slatedocs/slate serve
