@@ -1,5 +1,17 @@
 {
   "projects": {
-    "default": "facturapi-py"
+    "default": "facturasend"
+  },
+  "targets": {
+    "facturasend": {
+      "hosting": {
+        "facturasend-docs": [
+          "facturasend"
+        ],
+        "facturasend": [
+          "facturasend-docs"
+        ]
+      }
+    }
   }
 }

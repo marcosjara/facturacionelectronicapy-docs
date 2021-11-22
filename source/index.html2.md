@@ -149,37 +149,31 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-# Kittens
+# Lotes
 
-## Get All Kittens
+## Envio de lotes
+Esta invocación, crea los documentos electrónicos y los envía a la SET.
 
-```ruby
-require 'kittn'
+### HTTP Request
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+`POST http://api.facturasend.com.py/<tokenId>/lote/create`
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+Esta invocación, crea los documentos electrónicos y los envía a la SET.
 
 ```shell
-curl "http://example.com/api/kittens" \
+curl "http://api.facturasend.com.py/<tokenId>/lote/create" \
   -H "Authorization: meowmeowmeow"
 ```
 
 ```javascript
-const kittn = require('kittn');
+import axios from 'axios';
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+axios.get(`https://api.facturapi.com.py/<tokenId>/lote`).then( respuesta => {
+  console.log(respuesta);
+});
 ```
 
-> The above command returns JSON structured like this:
+> El comando de arriba, retornará lo siguiente:
 
 ```json
 [
@@ -200,7 +194,7 @@ let kittens = api.kittens.get();
 ]
 ```
 
-This endpoint retrieves all kittens.
+Primeramente se generaran los documentos electrónicos en FacturaSend, luego se intentarán enviar a la SET.
 
 ### HTTP Request
 
