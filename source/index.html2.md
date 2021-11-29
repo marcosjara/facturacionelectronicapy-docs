@@ -7,7 +7,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
   - <a href='#'>FacturApi Login</a>
-  - <a href='https://www.facturapi.com.py'>Inicio de FacturApi</a>
+  - <a href='https://www.facturasend.com.py'>Inicio de FacturApi</a>
 
 includes:
   - errors
@@ -79,7 +79,7 @@ Empezaras a abonar por el uso del servicio y de la API cuando hayas creado tu pr
 ## Pasos para utilizar FacturApi
 
 , de hecho eso es una de las razones por la cual muchas empresas no pueden 
-Puedes iniciar la prueba con FacturApi directamente y registrandote tu mismo en https://www.facturapi.com.py, no necesitas 
+Puedes iniciar la prueba con FacturApi directamente y registrandote tu mismo en https://www.facturasend.com.py, no necesitas 
 
 # Test de FacturApi
 
@@ -91,14 +91,14 @@ Para simplemente probar la comunicacion y ver si todo funciona de forma general,
 
 ```shell
 # Verificando si facturapi responde a la peticion
-curl "https://server.facturapi.com.py/api/test"  
+curl "https://api.facturasend.com.py/test"  
 ```
 
 ```javascript
 # El ejemplo se muestra utilizando AXIOS
 import axios from 'axios';
 
-axios.get(`https://server.facturapi.com.py/api/test`).then( respuesta => {
+axios.get(`https://api.facturasend.com.py/test`).then( respuesta => {
   console.log(respuesta);
 });
 ```
@@ -168,7 +168,7 @@ curl "http://api.facturasend.com.py/<tokenId>/lote/create" \
 ```javascript
 import axios from 'axios';
 
-axios.get(`https://api.facturapi.com.py/<tokenId>/lote`).then( respuesta => {
+axios.get(`https://api.facturasend.com.py/<tokenId>/lote`).then( respuesta => {
   console.log(respuesta);
 });
 ```

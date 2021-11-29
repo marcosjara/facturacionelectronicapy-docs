@@ -188,7 +188,7 @@ const headers = {
   `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
 };
 
-axios.post(`https://api.facturapi.com.py/<tokenId>/lote`, 
+axios.post(`https://api.facturasend.com.py/<tokenId>/lote`, 
           data, 
           {headers})
 .then( respuesta => {
