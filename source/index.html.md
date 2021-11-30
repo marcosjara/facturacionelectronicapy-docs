@@ -538,11 +538,23 @@ Primeramente se generaran los documentos electrónicos en FacturaSend, luego se 
 
 ### Parametros del objeto principal o data
 
-Parámetro | Description
---------- | -----------
-tipoDocumento | Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7).
-available | If set to false, the result will include kittens that have already been adopted.
-
+Parámetro | Requerido | Description
+--------- | --------- | -----------
+tipoDocumento | Si | Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7). Ej.:1= Factura electrónica, 4= Autofactura electrónica 5= Nota de crédito electrónica, 6= Nota de débito electrónica, 7= Nota de remisión electrónica.  C002 
+ruc | Si | RUC del contribuyente emisor(empresa), este campo debe ir con el digito verificador Ej.: 80069563-1
+establecimiento|Si| Son los 3 primeros digitos de la factura, Se puede enviar 1 o 001 C005 
+punto|Si| Es la segunda parte de una factura. C006 Ej.: 001.
+numero|Si| Es la parte final de la factura, se puede enviar directamente el numero o completar con 0 hasta obtener 7 digitos. C007 Ej.: 0000001, 1.
+descripcion|No| Información de interés del Fisco respecto al DE, B006.
+observacion|No| Información de interés del emisor respecto al DE, B005.
+fecha|Si| Fecha y hora de emisión del DE, D002.
+tipoEmision|Si| Tipo de emisión (1,2) Ej: 1= Normal, 2= Contingencia, B002.
+tipoTransaccion|No|Obligatorio si tipoDocumento= 2 o 4. D011	Ej.: 1= Venta de mercadería, 2= Prestación de servicios 
+tipoImpuesto|Si|Tipo de impuesto afectado, D013 Fijo 1 para venta.(1= IVA, 2= ISC, 3=Renta, 4=Ninguno, 5=IVA - Renta)
+moneda|Si|Descripcion de la moneda de acuerdo con la norma ISO 4217 Ej.: "PYG" D015
+condicionAnticipo|No|Condición del Anticipo, D019 Ej.:(1= Anticipo Global,2= Anticipo por ítem)no es obligatorio informar 
+condicionTipoCambio|No|Condición del tipo de cambio.Obligatorio si moneda ≠ PYG, D017 null para PYG
+cambio|No|Tipo de cambio de la operación,D018. null para PYG o el cambio del día de la moneda de venta. 
 ### Parametro del objeto data.cliente
 
 Parámetro | Description
@@ -633,7 +645,7 @@ require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
 api.kittens.delete(2)
-```
+```http://localhost:4567/#autorizacion
 
 ```python
 import kittn
