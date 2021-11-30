@@ -543,20 +543,47 @@ Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, e
 Parámetro | Requerido | Description
 --------- | --------- | -----------
 **tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002 
-ruc | Si | RUC del contribuyente emisor(empresa). Este campo debe ir con el digito verificador Ej.: 80069563-1
-establecimiento|Si| Son los 3 primeros digitos de la factura, Se puede enviar 1 o 001 C005 
-punto|Si| Es la segunda parte de una factura. C006 Ej.: 001.
-numero|Si| Es la parte final de la factura, se puede enviar directamente el numero o completar con 0 hasta obtener 7 digitos. C007 Ej.: 0000001, 1.
-descripcion|No| Información de interés del Fisco respecto al DE, B006.
-observacion|No| Información de interés del emisor respecto al DE, B005.
-fecha|Si| Fecha y hora de emisión del DE, D002.
-tipoEmision|Si| Tipo de emisión (1,2) Ej: 1= Normal, 2= Contingencia, B002.
-tipoTransaccion|No|Obligatorio si tipoDocumento= 2 o 4. D011	Ej.: 1= Venta de mercadería, 2= Prestación de servicios 
-tipoImpuesto|Si|Tipo de impuesto afectado, D013 Fijo 1 para venta.(1= IVA, 2= ISC, 3=Renta, 4=Ninguno, 5=IVA - Renta)
-moneda|Si|Descripcion de la moneda de acuerdo con la norma ISO 4217 Ej.: "PYG" D015
-condicionAnticipo|No|Condición del Anticipo, D019 Ej.:(1= Anticipo Global,2= Anticipo por ítem)no es obligatorio informar 
-condicionTipoCambio|No|Condición del tipo de cambio.Obligatorio si moneda ≠ PYG, D017 null para PYG
-cambio|No|Tipo de cambio de la operación,D018. null para PYG o el cambio del día de la moneda de venta. 
+**ruc** | **Si** | RUC del contribuyente emisor(empresa). Este campo debe ir con el digito verificador Ej.: 80069563-1
+**establecimiento**|**Si**| Son los 3 primeros digitos de la factura, Se puede enviar 1 o 001 <br/>**Campo XML:** C005 
+**punto**|**Si**| Es la segunda parte de una factura.  Ej.: 001.<br/>**Campo XML:** C006 
+**numero**|**Si**| Es la parte final de la factura, se puede enviar directamente el numero o completar con 0 hasta obtener 7 digitos. C007 Ej.: 0000001, 1.
+descripcion|No| Información de interés del Fisco respecto al DE.<br/>**Campo XML:** B006.
+observacion|No| Información de interés del emisor respecto al DE.<br/>**Campo XML:** B005.
+**fecha**|**Si**| Fecha y hora de emisión del DE. <br/>**Campo XML:** D002.
+**tipoEmision**|**Si**| Tipo de emisión (1,2) Ej: 1= Normal, 2= Contingencia. <br/>**Campo XML:** B002.
+tipoTransaccion|No|Obligatorio si tipoDocumento= 2 o 4.	<br/>Ej.: 1= Venta de mercadería, 2= Prestación de servicios <br/>**Campo XML:** D011
+**tipoImpuesto**|**Si**|Tipo de impuesto afectado, Fijo 1 para venta.(1= IVA, 2= ISC, 3=Renta, 4=Ninguno, 5=IVA - Renta) <br/>**Campo XML:**  D013
+**moneda**|**Si**|Descripcion de la moneda de acuerdo con la norma ISO 4217 Ej.: "PYG" D015
+condicionAnticipo|No|Condición del Anticipo,  Ej.:(1= Anticipo Global,2= Anticipo por ítem)no es obligatorio informar. <br/>**Campo XML:** D019
+condicionTipoCambio|No|Condición del tipo de cambio.Obligatorio si moneda ≠ PYG, null para PYG <br/>**Campo XML:** D017
+cambio|No|Tipo de cambio de la operación. null para PYG o el cambio del día de la moneda de venta. <br/>**Campo XML:** D018
+### Parametro del objeto data.cliente
+
+Parámetro | Requerido | Description
+--------- | --------- | -----------
+**contribuyente** |**Si**|Si el receptor(Cliente) del DE es contribuyente  Valores: true o false  <br/>**Campo XML:** D201
+ruc |No| R.U.C. del Cliente, Obligarorio si es contribuyente. <br/>**Campo XML:** D206
+**razonSocial**|**Si**| Nombre o Razon social del cliente,En caso de DE innominado,completar con “Sin Nombre” <br/>**Campo XML:** D211
+nombreFantasia |No|Nombre de fantasia del cliente <br/>**Campo XML:** D212
+**tipoOperacion**|**Si**|Tipo de operación(1= B2B, 2= B2C, 3= B2G, 4= B2F)<br/>**Campo XML:** D202
+direccion |No|Direccion del Cliente, Campo obligatorio cuando tipoDocumento =7 o tipoOperacion=4 <br/>**Campo XML:** D213
+numeroCasa |No|Numero de Casa del Cliente, Campo obligatorio si se informa la direccion,Cuando es contribuyente debe corresponder a lo declarado en el RUC<br/>**Campo XML:** D218
+departamento|No| Codigo del departamento,Campo obligatorio si se informa la direccion y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:** D219 
+departamentoDescripcion|No| Nombre del departamento. Referente al campo departamento<br/>**Campo XML:** D220
+distrito||
+distritoDescripcion||
+ciudad||
+ciudadDescripcion||
+pais||
+paisDescripcion||
+tipoContribuyente||
+documentoTipo||
+documentoTipo||
+documentoNumero||
+telefono||
+celular||
+email||
+codigo||
 ### Parametro del objeto data.cliente
 
 Parámetro | Description
@@ -564,12 +591,6 @@ Parámetro | Description
 contribuyente | (true o false) Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7).
 ruc | If set to false, the result will include kittens that have already been adopted.
 
-### Parametro del objeto data.cliente
-
-Parámetro | Description
---------- | -----------
-contribuyente | (true o false) Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7).
-ruc | If set to false, the result will include kittens that have already been adopted.
 
 ### Validaciones
 
