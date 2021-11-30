@@ -538,10 +538,12 @@ Primeramente se generaran los documentos electrónicos en FacturaSend, luego se 
 
 ### Parametros del objeto principal o data
 
+Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, es decir, se interpreta de la misma manera si envia tipoDocumento o tipo_documento. 
+
 Parámetro | Requerido | Description
 --------- | --------- | -----------
-tipoDocumento | Si | Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7). Ej.:1= Factura electrónica, 4= Autofactura electrónica 5= Nota de crédito electrónica, 6= Nota de débito electrónica, 7= Nota de remisión electrónica.  C002 
-ruc | Si | RUC del contribuyente emisor(empresa), este campo debe ir con el digito verificador Ej.: 80069563-1
+**tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002 
+ruc | Si | RUC del contribuyente emisor(empresa). Este campo debe ir con el digito verificador Ej.: 80069563-1
 establecimiento|Si| Son los 3 primeros digitos de la factura, Se puede enviar 1 o 001 C005 
 punto|Si| Es la segunda parte de una factura. C006 Ej.: 001.
 numero|Si| Es la parte final de la factura, se puede enviar directamente el numero o completar con 0 hasta obtener 7 digitos. C007 Ej.: 0000001, 1.
