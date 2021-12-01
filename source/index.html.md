@@ -208,7 +208,6 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
 [
   {
     "tipoDocumento" : 1,
-    "ruc" : "80069563-1",
     "establecimiento" : 1,
     "punto" : "001",
     "numero" : 4, 
@@ -232,13 +231,9 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
         "direccion" : "Avda Calle Segunda y Proyectada",
         "numeroCasa" : "1515",
         "departamento" : 11,
-        "departamentoDescripcion" : "ALTO PARANA",
         "distrito" : 143,
-        "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
         "ciudad" : 3344,
-        "ciudadDescripcion" : "PASO ITA (INDIGENA)",
         "pais" : "PRY",
-        "paisDescripcion" : "Paraguay",
         "tipoContribuyente" : 1,
         "documentoTipo" : 1,
         "documentoNumero" : "2324234",
@@ -270,18 +265,15 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
             "tipo" : 1,
             "monto" : "150000",
             "moneda" : "PYG",
-            "monedaDescripcion" : "Guarani",
             "cambio" : 0.0
         }, { 
             "tipo" : 3,
             "monto" : "150000",
             "moneda" : "PYG",
-            "monedaDescripcion" : "Guarani",
             "cambio" : 0.0,
             "infoTarjeta" : {
                 "numero" : 1234,
                 "tipo" : 1,
-                "tipoDescripcion" : "Dinelco",
                 "numeroTarjeta": 3232,
                 "titular" : "Marcos Jara",
                 "ruc" : "69695654-1",
@@ -293,7 +285,6 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
             "tipo" : 2,
             "monto" : "150000",
             "moneda" : "PYG",
-            "monedaDescripcion" : "Guarani",
             "cambio" : 0.0,
             "infoCheque" : {
                 "numeroCheque": "32323232",
@@ -330,7 +321,6 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
         "descuentoPorcentaje": 0,
         "anticipo": 0,
         "pais" : "PRY",
-        "paisDescripcion" : "Paraguay",
         "tolerancia" : 1,
         "toleranciaCantidad" : 1,
         "toleranciaPorcentaje" : 1,
@@ -366,12 +356,11 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
             "pesoBruto" : 10000,
             "pesoNeto" : 8000,
             "tipoCombustible" : 9,
-            "tipoCombustibleDescripcion" : "Vapor",
             "numeroMotor" : "323234234234234234",
             "capacidadTraccion" : 151.01,
             "año" : 2009,
             "tipoVehiculo" : "Camioneta",
-            "cilindradas" : "Camioneta"
+            "cilindradas" : "3500"
         }
     }],
     "sectorEnergiaElectrica" : {
@@ -423,13 +412,9 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
             "complementoDireccion1" : "Entre calle 2", 
             "complementoDireccion2" : "y Calle 7",
             "departamento" : 11,
-            "departamentoDescripcion" : "ALTO PARANA",
             "distrito" : 143,
-            "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
             "ciudad" : 3344,
-            "ciudadDescripcion" : "PASO ITA (INDIGENA)",
             "pais" : "PRY",
-            "paisDescripcion" : "Paraguay",
             "telefonoContacto" : "097x"
         },
         "entrega" : {
@@ -438,13 +423,9 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
             "complementoDireccion1" : "Entre calle 2", 
             "complementoDireccion2" : "y Calle 7",
             "departamento" : 11,
-            "departamentoDescripcion" : "ALTO PARANA",
             "distrito" : 143,
-            "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
             "ciudad" : 3344,
-            "ciudadDescripcion" : "PASO ITA (INDIGENA)",
             "pais" : "PRY",
-            "paisDescripcion" : "Paraguay",
             "telefonoContacto" : "097x"
         },
         "vehiculo" : {
@@ -472,42 +453,6 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
         }
     },
     "documentoAsociado" : null ,
-    "paramsOverride" : {
-        "version" : 150,
-        "ruc" : "80069563-1",
-        "razonSocial" : "DE generado en ambiente de prueba - sin valor comercial ni fiscal",
-        "nombreFantasia" : "TIPS S.A. TECNOLOGIA Y SERVICIOS",
-        "actividadesEconomicas" : [{
-            "codigo" : 62010,
-            "descripcion" : "ACTIVIDADES DE PROGRAMACIÓN INFORMÁTICA"
-        }, {
-            "codigo" : 62090,
-            "descripcion" : "OTRAS ACTIVIDADES DE TECNOLOGÍA DE LA INFORMACIÓN Y SERVICIOS INFORMÁTICOS"
-        }, {
-            "codigo" : 47411,
-            "descripcion" : "COMERCIO AL POR MENOR DE EQUIPOS INFORMÁTICOS Y SOFTWARE"
-        }],
-        "timbradoNumero" : "12558946",
-        "timbradoFecha" : "2021-08-25T00:00:00",
-        "tipoContribuyente" : 2, 
-        "tipoRegimen" : 8, 
-        "establecimientos" : [{
-            "codigo" : "001",
-            "direccion" : "Barrio Carolina", 
-            "numeroCasa" : "0", 
-            "complementoDireccion1" : "Entre calle 2", 
-            "complementoDireccion2" : "y Calle 7",
-            "departamento" : 11,
-            "departamentoDescripcion" : "ALTO PARANA",
-            "distrito" : 145,
-            "distritoDescripcion" : "CIUDAD DEL ESTE",
-            "ciudad" : 3432,
-            "ciudadDescripcion" : "PUERTO PTE.STROESSNER (MUNIC)",
-            "telefono" : "0973-527155",
-            "email" : "tips@tips.com.py",
-            "denominacion" : "Sucursal 1"
-        }]
-    }
 }
 ]
 ```
@@ -538,9 +483,9 @@ Primeramente se generaran los documentos electrónicos en FacturaSend, luego se 
 
 ### Parametros del objeto principal o data
 
-Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, es decir, se interpreta de la misma manera si envia tipoDocumento o tipo_documento. 
+Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, es decir, se interpreta de la misma manera si envia *tipoDocumento* o *tipo_documento*. 
 
-Parámetro | Requerido | Description
+Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002 
 **ruc** | **Si** | RUC del contribuyente emisor(empresa). Este campo debe ir con el digito verificador Ej.: 80069563-1
@@ -557,9 +502,11 @@ tipoTransaccion|No|Obligatorio si tipoDocumento= 2 o 4.	<br/>Ej.: 1= Venta de me
 condicionAnticipo|No|Condición del Anticipo,  Ej.:(1= Anticipo Global,2= Anticipo por ítem)no es obligatorio informar. <br/>**Campo XML:** D019
 condicionTipoCambio|No|Condición del tipo de cambio.Obligatorio si moneda ≠ PYG, null para PYG <br/>**Campo XML:** D017
 cambio|No|Tipo de cambio de la operación. null para PYG o el cambio del día de la moneda de venta. <br/>**Campo XML:** D018
+cliente|Si|Datos del Receptor del Documento Electrónico. Ver detalle en tabla siguiente.<br/>
+
 ### Parametro del objeto data.cliente
 
-Parámetro | Requerido | Description
+Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **contribuyente** |**Si**|Si el receptor(Cliente) del DE es contribuyente  Valores: true o false  <br/>**Campo XML:** D201
 ruc |No| R.U.C. del Cliente, Obligarorio si es contribuyente. <br/>**Campo XML:** D206
