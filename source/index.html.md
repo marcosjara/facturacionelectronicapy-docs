@@ -514,30 +514,42 @@ ruc |No| R.U.C. del Cliente, Obligarorio si es contribuyente. <br/>**Campo XML:*
 nombreFantasia |No|Nombre de fantasia del cliente <br/>**Campo XML:** D212
 **tipoOperacion**|**Si**|Tipo de operación(1= B2B, 2= B2C, 3= B2G, 4= B2F)<br/>**Campo XML:** D202
 direccion |No|Direccion del Cliente, Campo obligatorio cuando tipoDocumento =7 o tipoOperacion=4 <br/>**Campo XML:** D213
-numeroCasa |No|Numero de Casa del Cliente, Campo obligatorio si se informa la direccion,Cuando es contribuyente debe corresponder a lo declarado en el RUC<br/>**Campo XML:** D218
+numeroCasa|No|Numero de Casa del Cliente, Campo obligatorio si se informa la direccion,Cuando es contribuyente debe corresponder a lo declarado en el RUC<br/>**Campo XML:** D218
 departamento|No| Codigo del departamento,Campo obligatorio si se informa la direccion y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:** D219 
-departamentoDescripcion|No| Nombre del departamento. Referente al campo departamento<br/>**Campo XML:** D220
-distrito||
-distritoDescripcion||
-ciudad||
-ciudadDescripcion||
-pais||
-paisDescripcion||
-tipoContribuyente||
-documentoTipo||
-documentoTipo||
-documentoNumero||
-telefono||
-celular||
-email||
-codigo||
-### Parametro del objeto data.cliente
+distrito|No|Codigo del distrito del Cliente, El codigo debe seguir la Tabla 2.1 – Distritos del Manual Tecnico. <br/>**Campo XML:** D221
+ciudad|No|Codigo de la ciudad del Cliente. Campo obligatorio si se informa la direccion y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:**D223
+**pais**|**Si**|Codigo del Pais del Cliente, Segun XSD de Codificación de Países<br/>**Campo XML:**D203
+tipoContribuyente|No|Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false<br/>**Campo XML:**D205
+documentoTipo|No|Tipo de documento del cliente <br/>**Campo XML:**D208
+documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
+telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
+celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
+email|No|Correo electronico del cliente<br/>**Campo XML:**D216
+codigo|No|Codigo del Cliente<br/>**Campo XML:**D217
 
-Parámetro | Description
---------- | -----------
-contribuyente | (true o false) Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7).
-ruc | If set to false, the result will include kittens that have already been adopted.
+### Parametro del objeto data.items
 
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**codigo** |**Si**|Código interno de identificación de la mercadería o servicio de responsabilidad del emisor<br/>**Campo XML:**E701 
+**descripcion**|**Si** |Descripción del producto y/o servicio. Equivalente a nombre del producto establecido en la RG 24/2019<br/>**Campo XML:**E708
+observacion|No|Informacion de intetes acerca del item<br/>**Campo XML:**E714
+partidaArancelaria|No|Partida arancelaria<br/>**Campo XML:**E702
+ncm|No|Nomenclatura común del Mercosur (NCM)<br/>**Campo XML:**E703
+**unidadMedida**|**Si**|Es la unidad de medida del producto <br/>**Campo XML:**E709
+**cantidad**|**Si**|Cantidad del producto y/o servicio <br/>**Campo XML:**E711
+**precioUnitario**|**Si**|Precio unitario del producto y/o servicio (incluidos impuestos)<br/>**Campo XML:**E721
+cambio|No|Tipo de cambio por ítem<br/>**Campo XML:**E725
+descuento|No|Descuento particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA002
+descuentoPorcentaje|No|Porcentaje de descuento particular por ítem<br/>**Campo XML:**EA003
+anticipo|No|Anticipo particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA006
+subtotal||<br/>**Campo XML:**
+pais|No|<br/>Código del país de origen del producto**Campo XML:**E712
+paisDescripcion|No|Nombre del país de origen del producto<br/>**Campo XML:**E713
+tolerancia|No|Código de datos de relevancia de los productos<br/>**Campo XML:**E715
+toleranciaCantidad|No|Cantidad de quiebra o merma<br/>**Campo XML:**E717
+toleranciaPorcentaje|No|Porcentaje de quiebra o merma<br/>**Campo XML:**E718
+cdcAnticipo|No|CDC del anticipo<br/>**Campo XML:**E719
 
 ### Validaciones
 
