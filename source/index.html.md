@@ -502,8 +502,8 @@ tipoTransaccion|No|Obligatorio si tipoDocumento= 2 o 4.	<br/>Ej.: 1= Venta de me
 condicionAnticipo|No|Condición del Anticipo,  Ej.:(1= Anticipo Global,2= Anticipo por ítem)no es obligatorio informar. <br/>**Campo XML:** D019
 condicionTipoCambio|No|Condición del tipo de cambio.Obligatorio si moneda ≠ PYG, null para PYG <br/>**Campo XML:** D017
 cambio|No|Tipo de cambio de la operación. null para PYG o el cambio del día de la moneda de venta. <br/>**Campo XML:** D018
-cliente|Si|Datos del Receptor del Documento Electrónico. Ver detalle en tabla siguiente.<br/>
-
+cliente|Si|Datos del Receptor del Documento Electrónico. Ver detalle en tabla data.cliente.<br/>
+usuario|Si|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla data.usuario.<br/>
 ### Parametro del objeto data.cliente
 
 Parámetro | Requerido | Descripción
@@ -526,9 +526,14 @@ telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais =
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
 email|No|Correo electronico del cliente<br/>**Campo XML:**D216
 codigo|No|Codigo del Cliente<br/>**Campo XML:**D217
-
+### Parametro del objeto data.usuario
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**documentoTipo**|**Si**|Tipo de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D141
+**documentoNumero**|**Si**|Número de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D143
+**nombre**|**Si**|Nombre o razón social del responsable de la generación del DE<br/>**Campo XML:**D144
+**cargo**|**Si**|Cargo del responsable de la generación del DE<br/>**Campo XML:**D145
 ### Parametro del objeto data.items
-
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **codigo** |**Si**|Código interno de identificación de la mercadería o servicio de responsabilidad del emisor<br/>**Campo XML:**E701 
@@ -550,6 +555,102 @@ tolerancia|No|Código de datos de relevancia de los productos<br/>**Campo XML:**
 toleranciaCantidad|No|Cantidad de quiebra o merma<br/>**Campo XML:**E717
 toleranciaPorcentaje|No|Porcentaje de quiebra o merma<br/>**Campo XML:**E718
 cdcAnticipo|No|CDC del anticipo<br/>**Campo XML:**E719
+**ivaTipo** |**Si**|Forma de afectación tributaria del IVA <br/>1= Gravado IVA<br/>2= Exonerado (Art. 83- Ley 125/91) <br/>3= Exento <br/>4= Gravado parcial Grav-Exento)<br/>**Campo XML:**E731
+**ivaBase**|**Si**|Base gravada del IVA por ítem<br/>**Campo XML:**E735
+**iva**|**Si**|Tasa del IVA<br/>**Campo XML:**E734
+lote|No|Numero de Lote del producto<br/>**Campo XML:**E751
+vencimiento|No|Fecha de vencimiento del producto Formato AAAA-MM-DD<br/>**Campo XML:**E752
+numeroSerie|No|Número de serie <br/>**Campo XML:**E753
+numeroPedido|No|Número de pedido<br/>**Campo XML:**E754
+numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:**E755
+
+### Parametro del objeto data.items.dncp
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+codigoNivelGeneral|No|Código DNCP – Nivel General. Obligatorio si tipoOperacion = 3 <br/>**Campo XML:**E704
+codigoNivelEspecifico|No|Código DNCP – Nivel Especifico. Obligatorio si existe el campo codigoNivelGeneral <br/>**Campo XML:**E705
+codigoGtinProducto|No|Código GTIN por producto. Informar si la mercadería tiene GTIN <br/>**Campo XML:**E706
+codigoNivelPaquete|No|Código GTIN por paquete. Informar si el paquete tiene GTIN<br/>**Campo XML:**E707
+### Parametro del objeto data.items.importador
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+nombre|No|Nombre del Importador. Obligados por la RG N° 16/2019 – Agroquímicos<br/>**Campo XML:**E756
+direccion|No|Dirección de Importador<br/>**Campo XML:**E757
+registroImportador|No|Número de registro de la firma del importador<br/>**Campo XML:**E758
+registroSenave|No|Número de registro del producto otorgado por el SENAVE<br/>Obligados por la RG N° 16/2019 y la RG N° 24/2019 – Agroquímicos<br/>**Campo XML:**E759
+registroEntidadComercial|No|Número de registro de entidad comercial otorgado por el SENAVE<br/>**Campo XML:**E760
+
+
+### Parametro del objeto data.items.sectorAutomotor
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+tipo|No|Tipo de operación de venta de vehículos<br/>1= Venta a representante<br/>2= Venta al consumidor final<br/>3= Venta a gobierno<br/>4= Venta a flota de vehículos<br/>**Campo XML:**E771
+chasis|No|Chasis del vehículo<br/>**Campo XML:**E773
+color|No|Color del vehículo<br/>**Campo XML:**E774
+potencia|No|Potencia del motor (CV) <br/>**Campo XML:**E775
+capacidadMotor|No|Capacidad del motor. Expresa en centímetros cúbicos (cc) <br/>**Campo XML:**E776
+capacidadPasajeros|No|Capacidad máxima de pasajeros sentados<br/>**Campo XML:**E785
+pesoBruto|No|Peso bruto del vehiculo. En toneladas<br/>**Campo XML:**E778
+pesoNeto|No|Peso neto del vehiculo. En toneladas<br/>**Campo XML:**E777
+tipoCombustible|No|Tipo de combustible <br/>1= Gasolina<br/>2= Diésel<br/>3= Etanol<br/>4= GNV<br/>5= Flex<br/>9= Otro<br/>**Campo XML:**E779
+tipoCombustibleDescripcion|No|Descripción del tipo de combustible. <br/>**Campo XML:**E780
+numeroMotor|No|<br/>Número del motor**Campo XML:**E781
+capacidadTraccion|No|Capacidad máxima de tracción <br/>**Campo XML:**E782
+año|No|Año de fabricación<br/>**Campo XML:**E783
+tipoVehiculo|No|Tipo de vehículo<br/>**Campo XML:**E784
+cilindradas|No|Cilindradas del motor<br/>**Campo XML:**E786
+
+### Parametro del objeto data.condicion
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**tipo**|**Si**|Condición de la operación. <br/>1= Contado <br/>2= Crédito<br/>**Campo XML:**E601
+entregas|No|Datos que describen la forma de pago al contado o del monto de la entrega inicial. Ver detalle en tabla data.condicion.entregas.<br/>
+credito|No|Campos que describen la operación a crédito. Ver detalle en tabla data.condicion.credito.<br/>
+### Parametro del objeto data.condicion.entregas
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**tipo**|**Si**|Tipo de pago Ej.:1= Efectivo, 2= Cheque,3= Tarjeta de crédito, 4= Tarjeta de débito. Existe mas tipos de pagos ver en: <br/> **Campo XML:**E606
+**monto**|**Si**| Monto por tipo de pago <br/> **Campo XML:**E608
+**moneda**|**Si**|Moneda por tipo de pago<br/>Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 Se requiere la misma moneda para todos los ítems del DE<br/> **Campo XML:**E609
+**monedaDescripcion**|**Si**|Descripción de la moneda por tipo de pago <br/> **Campo XML:**E610
+cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:**E611
+infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla data.condicion.entregas.infoTarjeta
+infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en tabla data.condicion.entregas.infoCheque
+### Parametro del objeto data.condicion.entregas.infoTarjeta
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**tipo**|**Si**|Denominación de la tarjeta.<br/>1= Visa<br/>2= Mastercard<br/>3= American Express<br/>4= Maestro<br/>5= Panal<br/>6= Cabal<br/>99= Otro <br/>**Campo XML:**E621
+**tipoDescripcion**|**Si**|<br/>Descripción de denominación de la tarjeta. Si tipo =99 informar la descripción de la denominación de la tarjeta**Campo XML:**E622
+numeroTarjeta|No|Número de la tarjeta. Cuatro últimos dígitos de la tarjeta<br/>**Campo XML:**E629
+titular|No|Nombre del titular de la tarjeta <br/>**Campo XML:**E628
+ruc|No|RUC de la procesadora de tarjeta<br/>**Campo XML:**E624
+razonSocial|No|Razón social de la procesadora de tarjeta<br/>**Campo XML:**E623
+**medioPago**|**Si**|Forma de procesamiento de pago.<br/>1= POS. <br/>2= Pago Electrónico (Ejemplo:compras por Internet)<br/>9= Otro<br/>**Campo XML:**E626
+codigoAutorizacion|No|Código de autorización de la operación <br/>**Campo XML:**E627
+    
+### Parametro del objeto data.condicion.entregas.infoCheque
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------     
+**numeroCheque**|**Si**|Número de cheque. Completar con 0 (cero) a la izquierda hasta alcanzar 8 (ocho) cifras<br/>**Campo XML:**E631
+**banco**|**Si**|Banco emisor<br/>**Campo XML:**E632
+### Parametro del objeto data.condicion.credito
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------   
+**tipo**|**Si**|Condición de la operación a crédito <br/>1= Plazo <br/>2= Cuota<br/>**Campo XML:**E641
+plazo |No|Plazo del crédito. Obligatorio si tipo = 1 <br/>Ejemplo: 30 días, 12 meses<br/>**Campo XML:**E643
+cuotas|No|Cantidad de cuotas. Plazo del crédito.  Obligatorio si tipo = 2<br/>Ejemplo: 12, 24, 36 <br/>**Campo XML:**E644
+montoEntrega|No|Monto de la entrega inicial <br/>**Campo XML:**E645
+infoCuotas|No|Campos que describen las cuotas.Ver detalle en tabla data.condicion.credito.infoCuotas
+### Parametro del objeto data.condicion.credito.infoCuotas
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+**moneda**|**Si**|Moneda de las cuotas.Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 <br/>**Campo XML:**E653
+**monto**|**Si**|Monto de cada cuota<br/>**Campo XML:**E651
+vencimiento|No|Fecha de vencimiento de cada cuota<br/>**Campo XML:**E652
 
 ### Validaciones
 
