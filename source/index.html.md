@@ -651,7 +651,91 @@ Parámetro | Requerido | Descripción
 **moneda**|**Si**|Moneda de las cuotas.Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 <br/>**Campo XML:**E653
 **monto**|**Si**|Monto de cada cuota<br/>**Campo XML:**E651
 vencimiento|No|Fecha de vencimiento de cada cuota<br/>**Campo XML:**E652
+### Parametro del objeto data.sectorEnergiaElectrica
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+numeroMedidor|No|Número de medidor<br/>**Campo XML:**E792
+codigoActividad|No|Código de actividad<br/>**Campo XML:**E793
+codigoCategoria|No|Código de categoría E<br/>**Campo XML:**E794
+lecturaAnterior|No|Lectura anterior<br/>**Campo XML:**E795
+lecturaActual|No|Lectura actual <br/>**Campo XML:**E796
+### Parametro del objeto data.sectorSeguros
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+codigoAseguradora|No|Código de la empresa de seguros en la Superintendencia de Seguros<br/>**Campo XML:**E801
+**codigoPoliza**|**Si**|Código de la póliza<br/>**Campo XML:**EA791
+**numeroPoliza**|**Si**|Número de la póliza<br/>**Campo XML:**EA794
+**vigencia**|**Si**|Descripción de la unidad de tiempo de vigencia<br/>**Campo XML:**EA792
+**vigenciaUnidad**|**Si**|Vigencia de la póliza<br/>**Campo XML:**EA793
+inicioVigencia|No|Fecha de inicio de vigencia<br/>**Campo XML:**EA795
+finVigencia|No|Fecha de fin de vigencia <br/>**Campo XML:**EA796
+codigoInternoItem|No|Código interno del ítem<br/>**Campo XML:**EA797
 
+### Parametro del objeto data.sectorSupermercados
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+nombreCajero|No|Nombre del cajero<br/>**Campo XML:**E811
+efectivo|No|Efectivo<br/>**Campo XML:**E812
+vuelto|No|Vuelto<br/>**Campo XML:**E813
+donacion|No|Monto de la donación<br/>**Campo XML:**E814
+donacionDescripcion|No|Descripción de la donación<br/>**Campo XML:**E815
+
+### Parametro del objeto data.sectorAdicional
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+ciclo|No|Ciclo<br/>**Campo XML:**E821
+inicioCiclo|No|Fecha de inicio de ciclo<br/>**Campo XML:**E822
+finCiclo|No|Fecha de fin de ciclo<br/>**Campo XML:**E823
+vencimientoPago|No|Fecha de vencimiento para el pago<br/>**Campo XML:**E824
+numeroContrato|No|Número de contrato E<br/>**Campo XML:**E825
+saldoAnterior|No|Saldo anterior<br/>**Campo XML:**E826
+
+### Parametro del objeto data.detalleTransporte
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+tipo|No|Tipo de transporte. Obligatorio si tipoDocumento = 7. <br/>1= Propio<br/>2= Tercero<br/>**Campo XML:**E901
+**modalidad**|**Si**|Modalidad del transporte<br/>1=Terrestre<br/>2= Fluvial<br/>3= Aéreo<br/>4= Multimodal<br/>**Campo XML:**E903
+**tipoResponsable**|**Si**|Responsable del costo del flete<br/>1= Emisor de la Factura Electrónica<br/>2= Receptor de la Factura Electrónica <br/>3= Tercero<br/>4= Agente intermediario del transporte (cuando intervenga)<br/>5= Transporte propio <br/>**Campo XML:**E905
+**condicionNegociacion**|**Si**|Condición de la negociación<br/>**Campo XML:**E905
+numeroManifiesto|No|Número de manifiesto o conocimiento de carga/declaración de tránsito aduanero/ Carta de porte internacional <br/>**Campo XML:**E907
+numeroDespachoImportacion|No|Número de despacho de importación<br/>**Campo XML:**E908
+inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:**E909
+finEstimadoTranslado|No|Fecha estimada de fin de traslado<br/>**Campo XML:**E910
+paisDestino|No|Código del país de destino <br/>**Campo XML:**E911
+paisDestinoNombre|No|Descripción del país de destino.  <br/>**Campo XML:**E912
+salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla data.detalleTransporte.salida
+entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla data.detalleTransporte.entrega
+vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla data.detalleTransporte.vehiculo
+transportista|No|Campos que identifican al transportista. Ver detalle en tabla data.detalleTransporte.transportista
+### Parametro del objeto data.salida
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+direccion||
+numeroCasa||
+complementoDireccion1||
+complementoDireccion2||
+departamento||
+departamentoDescripcion||
+distrito||
+distritoDescripcion||
+ciudad||
+ciudadDescripcion||
+pais||
+paisDescripcion||
+telefonoContacto||
+
+
+### Parametro del objeto data.entrega
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+
+### Parametro del objeto data.vehiculo
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
+
+### Parametro del objeto data.transportista
+Parámetro | Requerido | Descripción
+--------- | --------- | ----------- 
 ### Validaciones
 
 - Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
