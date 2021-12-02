@@ -504,6 +504,52 @@ condicionTipoCambio|No|Condición del tipo de cambio.Obligatorio si moneda ≠ P
 cambio|No|Tipo de cambio de la operación. null para PYG o el cambio del día de la moneda de venta. <br/>**Campo XML:** D018
 cliente|Si|Datos del Receptor del Documento Electrónico. Ver detalle en tabla data.cliente.<br/>
 usuario|Si|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla data.usuario.<br/>
+### Parametro del objeto data.factura
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:**E011
+fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:**E013
+dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla data.factura.dncp 
+### Parametro del objeto data.factura.dncp
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**modalidad**|**Si**|Modalidad - Código emitido por la DNCP <br/>**Campo XML:**E021
+**entidad**|**Si**|Entidad - Código emitido por la DNCP<br/>**Campo XML:**E022
+**año**|**Si**|Año - Código emitido por la DNCP<br/>**Campo XML:**E023
+**secuencia**|**Si**|Secuencia - emitido por la DNCP <br/>**Campo XML:**E024
+**fecha**|**Si**|Fecha de emisión del código de contratación por la DNCP<br/>**Campo XML:**E025
+### Parametro del objeto data.autofactura
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**tipoVendedor**|**Si**|Naturaleza del vendedor <br/>1= No contribuyente <br/>2= Extranjero <br/>**Campo XML:** E301
+**documentoTipo**|**Si**|Tipo de documento de identidad del vendedor <br/>**Campo XML:** E304
+**documentoNumero**|**Si**| Número de documento de identidad del vendedor<br/>**Campo XML:** E306
+**nombre**|**Si**|Nombre y apellido del vendedor  <br/>**Campo XML:** E307
+**direccion**|**Si**|Dirección del vendedor.En caso de extranjeros, colocar la dirección en donde se realizó la transacción. <br/>**Campo XML:** E308
+**numeroCasa**|**Si**|Número de casa del vendedor.Si no tiene numeración colocar 0 (cero)  <br/>**Campo XML:** E309
+**departamento**|**Si**|Código del departamento del vendedor  <br/>**Campo XML:** E310
+**departamentoDescripcion**|**Si**|Descripción del departamento del vendedor <br/>**Campo XML:** E311
+**distrito**|**Si**|Código del distrito del vendedor <br/>**Campo XML:** E312
+**distritoDescripcion**|**Si**|Descripción del distrito del vendedor <br/>**Campo XML:**E313
+**ciudad**|Si|Código de la ciudad del vendedor <br/>**Campo XML:** E314
+**ciudadDescripcion**|**Si**|Descripción del ciudad del vendedor <br/>**Campo XML:** E315
+ubicacion|No| Ver detalle en tabla data.autofactura.ubicacion
+
+### Parametro del objeto data.autofactura.ubicacion
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+lugar|| Lugar de la transacción <br/>**Campo XML:** E316
+departamento||Código del departamento donde se realiza la transacción <br/>**Campo XML:** E317
+departamentoDescripcion||| Descripcion del departamento donde se realiza la transacción <br/>**Campo XML:** E318
+distrito||<br/>Código del distrito donde se realiza la transacción **Campo XML:**E319
+distritoDescripcion|| Descripcion del distrito donde se realiza la transacción <br/>**Campo XML:**E320
+ciudad|| Código de la ciudad donde se realiza la transacción <br/>**Campo XML:**E321 
+ciudadDescripcion||Descripcion de la ciudad donde se realiza la transacción  <br/>**Campo XML:**E322 
+
 ### Parametro del objeto data.cliente
 
 Parámetro | Requerido | Descripción
@@ -710,32 +756,104 @@ transportista|No|Campos que identifican al transportista. Ver detalle en tabla d
 ### Parametro del objeto data.salida
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-direccion||
-numeroCasa||
-complementoDireccion1||
-complementoDireccion2||
-departamento||
-departamentoDescripcion||
-distrito||
-distritoDescripcion||
-ciudad||
-ciudadDescripcion||
-pais||
-paisDescripcion||
-telefonoContacto||
+**direccion**|**Si**|Dirección del local de salida. Nombre de la calle principal <br/>**Campo XML:**E921
+**numeroCasa**|**Si**|Número de casa de salida<br/>**Campo XML:**E922
+complementoDireccion1|No|Complemento de dirección 1 salida. Nombre de la calle secundaria<br/>**Campo XML:**E923
+complementoDireccion2|No|Complemento de dirección 2 salida. Número de departamento/piso/ local/ edificio/ deposito del local de salida de la mercadería<br/>**Campo XML:**E924
+**departamento**|**Si**|Código del departamento del local de salida. Según XSD de Departamentos<br/>**Campo XML:**E925
+**departamentoDescripcion**|**Si**|Descripción del departamento del local de salida<br/>**Campo XML:**E926
+distrito|No|Código del distrito del local de salida<br/>**Campo XML:**E927
+distritoDescripcion|No|Descripción de distrito del local de salida<br/>**Campo XML:**E927
+**ciudad**|**Si**|Código de la ciudad del local de salida<br/>**Campo XML:**E929
+**ciudadDescripcion**|**Si**|Descripción de ciudad del local de salida<br/>**Campo XML:**E930
+pais|No|Código de la ciudad del local de salida
+paisDescripcion|No|Código de la ciudad del local de salida
+telefonoContacto|No|Teléfono de contacto del local de salida<br/>**Campo XML:**E931 
 
 
 ### Parametro del objeto data.entrega
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-
+**direccion**|**Si**|Dirección del local de entrega. Nombre de la calle principal <br/>**Campo XML:**E941
+**numeroCasa**|**Si**|Número de casa de entrega<br/>**Campo XML:**E942
+complementoDireccion1|No|Complemento de dirección 1 entrega. Nombre de la calle secundaria<br/>**Campo XML:**E943
+complementoDireccion2|No|Complemento de dirección 2 salida. Número de departamento/piso/ local/ edificio/ deposito del local de salida de la mercadería<br/>**Campo XML:**E944
+**departamento**|**Si**|Código del departamento del local de entrega. Según XSD de Departamentos<br/>**Campo XML:**E945
+**departamentoDescripcion**|**Si**|Descripción del departamento del local de salida<br/>**Campo XML:**E946
+distrito|No|Código del distrito del local de entrega<br/>**Campo XML:**E947
+distritoDescripcion|No|Descripción de distrito del local de entrega<br/>**Campo XML:**E948
+**ciudad**|**Si**|Código de la ciudad del local de salida<br/>**Campo XML:**E949
+**ciudadDescripcion**|**Si**|Descripción de ciudad del local de salida<br/>**Campo XML:**E950
+pais|No|Código de  pais de salida
+paisDescripcion|No|Descripcion del pais de salida
+telefonoContacto|No|Teléfono de contacto del local de la entrega<br/>**Campo XML:**E951 
 ### Parametro del objeto data.vehiculo
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
+**tipo**|**Si**|Tipo de vehículo<br/>**Campo XML:**E961
+**marca**|**Si**|Marca<br/>**Campo XML:**E962
+**documentoTipo**|**Si**|Tipo de identificación del vehículo <br/>1=Número de identificación del vehículo<br/>2=Número de matrícula del vehículo<br/>**Campo XML:**E967
+documentoNumero|No|Número de identificación del vehículo<br/>**Campo XML:**E963
+obs|No|Datos adicionales del vehículo <br/>**Campo XML:**E964
+numeroMatricula|No|Número de matrícula del vehículo.Debe informarse cuando el documentoTipo=2 <br/>**Campo XML:**E965
+numeroVuelo|No|Número de vuelo<br/>**Campo XML:**E966
 
 ### Parametro del objeto data.transportista
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
+**contribuyente**|**Si**|Naturaleza del transportista(true o false)<br/>**Campo XML:**E980
+**nombre**|**Si**|Nombre o razón social del transportista <br/>**Campo XML:**E982
+**ruc**|**Si**|RUC del transportista<br/>**Campo XML:**E983
+documentoTipo|No|Tipo de documento de identidad del transportista<br/>**Campo XML:**E985
+documentoNumero||Número de documento de identidad del transportista. Obligatorio si existe el campo documentoTipo<br/>**Campo XML:**E987
+direccion|No|Domicilio fiscal del transportista<br/>**Campo XML:**E992
+obs|No|Observacion del transportista
+pais|No|Código del pais de Origen del transportista
+paisDescripcion|No|Descripcion del pais Origen
+chofer|No|Campos que identifican al chofer. Ver detalle en tabla data.transportista.chofer
+agente|No|Campos que identifican al agente. Ver detalle en tabla data.transportista.agente
+
+### Parametro del objeto data.transportista.chofer
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**documentoNumero**|**Si**|Número de documento de identidad del chofer<br/>**Campo XML:**E990
+**nombre**|**Si**|Nombre y apellido del chofer <br/>**Campo XML:**E991
+direccion|No|Dirección del chofer<br/>**Campo XML:**E993
+
+### Parametro del objeto data.transportista.agente
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+nombre|No|Nombre o razón social del agente. Casos particulares según RG N°41/14 <br/>**Campo XML:**E994
+ruc|No|RUC del agente<br/>**Campo XML:**E995
+direccion|No|Dirección del agente<br/>**Campo XML:**E997
+
+### Parametro del objeto data.complementarios
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+ordenCompra|No|Número de orden de compra<br/>**Campo XML:**G002
+ordenVenta|No|Número de orden de venta<br/>**Campo XML:**G003
+numeroAsiento|No|Número de asiento contable <br/>**Campo XML:**G004
+carga|No|Campos generales de la carga
+### Parametro del objeto data.complementarios.carga
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+ordenCompra||<br/>**Campo XML:**
+ordenVenta||<br/>**Campo XML:**
+numeroAsiento||<br/>**Campo XML:**
+### Parametro del objeto data.documentoAsociado
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**formato**|**Si**|Tipo de documento asociado<br/>1= Electrónico<br/>2= Impreso<br/>3= Constancia Electrónica <br/>**Campo XML:**H002
+cdc|No|CDC del DTE referenciado <br/>**Campo XML:**H004
+tipo|No|Tipo de documento impreso<br/>**Campo XML:**H009
+timbrado|No|Nro. timbrado documento impreso de referencia<br/>**Campo XML:**H005
+establecimiento|No|Establecimiento<br/>**Campo XML:**H005
+punto|No|Punto de expedición<br/>**Campo XML:**H007
+numero|No|Número del documento<br/>**Campo XML:**H008
+fecha|No|Fecha de emisión del documento impreso de referencia.Obligatorio si existe el campo establecimiento.<br/>Formato AAAA-MM-DD <br/>No Informar si campo establecimiento no existe<br/>**Campo XML:**H011
+numeroRetencion|No|Número de comprobante de retención <br/>**Campo XML:**H012
+resolucionCreditoFiscal|No|Número de resolución de crédito fiscal <br/>**Campo XML:**H013
+tipoConstancia|No|Tipo de constancia<br/>**Campo XML:**H014
 ### Validaciones
 
 - Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
