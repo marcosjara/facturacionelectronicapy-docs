@@ -295,7 +295,6 @@ Esta invocación, crea los documentos electrónicos y los envía a la SET.
             "tipo" : 1,
             "plazo" : "30 días",
             "cuotas" : 2,
-            "montoEntrega" : 1500000.00,
             "infoCuotas" : [{
                 "moneda" : "PYG",
                 "monto" : 800000.00,
@@ -689,7 +688,6 @@ Parámetro | Requerido | Descripción
 **tipo**|**Si**|Condición de la operación a crédito <br/>1= Plazo <br/>2= Cuota<br/>**Campo XML:**E641
 plazo |No|Plazo del crédito. Obligatorio si tipo = 1 <br/>Ejemplo: 30 días, 12 meses<br/>**Campo XML:**E643
 cuotas|No|Cantidad de cuotas. Plazo del crédito.  Obligatorio si tipo = 2<br/>Ejemplo: 12, 24, 36 <br/>**Campo XML:**E644
-montoEntrega|No|Monto de la entrega inicial <br/>**Campo XML:**E645
 infoCuotas|No|Campos que describen las cuotas.Ver detalle en tabla data.condicion.credito.infoCuotas
 ### Parametro del objeto data.condicion.credito.infoCuotas
 Parámetro | Requerido | Descripción
