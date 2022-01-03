@@ -843,12 +843,12 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **formato**|**Si**|Tipo de documento asociado<br/>1= Electrónico<br/>2= Impreso<br/>3= Constancia Electrónica <br/>**Campo XML:**H002
 cdc|No|CDC del DTE referenciado <br/>**Campo XML:**H004
-tipo|No|Tipo de documento impreso<br/>**Campo XML:**H009
-timbrado|No|Nro. timbrado documento impreso de referencia<br/>**Campo XML:**H005
-establecimiento|No|Establecimiento<br/>**Campo XML:**H005
-punto|No|Punto de expedición<br/>**Campo XML:**H007
-numero|No|Número del documento<br/>**Campo XML:**H008
-fecha|No|Fecha de emisión del documento impreso de referencia.Obligatorio si existe el campo establecimiento.<br/>Formato AAAA-MM-DD <br/>No Informar si campo establecimiento no existe<br/>**Campo XML:**H011
+tipoDocumentoImpreso|**Si**|Tipo de documento impreso<br/>**Campo XML:**H009
+timbrado|**Si**|Nro. timbrado documento impreso de referencia<br/>**Campo XML:**H005
+establecimiento|**Si**|Establecimiento<br/>**Campo XML:**H005
+punto|**Si**|Punto de expedición<br/>**Campo XML:**H007
+numero|**Si**|Número del documento<br/>**Campo XML:**H008
+fecha|**Si**|Fecha de emisión del documento impreso de referencia.Obligatorio si existe el campo establecimiento.<br/>Formato AAAA-MM-DD <br/>No Informar si campo establecimiento no existe<br/>**Campo XML:**H011
 numeroRetencion|No|Número de comprobante de retención <br/>**Campo XML:**H012
 resolucionCreditoFiscal|No|Número de resolución de crédito fiscal <br/>**Campo XML:**H013
 tipoConstancia|No|Tipo de constancia<br/>**Campo XML:**H014
