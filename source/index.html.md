@@ -44,7 +44,7 @@ Con **FacturaSend** podrás administrar varias empresas cada una de ellas para c
 7. Invocación de eventos de la SET (Cancelación, inutilización, etc.)
 8. Consulta de RUC.
 
-Para encontrar más información en el [Manual Técnico PDF de la SET](https://ekuatia.set.gov.py/portal/ekuatia/detail?content-id=/repository/collaboration/sites/ekuatia/documents/documentacion/documentacion-tecnica/Manual%20T%C3%A9cnico%20Versi%C3%B3n%20150.pdf) y en el [Portal de eKuatia](https://ekuatia.set.gov.py/portal/ekuatia/).
+Para encontrar más información en el [Manual Técnico PDF de la SET](https://ekuatia.set.gov.py/portal/ekuatia/detail?content-id=/repository/collaboration/sites/ekuatia/documents/documentacion/documentacion-tecnica/Manual%20T%C3%A9cnico%20Versi%C3%B3n%20150.pdf) y en el [Portal de e-Kuatia](https://ekuatia.set.gov.py/portal/ekuatia/).
 
 ## Para quien fue pensado FacturaSend
 
