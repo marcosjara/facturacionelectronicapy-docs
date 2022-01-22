@@ -90,7 +90,7 @@ Para simplemente probar la comunicacion y ver si todo funciona de forma general,
 > Para simplemente probar la comunicacion:
 
 ```shell
-# Verificando si facturapi responde a la peticion
+# Verificando si facturasend responde a la peticion
 curl "https://api.facturasend.com.py/test"  
 ```
 
