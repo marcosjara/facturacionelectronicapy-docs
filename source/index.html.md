@@ -760,8 +760,6 @@ En éste caso NO es posible obtener en la respuesta, la información de si el Do
 ]
 ```
 
-Primeramente se generaran los documentos electrónicos en FacturaSend, luego se intentarán enviar a la SET.
-
 ### Parámetros
 
 Los parámetros se envían en formato JSON y tienen la misma estructura que el de creación de 1 (un) sólo DE. 
@@ -1056,7 +1054,7 @@ En éste caso existen técnicas que se deben manejar para no alterar el CDC (Có
 ```
 A continuación se describe la estructura de atributos del parámetro requerido para crear un nuevo documento electrónico.
 
-A la derecha puede observarse un ejemplo con los valores obligatorios especificados.
+A la derecha puede observarse un ejemplo con los valores obligatorios especificados, así como la relación que guardan éstos atributos con los del manual técnico. Por ejemplo el tipo de documento en el manual técnico es el C002.
 
 ### <a name="p_data">Parametros del objeto principal o data</a>
 
@@ -1065,11 +1063,10 @@ Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, e
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por la SET (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002 
-**ruc** | **Si** | RUC del contribuyente emisor(empresa). Este campo debe ir con el digito verificador Ej.: 80069563-1
-**establecimiento**|**Si**| Son los 3 primeros digitos de la factura, Se puede enviar 1 o 001 <br/>**Campo XML:** C005 
-**punto**|**Si**| Es la segunda parte de una factura.  Ej.: 001.<br/>**Campo XML:** C006 
-**numero**|**Si**| Es la parte final de la factura, se puede enviar directamente el numero o completar con 0 hasta obtener 7 digitos. C007 Ej.: 0000001, 1.
+**tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por e-Kuatia (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002 
+**establecimiento**|**Si**| Representa al código de establecimiento del emisor, se puede enviar 1 o '001' <br/><br/>**Campo XML:** C005 
+**punto**|**Si**| Es el punto de emisión del documento electrónico, se puede enviar 1 o '001'<br/><br/>**Campo XML:** C006 
+**numero**|**Si**| Es el número del documento electrónico, se puede enviar directamente el número o completar con 0 a la izquierda hasta alcanzar 7 digitos. Ej.: 1 o '0000001'. <br/><br/>**Campo XML:**C007 
 descripcion|No| Información de interés del Fisco respecto al DE.<br/>**Campo XML:** B006.
 observacion|No| Información de interés del emisor respecto al DE.<br/>**Campo XML:** B005.
 **fecha**|**Si**| Fecha y hora de emisión del DE. <br/>**Campo XML:** D002.

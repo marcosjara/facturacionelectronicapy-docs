@@ -1,0 +1,38 @@
+[debug] [2022-01-23T23:43:24.500Z] ----------------------------------------------------------------------
+[debug] [2022-01-23T23:43:24.502Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\marco\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-01-23T23:43:24.502Z] CLI Version:   9.14.0
+[debug] [2022-01-23T23:43:24.503Z] Platform:      win32
+[debug] [2022-01-23T23:43:24.503Z] Node Version:  v14.17.3
+[debug] [2022-01-23T23:43:24.508Z] Time:          Sun Jan 23 2022 20:43:24 GMT-0300 (hora de verano de Paraguay)
+[debug] [2022-01-23T23:43:24.508Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-01-23T23:43:24.511Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-01-23T23:43:24.535Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-01-23T23:43:24.535Z] > authorizing via signed-in user (adrianjara@gmail.com)
+[debug] [2022-01-23T23:43:24.535Z] [iam] checking project facturasend for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-01-23T23:43:24.537Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-01-23T23:43:24.537Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-01-23T23:43:24.827Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","date":"Sun, 23 Jan 2022 23:43:23 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-23T23:43:24.838Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/facturasend:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-01-23T23:43:25.230Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-01-23T23:43:25.230Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-01-23T23:43:25.825Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sun, 23 Jan 2022 23:43:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=734","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-23T23:43:25.826Z] > refreshing access token with scopes: []
+[debug] [2022-01-23T23:43:25.826Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-01-23T23:43:26.092Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Sun, 23 Jan 2022 23:43:25 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-23T23:43:26.116Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/facturasend [none]
+[debug] [2022-01-23T23:43:27.376Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/facturasend 200
+[debug] [2022-01-23T23:43:27.376Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/facturasend {"projectId":"facturasend","projectNumber":"183233297538","displayName":"FacturaSend","name":"projects/facturasend","resources":{"hostingSite":"facturasend"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'facturasend'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-01-23T23:43:27.381Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-01-23T23:43:27.381Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-01-23T23:43:27.637Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Sun, 23 Jan 2022 23:43:26 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-01-23T23:43:27.645Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/facturasend-docs/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
