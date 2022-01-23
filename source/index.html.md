@@ -170,21 +170,251 @@ FacturaSend utiliza una API KEY para tener autorización a los servicios de la A
 Debes reemplazar <code>&lt;hdiweuw-92jwwle...&gt;</code> con la API key específica de la Empresa.
 </aside>
 
-# Servicios del DE (Síncrono)
+# Servicios del DE
 
 ## Creación de un DE
 ```shell
-curl 
-  -X 
-  -d '{"username":"mkyong","password":"abc"}'
+curl \  
+  -X \
   POST "http://api.facturasend.com.py/<tenantId>/de/create" \
-  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data-raw '{
+    "tipoDocumento" : 1,
+    "establecimiento" : 1,
+    "punto" : "001",
+    "numero" : 5, 
+    "descripcion" : "Aparece en el documento",
+    "observacion" : "Cualquier informacion de interes",
+    "fecha" : "2021-10-19T10:11:00",
+    "tipoEmision" : 1,
+    "tipoTransaccion" : 1,
+    "tipoImpuesto" : 1,
+    "moneda" : "PYG",
+    "cliente" : {
+        "contribuyente" : true,
+        "ruc" : "2005001-1",
+        "razonSocial" : "Marcos Adrian Jara Rodriguez",
+        "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
+        "tipoOperacion" : 1,
+        "direccion" : "Avda Calle Segunda y Proyectada",
+        "numeroCasa" : "1515",
+        "departamento" : 11,
+        "departamentoDescripcion" : "ALTO PARANA",
+        "distrito" : 143,
+        "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
+        "ciudad" : 3344,
+        "ciudadDescripcion" : "PASO ITA (INDIGENA)",
+        "pais" : "PRY",
+        "paisDescripcion" : "Paraguay",
+        "tipoContribuyente" : 1,
+        "documentoTipo" : 1,
+        "documentoNumero" : "2324234",
+        "telefono" : "xyz",
+        "celular" : "xyz",
+        "email" : "cliente@cliente.com",
+        "codigo" : "1548"
+    },
+    "usuario" : {
+        "documentoTipo" : 1,
+        "documentoNumero" : "157264",
+        "nombre" : "Marcos Jara",
+        "cargo" : "Vendedor"
+    },
+    "factura" : {
+        "presencia" : 1
+    },
+    "condicion" : {
+        "tipo" : 1,
+        "entregas" : [{ 
+            "tipo" : 1,
+            "monto" : "150000",
+            "moneda" : "PYG",
+            "monedaDescripcion" : "Guarani",
+            "cambio" : 0.0
+        }, { 
+            "tipo" : 3,
+            "monto" : "150000",
+            "moneda" : "PYG",
+            "monedaDescripcion" : "Guarani",
+            "cambio" : 0.0,
+            "infoTarjeta" : {
+                "numero" : 1234,
+                "tipo" : 1,
+                "tipoDescripcion" : "Dinelco",
+                "numeroTarjeta": 3232,
+                "titular" : "Marcos Jara",
+                "ruc" : "69695654-1",
+                "razonSocial" : "Bancard",
+                "medioPago" : 1,
+                "codigoAutorizacion" : 232524234
+            }
+        }, { 
+            "tipo" : 2,
+            "monto" : "150000",
+            "moneda" : "PYG",
+            "monedaDescripcion" : "Guarani",
+            "cambio" : 0.0,
+            "infoCheque" : {
+                "numeroCheque": "32323232",
+                "banco" : "Sudameris"
+            }
+        }],
+        "credito" : {
+            "tipo" : 1,
+            "plazo" : "30 días",
+            "cuotas" : 2,
+            "montoEntrega" : 1500000.00,
+            "infoCuotas" : [{
+                "moneda" : "PYG",
+                "monto" : 800000.00,
+                "vencimiento" : "2021-10-30"
+            }, {
+                "moneda" : "PYG",
+                "monto" : 800000.00,
+                "vencimiento" : "2021-11-30"
+            }]
+        }
+    },
+    "items" : [{
+        "codigo" : "A-001",
+        "descripcion": "Producto o Servicio", 
+        "observacion": "Cualquier informacion de interes", 
+        "ncm": "123456",
+        "unidadMedida": 77,
+        "cantidad": 10.5,
+        "precioUnitario": 10800,
+        "cambio": 0.0,
+        "ivaTipo" : 1,
+        "ivaBase" : 100,
+        "iva" : 5,
+        "lote" : "A-001",
+        "vencimiento" : "2022-10-30",
+        "numeroSerie" : "",
+        "numeroPedido" : "",
+        "numeroSeguimiento" : ""
+    }]
+  }'
+
 ```
 
 ```javascript
 import axios from 'axios';
 const data = {
-  datos_de_la_peticion...
+  "tipoDocumento" : 1,
+  "establecimiento" : 1,
+  "punto" : "001",
+  "numero" : 5, 
+  "descripcion" : "Aparece en el documento",
+  "observacion" : "Cualquier informacion de interes",
+  "fecha" : "2021-10-19T10:11:00",
+  "tipoEmision" : 1,
+  "tipoTransaccion" : 1,
+  "tipoImpuesto" : 1,
+  "moneda" : "PYG",
+  "cliente" : {
+      "contribuyente" : true,
+      "ruc" : "2005001-1",
+      "razonSocial" : "Marcos Adrian Jara Rodriguez",
+      "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
+      "tipoOperacion" : 1,
+      "direccion" : "Avda Calle Segunda y Proyectada",
+      "numeroCasa" : "1515",
+      "departamento" : 11,
+      "departamentoDescripcion" : "ALTO PARANA",
+      "distrito" : 143,
+      "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
+      "ciudad" : 3344,
+      "ciudadDescripcion" : "PASO ITA (INDIGENA)",
+      "pais" : "PRY",
+      "paisDescripcion" : "Paraguay",
+      "tipoContribuyente" : 1,
+      "documentoTipo" : 1,
+      "documentoNumero" : "2324234",
+      "telefono" : "xyz",
+      "celular" : "xyz",
+      "email" : "cliente@cliente.com",
+      "codigo" : "1548"
+  },
+  "usuario" : {
+      "documentoTipo" : 1,
+      "documentoNumero" : "157264",
+      "nombre" : "Marcos Jara",
+      "cargo" : "Vendedor"
+  },
+  "factura" : {
+      "presencia" : 1
+  },
+  "condicion" : {
+      "tipo" : 1,
+      "entregas" : [{ 
+          "tipo" : 1,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0
+      }, { 
+          "tipo" : 3,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0,
+          "infoTarjeta" : {
+              "numero" : 1234,
+              "tipo" : 1,
+              "tipoDescripcion" : "Dinelco",
+              "numeroTarjeta": 3232,
+              "titular" : "Marcos Jara",
+              "ruc" : "69695654-1",
+              "razonSocial" : "Bancard",
+              "medioPago" : 1,
+              "codigoAutorizacion" : 232524234
+          }
+      }, { 
+          "tipo" : 2,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0,
+          "infoCheque" : {
+              "numeroCheque": "32323232",
+              "banco" : "Sudameris"
+          }
+      }],
+      "credito" : {
+          "tipo" : 1,
+          "plazo" : "30 días",
+          "cuotas" : 2,
+          "montoEntrega" : 1500000.00,
+          "infoCuotas" : [{
+              "moneda" : "PYG",
+              "monto" : 800000.00,
+              "vencimiento" : "2021-10-30"
+          }, {
+              "moneda" : "PYG",
+              "monto" : 800000.00,
+              "vencimiento" : "2021-11-30"
+          }]
+      }
+  },
+  "items" : [{
+      "codigo" : "A-001",
+      "descripcion": "Producto o Servicio", 
+      "observacion": "Cualquier informacion de interes", 
+      "ncm": "123456",
+      "unidadMedida": 77,
+      "cantidad": 10.5,
+      "precioUnitario": 10800,
+      "cambio": 0.0,
+      "ivaTipo" : 1,
+      "ivaBase" : 100,
+      "iva" : 5,
+      "lote" : "A-001",
+      "vencimiento" : "2022-10-30",
+      "numeroSerie" : "",
+      "numeroPedido" : "",
+      "numeroSeguimiento" : ""
+  }]
 };
 const headers = {
   `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
@@ -198,9 +428,26 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/create`,
 });
 ```
 
-Esta invocación, crea los documentos electrónicos y los envía de forma síncrona a la SET, sólo es posible enviar el data de 1 (un) Documento Electrónico por vez.
+> El comando de arriba, retornará lo siguiente:
 
-Utilizando éste servicio es posible conocer en linea si el Documento Electrónico fue aprobado o rechazado por algún error, gracias a la respuesta del servicio.
+```json
+{ 
+  "success" : true,
+  "deList" : [{
+    "cdc": "01800695631001002100694612021112410311184194",
+    "numero": "001-001-0000001",
+    "estado": "Aprobado",
+    "respuesta_codigo": "",
+    "respuesta_mensaje": ""
+  }]
+}
+```
+
+Esta invocación, crea un documento electrónico y lo envía de forma síncrona a la SET, sólo es posible enviar el dato de 1 (un) Documento Electrónico por vez.
+
+Se denomina proceso síncrono, cuando la SET valida e informa de forma inmediata la aprobación del documento electrónico, o el rechazo.
+
+Mediante el proceso asíncrono es posible conocer en línea si el Documento Electrónico fue aprobado o rechazado por algún error y saber qué error es para poder corregirlo, gracias a la respuesta del servicio.
 
 ### Petición HTTP
 
@@ -208,31 +455,357 @@ Utilizando éste servicio es posible conocer en linea si el Documento Electróni
 
 ### Parámetros
 
-Los parámetros se envían en formato JSON. Para detalles del Objeto JSON que puede ser enviado consulte XXYYZZ
+Los parámetros se envían en formato JSON. 
+
+Para detalles de la estructura completa de atributos JSON que puede ser enviado como parámetro consulte la sección [Parámetros del Objeto Principal](#parámetros-de-creación-de-un-de)
+
+Debe tener en cuenta que para éste servicio en particular debe enviar el JSON en formato de un solo objeto, sin los corchetes [].
 
 ### Respuesta
-La respuesta de éste Servicio:
+La respuesta obtenida luego de llamar a éste servicio se describe en la sección [Respuesta de Creación de un DE](#respuesta-de-creación-de-un-de)
 
-Atributos | Tipo | Description
---------- | ---- | -----------
-success | boolean | true si no hubo errores en la transacción
-error | string | El mensaje de Error, en el caso de que el success = false
-deList | array | El array con la respuesta de cada DE procesado. Este array siempre devolverá 1 (un) sólo elemento, pero es un array por compatibilidad con el envío por lotes<br><br>Los atributos de éste array se describen en Respuesta deList
+### Recomendaciones
+Se recomienda almacenar el identificador único del Documento electrónico o CDC (Código de Control) en su sistema, junto con la operación o movimiento que generó el Comprobante, ya sea que éste haya sido una Compra, Venta, Cobro, Pago, etc. 
 
-### Respuesta deList (Atributos)
+El valor de éste CDC será muy útil más adelante, cuando desee obtener una copia del XML del Documento o incluso si desea obtener el PDF KUDE para imprimirlo desde su aplicación. Otras operaciones importantes que podrá realizar son la de Cancelar el Documento Electrónico o informara a la SET sobre otros eventos.
 
-Atributos | Tipo | Description
---------- | ---- | -----------
-cdc | string | Id único de 44 dígitos generado para el Documento Electrónico
-numero | string | Número de Documento Electrónico generado en formato 001-001-0000001
-estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
-respuesta_codigo | string | Código de la Respuesta de la SET
-respuesta_mensaje | string | Mensaje de Respuesta de la SET
+### Validaciones
+FacturaSend realizará las validaciones de los valores de los atributos, conforme las especificaciones del manual técnico, antes de enviar a la SET, retornando el mensaje de error en la respuesta de invocación de éste servicio.
 
-En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
+## Creación de varios DEs 
+
+```shell
+curl \
+  -X \
+  POST "http://api.facturasend.com.py/<tenantId>/lote/create" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data-raw '[{
+  "tipoDocumento" : 1,
+  "establecimiento" : 1,
+  "punto" : "001",
+  "numero" : 5, 
+  "descripcion" : "Aparece en el documento",
+  "observacion" : "Cualquier informacion de interes",
+  "fecha" : "2021-10-19T10:11:00",
+  "tipoEmision" : 1,
+  "tipoTransaccion" : 1,
+  "tipoImpuesto" : 1,
+  "moneda" : "PYG",
+  "cliente" : {
+      "contribuyente" : true,
+      "ruc" : "2005001-1",
+      "razonSocial" : "Marcos Adrian Jara Rodriguez",
+      "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
+      "tipoOperacion" : 1,
+      "direccion" : "Avda Calle Segunda y Proyectada",
+      "numeroCasa" : "1515",
+      "departamento" : 11,
+      "departamentoDescripcion" : "ALTO PARANA",
+      "distrito" : 143,
+      "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
+      "ciudad" : 3344,
+      "ciudadDescripcion" : "PASO ITA (INDIGENA)",
+      "pais" : "PRY",
+      "paisDescripcion" : "Paraguay",
+      "tipoContribuyente" : 1,
+      "documentoTipo" : 1,
+      "documentoNumero" : "2324234",
+      "telefono" : "xyz",
+      "celular" : "xyz",
+      "email" : "cliente@cliente.com",
+      "codigo" : "1548"
+  },
+  "usuario" : {
+      "documentoTipo" : 1,
+      "documentoNumero" : "157264",
+      "nombre" : "Marcos Jara",
+      "cargo" : "Vendedor"
+  },
+  "factura" : {
+      "presencia" : 1
+  },
+  "condicion" : {
+      "tipo" : 1,
+      "entregas" : [{ 
+          "tipo" : 1,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0
+      }, { 
+          "tipo" : 3,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0,
+          "infoTarjeta" : {
+              "numero" : 1234,
+              "tipo" : 1,
+              "tipoDescripcion" : "Dinelco",
+              "numeroTarjeta": 3232,
+              "titular" : "Marcos Jara",
+              "ruc" : "69695654-1",
+              "razonSocial" : "Bancard",
+              "medioPago" : 1,
+              "codigoAutorizacion" : 232524234
+          }
+      }, { 
+          "tipo" : 2,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0,
+          "infoCheque" : {
+              "numeroCheque": "32323232",
+              "banco" : "Sudameris"
+          }
+      }],
+      "credito" : {
+          "tipo" : 1,
+          "plazo" : "30 días",
+          "cuotas" : 2,
+          "montoEntrega" : 1500000.00,
+          "infoCuotas" : [{
+              "moneda" : "PYG",
+              "monto" : 800000.00,
+              "vencimiento" : "2021-10-30"
+          }, {
+              "moneda" : "PYG",
+              "monto" : 800000.00,
+              "vencimiento" : "2021-11-30"
+          }]
+      }
+  },
+  "items" : [{
+      "codigo" : "A-001",
+      "descripcion": "Producto o Servicio", 
+      "observacion": "Cualquier informacion de interes", 
+      "ncm": "123456",
+      "unidadMedida": 77,
+      "cantidad": 10.5,
+      "precioUnitario": 10800,
+      "cambio": 0.0,
+      "ivaTipo" : 1,
+      "ivaBase" : 100,
+      "iva" : 5,
+      "lote" : "A-001",
+      "vencimiento" : "2022-10-30",
+      "numeroSerie" : "",
+      "numeroPedido" : "",
+      "numeroSeguimiento" : ""
+  }]
+}]'
+```
+
+```javascript
+import axios from 'axios';
+const data = [{
+  "tipoDocumento" : 1,
+  "establecimiento" : 1,
+  "punto" : "001",
+  "numero" : 5, 
+  "descripcion" : "Aparece en el documento",
+  "observacion" : "Cualquier informacion de interes",
+  "fecha" : "2021-10-19T10:11:00",
+  "tipoEmision" : 1,
+  "tipoTransaccion" : 1,
+  "tipoImpuesto" : 1,
+  "moneda" : "PYG",
+  "cliente" : {
+      "contribuyente" : true,
+      "ruc" : "2005001-1",
+      "razonSocial" : "Marcos Adrian Jara Rodriguez",
+      "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
+      "tipoOperacion" : 1,
+      "direccion" : "Avda Calle Segunda y Proyectada",
+      "numeroCasa" : "1515",
+      "departamento" : 11,
+      "departamentoDescripcion" : "ALTO PARANA",
+      "distrito" : 143,
+      "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
+      "ciudad" : 3344,
+      "ciudadDescripcion" : "PASO ITA (INDIGENA)",
+      "pais" : "PRY",
+      "paisDescripcion" : "Paraguay",
+      "tipoContribuyente" : 1,
+      "documentoTipo" : 1,
+      "documentoNumero" : "2324234",
+      "telefono" : "xyz",
+      "celular" : "xyz",
+      "email" : "cliente@cliente.com",
+      "codigo" : "1548"
+  },
+  "usuario" : {
+      "documentoTipo" : 1,
+      "documentoNumero" : "157264",
+      "nombre" : "Marcos Jara",
+      "cargo" : "Vendedor"
+  },
+  "factura" : {
+      "presencia" : 1
+  },
+  "condicion" : {
+      "tipo" : 1,
+      "entregas" : [{ 
+          "tipo" : 1,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0
+      }, { 
+          "tipo" : 3,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0,
+          "infoTarjeta" : {
+              "numero" : 1234,
+              "tipo" : 1,
+              "tipoDescripcion" : "Dinelco",
+              "numeroTarjeta": 3232,
+              "titular" : "Marcos Jara",
+              "ruc" : "69695654-1",
+              "razonSocial" : "Bancard",
+              "medioPago" : 1,
+              "codigoAutorizacion" : 232524234
+          }
+      }, { 
+          "tipo" : 2,
+          "monto" : "150000",
+          "moneda" : "PYG",
+          "monedaDescripcion" : "Guarani",
+          "cambio" : 0.0,
+          "infoCheque" : {
+              "numeroCheque": "32323232",
+              "banco" : "Sudameris"
+          }
+      }],
+      "credito" : {
+          "tipo" : 1,
+          "plazo" : "30 días",
+          "cuotas" : 2,
+          "montoEntrega" : 1500000.00,
+          "infoCuotas" : [{
+              "moneda" : "PYG",
+              "monto" : 800000.00,
+              "vencimiento" : "2021-10-30"
+          }, {
+              "moneda" : "PYG",
+              "monto" : 800000.00,
+              "vencimiento" : "2021-11-30"
+          }]
+      }
+  },
+  "items" : [{
+      "codigo" : "A-001",
+      "descripcion": "Producto o Servicio", 
+      "observacion": "Cualquier informacion de interes", 
+      "ncm": "123456",
+      "unidadMedida": 77,
+      "cantidad": 10.5,
+      "precioUnitario": 10800,
+      "cambio": 0.0,
+      "ivaTipo" : 1,
+      "ivaBase" : 100,
+      "iva" : 5,
+      "lote" : "A-001",
+      "vencimiento" : "2022-10-30",
+      "numeroSerie" : "",
+      "numeroPedido" : "",
+      "numeroSeguimiento" : ""
+  }]
+}];
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/lote/create`, 
+          data, 
+          {headers})
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+Esta invocación, crea varios documentos electrónicos (hasta un máximo de 50 del mismo tipo) y los envía a la SET utilizando el proceso por lotes o asíncrono. 
+
+Se denomina proceso asíncrono, cuando no hay una respuesta inmediata de aprobación o rechazo desde la SET sobre los documentos enviados. Esto debe consultarse mediante otro proceso.
+
+En éste caso NO es posible obtener en la respuesta, la información de si el Documento Electrónico fue Aprobado o Rechazado aún, pero FacturaSend se encargará de consultar esa información más tarde, invocando otro Servicio a la SET. 
+
+
+### Petición HTTP
+
+`POST http://api.facturasend.com.py/<tenantId>/lote/create`
+
+> El comando de arriba, retornará lo siguiente:
 
 ```json
+[
+  {
+    "id": 1,
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Max",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
+  }
+]
+```
 
+Primeramente se generaran los documentos electrónicos en FacturaSend, luego se intentarán enviar a la SET.
+
+### Parámetros
+
+Los parámetros se envían en formato JSON y tienen la misma estructura que el de creación de 1 (un) sólo DE. 
+
+Para detalles de la estructura completa de atributos JSON que puede ser enviado como parámetro consulte la sección [Parámetros del Objeto Principal](#parámetros-de-creación-de-un-de)
+
+Tenga en cuenta que a diferencia del método anterior, aqui se recibe un array de objetos, por lo cual se debe empezar el JSON con corchetes [] aunque vaya a enviar 1 (un) sólo documento. El límite de objetos es hasta 50 documentos electrónicos por cada invocación.
+
+### Respuesta
+El formato de la respuesta es igual al método anterior y se describe en la sección [Respuesta de Creación de un DE](#respuesta-de-creación-de-un-de)
+
+### Recomendaciones
+- El implementador es libre de utilizar el método más conveniente del servicio a implementar en su sistema, sea el sincrono o el asíncrono, de todas formas dada la similitud entre ambos, se recomienda implementar los dos tipos en su sistema y parametrizar uno u otro de forma opcional, ya que a veces la SET establece que sólo pueda utilizarse el asincrono (ésto podrá cambiar más adelante.)
+
+- Una situación que se dá con el proceso asíncrono es que como se realiza en dos tiempos, se puede entregar al Cliente, por ejemplo, una Factura Electrónica que sin nuestro conocimiento sufrió un rechazo por algún motivo y tenga que ser corregido en un paso siguiente. 
+En éste caso existen técnicas que se deben manejar para no alterar el CDC (Código de Control) evitando que el Cliente tenga que devolver el Comprobante para un cambio. Además la SET brinda un plazo de 72 horas para realizar cualquier cambio o modificación sobre el comprobante.
+
+### Validaciones
+
+- Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
+- Puede enviar como mínimo 1 documento y como máximo 50 por llamada, si tienen más debe realizarlo en una siguiente llamada.
+
+
+## Consulta DE por Id
+
+## Consulta DE por CDC
+
+## Consulta DE Asociado
+
+## Consulta Items DE
+
+## Consulta Info DE
+
+## Obtener XML del DE
+
+## Obtener PDF del DE
+
+## Listar Documentos Electrónicos
+
+## Parámetros de creación de un DE
+
+> Ejemplo de Datos JSON para creación de un Documento Electrónico:
+
+```json
 {
   "tipoDocumento" : 1,
   "establecimiento" : 1,
@@ -478,363 +1051,15 @@ En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden se
           "caracteristicaCargaDescripcion" : null
       }
   },
-  "documentoAsociado" : null
-  }
-```
-
-> El comando de arriba, retornará lo siguiente:
-
-```json
-{ 
-  "success" : true,
-  "deList" : [{
-    "cdc": 1,
-    "numero": "Fluffums",
-    "estado": "calico",
-    "respuesta_codigo": "",
-    "respuesta_mensaje": ""
-  }]
+  "documentoAsociado" : null ,
 }
 ```
+A continuación se describe la estructura de atributos del parámetro requerido para crear un nuevo documento electrónico.
 
+A la derecha puede observarse un ejemplo con los valores obligatorios especificados.
 
-## Consulta DE por Id
+### <a name="p_data">Parametros del objeto principal o data</a>
 
-## Consulta DE por CDC
-
-## Consulta DE Asociado
-
-## Consulta Items DE
-
-## Consulta Info DE
-
-## Obtener XML del DE
-
-## Obtener PDF del DE
-
-## Listar Documentos Electrónicos
-
-# Misceláneas
-
-## Listar Departamentos
-
-## Listar Distritos
-
-## Listar Ciudades
-
-## Listar Tipos de Regimenes
-
-# Lotes
-
-## Envio de lotes
-
-```shell
-curl -X POST "http://api.facturasend.com.py/<tenantId>/lote/create" \
-  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
-```
-
-```javascript
-import axios from 'axios';
-const data = {
-  datos_de_la_peticion...
-};
-const headers = {
-  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
-};
-
-axios.post(`https://api.facturasend.com.py/<tenantId>/lote/create`, 
-          data, 
-          {headers})
-.then( respuesta => {
-  console.log(respuesta);
-});
-```
-
-Esta invocación, crea los documentos electrónicos y los envía a la SET.
-
-### Petición HTTP
-
-`POST http://api.facturasend.com.py/<tenantId>/lote/create`
-
-> La petición requiere de la siguiente estructura de Datos JSON:
-
-```json
-[
-  {
-    "tipoDocumento" : 1,
-    "establecimiento" : 1,
-    "punto" : "001",
-    "numero" : 4, 
-    "descripcion" : "Aparece en el documento",
-    "observacion" : "Cualquier informacion de interes",
-    "tipoContribuyente" : 1,
-    "fecha" : "2021-10-19T10:11:00",
-    "tipoEmision" : 1,
-    "tipoTransaccion" : 1,
-    "tipoImpuesto" : 1,
-    "moneda" : "PYG",
-    "condicionAnticipo" : null,
-    "condicionTipoCambio": null,
-    "cambio": 6700.0,
-    "cliente" : {
-        "contribuyente" : true,
-        "ruc" : "2005001-1",
-        "razonSocial" : "Marcos Adrian Jara Rodriguez",
-        "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
-        "tipoOperacion" : 1,
-        "direccion" : "Avda Calle Segunda y Proyectada",
-        "numeroCasa" : "1515",
-        "departamento" : 11,
-        "distrito" : 143,
-        "ciudad" : 3344,
-        "pais" : "PRY",
-        "tipoContribuyente" : 1,
-        "documentoTipo" : 1,
-        "documentoNumero" : "2324234",
-        "telefono" : "xyz",
-        "celular" : "xyz",
-        "email" : "cliente@cliente.com",
-        "codigo" : "1548"
-    },
-    "usuario" : {
-        "documentoTipo" : 1,
-        "documentoNumero" : "157264",
-        "nombre" : "Marcos Jara",
-        "cargo" : "Vendedor"
-    },
-    "factura" : {
-        "presencia" : 1,    
-        "fechaEnvio" : null,
-        "dncp" : {
-            "modalidad" : "ABC",
-            "entidad" : 1,
-            "año" : 2021,
-            "secuencia" : 3377,
-            "fecha" : "2020-10-14T10:11:00"
-        }
-    },
-    "condicion" : {
-        "tipo" : 1,
-        "entregas" : [{ 
-            "tipo" : 1,
-            "monto" : "150000",
-            "moneda" : "PYG",
-            "cambio" : 0.0
-        }, { 
-            "tipo" : 3,
-            "monto" : "150000",
-            "moneda" : "PYG",
-            "cambio" : 0.0,
-            "infoTarjeta" : {
-                "numero" : 1234,
-                "tipo" : 1,
-                "numeroTarjeta": 3232,
-                "titular" : "Marcos Jara",
-                "ruc" : "69695654-1",
-                "razonSocial" : "Bancard",
-                "medioPago" : 1,
-                "codigoAutorizacion" : 232524234
-            }
-        }, { 
-            "tipo" : 2,
-            "monto" : "150000",
-            "moneda" : "PYG",
-            "cambio" : 0.0,
-            "infoCheque" : {
-                "numeroCheque": "32323232",
-                "banco" : "Sudameris"
-            }
-        }],
-        "credito" : {
-            "tipo" : 1,
-            "plazo" : "30 días",
-            "cuotas" : 2,
-            "infoCuotas" : [{
-                "moneda" : "PYG",
-                "monto" : 800000.00,
-                "vencimiento" : "2021-10-30"
-            }, {
-                "moneda" : "PYG",
-                "monto" : 800000.00,
-                "vencimiento" : "2021-11-30"
-            }]
-        }
-    },
-    "items" : [{
-        "codigo" : "A-001",
-        "descripcion": "Producto o Servicio", 
-        "observacion": "Cualquier informacion de interes", 
-        "partidaArancelaria" : 4444,
-        "ncm": "123456",
-        "unidadMedida": 77,
-        "cantidad": 10.5,
-        "precioUnitario": 10800,
-        "cambio": 0.0,
-        "descuento": 0,
-        "descuentoPorcentaje": 0,
-        "anticipo": 0,
-        "pais" : "PRY",
-        "tolerancia" : 1,
-        "toleranciaCantidad" : 1,
-        "toleranciaPorcentaje" : 1,
-        "cdcAnticipo" : "44digitos",
-        "dncp" : {
-            "codigoNivelGeneral" : "12345678",
-            "codigoNivelEspecifico" : "1234",
-            "codigoGtinProducto" : "12345678",
-            "codigoNivelPaquete" : "12345678"
-        },
-        "ivaTipo" : 1,
-        "ivaBase" : 100,
-        "iva" : 5,
-        "lote" : "A-001",
-        "vencimiento" : "2022-10-30",
-        "numeroSerie" : "",
-        "numeroPedido" : "",
-        "numeroSeguimiento" : "",
-        "importador" : {
-            "nombre" : "Importadora Parana S.A.",
-            "direccion" : "Importadora Parana S.A.",
-            "registroImportador" : "Importadora Parana S.A.",
-            "registroSenave" : "Importadora Parana S.A.",
-            "registroEntidadComercial" : "Importadora Parana S.A."
-        },
-        "sectorAutomotor" : {
-            "tipo" : 1,
-            "chasis" : "4525234523542353245",
-            "color" : "Rojo",
-            "potencia" : 1500,
-            "capacidadMotor" : 5,
-            "capacidadPasajeros" : 5,
-            "pesoBruto" : 10000,
-            "pesoNeto" : 8000,
-            "tipoCombustible" : 9,
-            "numeroMotor" : "323234234234234234",
-            "capacidadTraccion" : 151.01,
-            "año" : 2009,
-            "tipoVehiculo" : "Camioneta",
-            "cilindradas" : "3500"
-        }
-    }],
-    "sectorEnergiaElectrica" : {
-        "numeroMedidor" : "132423424235425",
-        "codigoActividad" : 12,
-        "codigoCategoria" : "001",
-        "lecturaAnterior" : 4,
-        "lecturaActual" : 5
-    },
-    "sectorSeguros" : {
-        "codigoAseguradora" : "112",
-        "codigoPoliza" : "AAAA",
-        "numeroPoliza" : "BBBB",
-        "vigencia" : 1,
-        "vigenciaUnidad" : "año",
-        "inicioVigencia" : "2021-10-01T00:00:00",
-        "finVigencia" : "2022-10-01T00:00:00",
-        "codigoInternoItem" : "A-001"
-    },
-    "sectorSupermercados" : {
-        "nombreCajero" : "Juan Antonio Caceres",
-        "efectivo" : 150000,
-        "vuelto" : 30000,
-        "donacion" : 1000,
-        "donacionDescripcion" : "Donado para la caridad"
-    },
-    "sectorAdicional" : {
-        "ciclo" : "Mensualidad Pago",
-        "inicioCiclo" : "2021-09-01",
-        "finCiclo" : "2021-10-01",
-        "vencimientoPago" : "2021-11-01",
-        "numeroContrato" : "AF-2541",
-        "saldoAnterior" : 1550000
-    },
-    "detalleTransporte" : {
-        "tipo" : 1,
-        "modalidad" : 1,
-        "tipoResponsable" : 1,
-        "condicionNegociacion" : "FOB",
-        "numeroManifiesto" : "AF-2541",
-        "numeroDespachoImportacion" : "153223232332",
-        "inicioEstimadoTranslado" : "2021-11-01",
-        "finEstimadoTranslado" : "2021-11-01",
-        "paisDestino" : "PRY", 
-        "paisDestinoNombre" : "Paraguay",
-        "salida" : {
-            "direccion" : "Paraguay",
-            "numeroCasa" : "3232",
-            "complementoDireccion1" : "Entre calle 2", 
-            "complementoDireccion2" : "y Calle 7",
-            "departamento" : 11,
-            "distrito" : 143,
-            "ciudad" : 3344,
-            "pais" : "PRY",
-            "telefonoContacto" : "097x"
-        },
-        "entrega" : {
-            "direccion" : "Paraguay",
-            "numeroCasa" : "3232",
-            "complementoDireccion1" : "Entre calle 2", 
-            "complementoDireccion2" : "y Calle 7",
-            "departamento" : 11,
-            "distrito" : 143,
-            "ciudad" : 3344,
-            "pais" : "PRY",
-            "telefonoContacto" : "097x"
-        },
-        "vehiculo" : {
-            "tipo" : "Camioneta",
-            "marca" : "Nissan",
-            "documentoTipo" : 1, 
-            "documentoNumero" : "232323-1",
-            "obs" : "",
-            "numeroMatricula" : "ALTO PARANA",
-            "numeroVuelo" : "32123"
-        },
-        "transportista" : null
-    },
-    "complementarios" : {
-        "ordenCompra" : 1001,
-        "ordenVenta" : 1002,
-        "numeroAsiento" : 1212,
-        "carga" : {
-            "unidadMedidaVolumenTotal" : null,
-            "volumenTotal" : 10,
-            "unidadMedidaPesoTotal" : null,
-            "pesoTotal" : 11,
-            "caracteristicaCarga" : null,
-            "caracteristicaCargaDescripcion" : null
-        }
-    },
-    "documentoAsociado" : null ,
-}
-]
-```
-
-> El comando de arriba, retornará lo siguiente:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-Primeramente se generaran los documentos electrónicos en FacturaSend, luego se intentarán enviar a la SET.
-
-
-### Parametros del objeto principal o data
 
 Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, es decir, se interpreta de la misma manera si envia *tipoDocumento* o *tipo_documento*. 
 
@@ -1204,10 +1429,60 @@ fecha|**Si**|Fecha de emisión del documento impreso de referencia.Obligatorio s
 numeroRetencion|No|Número de comprobante de retención <br/>**Campo XML:**H012
 resolucionCreditoFiscal|No|Número de resolución de crédito fiscal <br/>**Campo XML:**H013
 tipoConstancia|No|Tipo de constancia<br/>**Campo XML:**H014
-### Validaciones
 
-- Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
-- Puede enviar como mínimo 1 documento y como máximo 50 por llamada, si tienen más debe realizarlo en una siguiente llamada.
+## Respuesta de creación de un DE
+> Ejemplo de respuesta de creación de un DE:
+
+```json
+{ 
+  "success" : true,
+  "deList" : [{
+    "cdc": "01800695631001002100694612021112410311184194",
+    "numero": "001-001-0000001",
+    "estado": "Aprobado",
+    "respuesta_codigo": "",
+    "respuesta_mensaje": ""
+  }]
+}
+```
+
+La respuesta de creación de un documento electrónico, representa la estructura de datos JSON que retorna la API de FacturaSend luego de haber solicitado la creación de un DE.
+
+Abajo se describe el detalles de los atributos.
+
+### Respuesta
+La respuesta de éste Servicio:
+
+Atributos | Tipo | Description
+--------- | ---- | -----------
+success | boolean | true si no hubo errores en la transacción
+error | string | El mensaje de Error, en el caso de que el success = false
+deList | array | El array con la respuesta de cada DE procesado. Este array siempre devolverá 1 (un) sólo elemento, pero es un array por compatibilidad con el envío por lotes<br><br>Los atributos de éste array se describen en Respuesta deList
+
+### Respuesta deList (Atributos)
+
+Atributos | Tipo | Description
+--------- | ---- | -----------
+cdc | string | Id único de 44 dígitos generado para el Documento Electrónico
+numero | string | Número de Documento Electrónico generado en formato 001-001-0000001
+estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
+respuesta_codigo | string | Código de la Respuesta de la SET
+respuesta_mensaje | string | Mensaje de Respuesta de la SET
+
+En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
+
+# Misceláneas
+
+## Listar Departamentos
+
+## Listar Distritos
+
+## Listar Ciudades
+
+## Listar Tipos de Regimenes
+
+# Lotes
+
 
 
 <aside class="success">
