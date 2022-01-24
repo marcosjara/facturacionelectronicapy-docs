@@ -171,6 +171,7 @@ Debes reemplazar <code>&lt;hdiweuw-92jwwle...&gt;</code> con la API key específ
 </aside>
 
 # Servicios del DE
+A continuación se detallan los servicios que pueden ser realizados sobre los DEs (Documentos Electrónicos) 
 
 ## Creación de un DE
 ```shell
@@ -457,12 +458,12 @@ Mediante el proceso asíncrono es posible conocer en línea si el Documento Elec
 
 Los parámetros se envían en formato JSON. 
 
-Para detalles de la estructura completa de atributos JSON que puede ser enviado como parámetro consulte la sección [Parámetros del Objeto Principal](#parámetros-de-creación-de-un-de)
+Para detalles de la estructura completa de atributos JSON que puede ser enviado como parámetro consulte la sección [Parámetros del Objeto Principal](#parametros-de-creacion-de-un-de)
 
 Debe tener en cuenta que para éste servicio en particular debe enviar el JSON en formato de un solo objeto, sin los corchetes [].
 
 ### Respuesta
-La respuesta obtenida luego de llamar a éste servicio se describe en la sección [Respuesta de Creación de un DE](#respuesta-de-creación-de-un-de)
+La respuesta obtenida luego de llamar a éste servicio se describe en la sección [Respuesta de Creación de un DE](#respuesta-de-creacion-de-un-de)
 
 ### Recomendaciones
 Se recomienda almacenar el identificador único del Documento electrónico o CDC (Código de Control) en su sistema, junto con la operación o movimiento que generó el Comprobante, ya sea que éste haya sido una Compra, Venta, Cobro, Pago, etc. 
@@ -764,12 +765,12 @@ En éste caso NO es posible obtener en la respuesta, la información de si el Do
 
 Los parámetros se envían en formato JSON y tienen la misma estructura que el de creación de 1 (un) sólo DE. 
 
-Para detalles de la estructura completa de atributos JSON que puede ser enviado como parámetro consulte la sección [Parámetros del Objeto Principal](#parámetros-de-creación-de-un-de)
+Para detalles de la estructura completa de atributos JSON que puede ser enviado como parámetro consulte la sección [Parámetros del Objeto Principal](#parametros-de-creacion-de-un-de)
 
 Tenga en cuenta que a diferencia del método anterior, aqui se recibe un array de objetos, por lo cual se debe empezar el JSON con corchetes [] aunque vaya a enviar 1 (un) sólo documento. El límite de objetos es hasta 50 documentos electrónicos por cada invocación.
 
 ### Respuesta
-El formato de la respuesta es igual al método anterior y se describe en la sección [Respuesta de Creación de un DE](#respuesta-de-creación-de-un-de)
+El formato de la respuesta es igual al método anterior y se describe en la sección [Respuesta de Creación de un DE](#respuesta-de-creacion-de-un-de)
 
 ### Recomendaciones
 - El implementador es libre de utilizar el método más conveniente del servicio a implementar en su sistema, sea el sincrono o el asíncrono, de todas formas dada la similitud entre ambos, se recomienda implementar los dos tipos en su sistema y parametrizar uno u otro de forma opcional, ya que a veces la SET establece que sólo pueda utilizarse el asincrono (ésto podrá cambiar más adelante.)
@@ -781,9 +782,6 @@ En éste caso existen técnicas que se deben manejar para no alterar el CDC (Có
 
 - Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
 - Puede enviar como mínimo 1 documento y como máximo 50 por llamada, si tienen más debe realizarlo en una siguiente llamada.
-
-
-## Consulta DE por Id
 
 ## Consulta DE por CDC
 
@@ -1056,29 +1054,65 @@ A continuación se describe la estructura de atributos del parámetro requerido 
 
 A la derecha puede observarse un ejemplo con los valores obligatorios especificados, así como la relación que guardan éstos atributos con los del manual técnico. Por ejemplo el tipo de documento en el manual técnico es el C002.
 
-### <a name="p_data">Parametros del objeto principal o data</a>
+Algunos campos son obligatorios para el e-Kuatia, para lo cual desde FacturaSend se asumen algunos valores por defecto caso no sean proveidos en el parámetro principal.
 
+### Parametros del objeto principal o data
 
 Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, es decir, se interpreta de la misma manera si envia *tipoDocumento* o *tipo_documento*. 
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por e-Kuatia (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002 
-**establecimiento**|**Si**| Representa al código de establecimiento del emisor, se puede enviar 1 o '001' <br/><br/>**Campo XML:** C005 
-**punto**|**Si**| Es el punto de emisión del documento electrónico, se puede enviar 1 o '001'<br/><br/>**Campo XML:** C006 
+**tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por e-Kuatia (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002.
+**establecimiento**|**Si**| Representa al código de establecimiento del emisor, se puede enviar 1 o '001' <br/><br/>**Campo XML:** C005.
+**punto**|**Si**| Es el punto de emisión del documento electrónico, se puede enviar 1 o '001'<br/><br/>**Campo XML:** C006.
 **numero**|**Si**| Es el número del documento electrónico, se puede enviar directamente el número o completar con 0 a la izquierda hasta alcanzar 7 digitos. Ej.: 1 o '0000001'. <br/><br/>**Campo XML:**C007 
-descripcion|No| Información de interés del Fisco respecto al DE.<br/>**Campo XML:** B006.
-observacion|No| Información de interés del emisor respecto al DE.<br/>**Campo XML:** B005.
-**fecha**|**Si**| Fecha y hora de emisión del DE. <br/>**Campo XML:** D002.
-**tipoEmision**|**Si**| Tipo de emisión (1,2) Ej: 1= Normal, 2= Contingencia. <br/>**Campo XML:** B002.
-tipoTransaccion|No|Obligatorio si tipoDocumento= 2 o 4.	<br/>Ej.: 1= Venta de mercadería, 2= Prestación de servicios <br/>**Campo XML:** D011
-**tipoImpuesto**|**Si**|Tipo de impuesto afectado, Fijo 1 para venta.(1= IVA, 2= ISC, 3=Renta, 4=Ninguno, 5=IVA - Renta) <br/>**Campo XML:**  D013
-**moneda**|**Si**|Descripcion de la moneda de acuerdo con la norma ISO 4217 Ej.: "PYG" D015
-condicionAnticipo|No|Condición del Anticipo,  Ej.:(1= Anticipo Global,2= Anticipo por ítem)no es obligatorio informar. <br/>**Campo XML:** D019
-condicionTipoCambio|No|Condición del tipo de cambio.Obligatorio si moneda ≠ PYG, null para PYG <br/>**Campo XML:** D017
-cambio|No|Tipo de cambio de la operación. null para PYG o el cambio del día de la moneda de venta. <br/>**Campo XML:** D018
-cliente|Si|Datos del Receptor del Documento Electrónico. Ver detalle en tabla data.cliente.<br/>
-usuario|Si|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla data.usuario.<br/>
+descripcion|No| Información de interés del Fisco respecto al DE.<br/><br/>**Campo XML:** B006.
+observacion|No| Información de interés del emisor respecto al DE.<br/><br/>**Campo XML:** B005.
+**fecha**|**Si**| Fecha y hora de emisión del DE. <br/><br/>**Campo XML:** D002.
+tipoEmision|No| Tipo de emisión del DE (1 o 2) <br/>Valores: <br/>1=Normal (Por defecto).<br/>2=Contingencia.<br/><br/>**Campo XML:** B002.
+tipoTransaccion|No|Tipo de Transacción. <br/>Valores: <br/>1=Venta de mercadería (Por defecto). <br/>2=Prestación de servicios. <br/>3=Mixto (Venta de mercadería y servicios). <br/>4=Venta de activo fijo. <br/>5=Venta de divisas. <br/>6=Compra de divisas. <br/>7=Promoción o entrega de muestras. <br/>8=Donación. <br/>9=Anticipo. <br/>10=Compra de Productos. <br/>11=Venta de Crédito fiscal. <br/>12=Compra de Crédito fiscal. <br/>13=Muestras médicas (Art. 3 RG 24/2014). <br/><br/>**Campo XML:** D011.
+**tipoImpuesto**|**Si**|Tipo de impuesto afectado. <br/>Valores:<br/>1=IVA.<br/>2=ISC.<br/> 3=Renta.<br/>4=Ninguno.<br/>5=IVA - Renta. <br/><br/>**Campo XML:**  D013.
+moneda|No|Código de la moneda de la operación de acuerdo con la norma [ISO 4217](https://www.currency-iso.org/en/home/tables/table-a1.html). Si no se pasa asume el valor por defecto "PYG"<br/><br/>**Campo XML:**  D015.
+condicionAnticipo|No|Condición del Anticipo.<br/>Valores:<br/>1=Anticipo Global. <br/>2=Anticipo por ítem.<br/>No es obligatorio informar. <br/><br/>**Campo XML:** D019.
+condicionTipoCambio|No|Condición del tipo de cambio. <br/>Valores: <br/>1=Global (un solo tipo de cambio para todo el DE). <br/>2=Por ítem (tipo de cambio distinto por ítem). <br/>Obligatorio si moneda ≠ PYG, <br/>Si la moneda es PYG no enviar éste atributo o enviar con el valor null. <br/><br/>**Campo XML:** D017.
+cambio|No|Valor del cambio de la moneda de la operación en la cotización del día. <br/>Ej.: 6500.00 si la moneda es USD. <br/>Si la moneda es PYG no enviar éste campo o enviar null <br/><br/>**Campo XML:** D018
+**cliente**|**Si**|Datos del Receptor del Documento Electrónico. <br/>Ver detalle en tabla [data.cliente](#parametro-del-objeto-data-cliente).<br/>
+**usuario**|**Si**|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla [data.usuario](#parametro-del-objeto-data-usuario).<br/>
+factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>Solo es necesario cuando el tipoDocumento=1 (Factura Electrónica)<br/>Ver detalle en tabla [data.factura](#parametro-del-objeto-data-factura).<br/>
+autofactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autofactura](#parametro-del-objeto-data-autofactura).<br/>
+
+
+### Parametro del objeto data.cliente
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**contribuyente** |**Si**|Si el receptor(Cliente) del DE es contribuyente  Valores: true o false  <br/>**Campo XML:** D201
+ruc |No| R.U.C. del Cliente, Obligarorio si es contribuyente. <br/>**Campo XML:** D206
+**razonSocial**|**Si**| Nombre o Razon social del cliente,En caso de DE innominado,completar con “Sin Nombre” <br/>**Campo XML:** D211
+nombreFantasia |No|Nombre de fantasia del cliente <br/>**Campo XML:** D212
+**tipoOperacion**|**Si**|Tipo de operación(1= B2B, 2= B2C, 3= B2G, 4= B2F)<br/>**Campo XML:** D202
+direccion |No|Direccion del Cliente, Campo obligatorio cuando tipoDocumento =7 o tipoOperacion=4 <br/>**Campo XML:** D213
+numeroCasa|No|Numero de Casa del Cliente, Campo obligatorio si se informa la direccion,Cuando es contribuyente debe corresponder a lo declarado en el RUC<br/>**Campo XML:** D218
+departamento|No| Codigo del departamento,Campo obligatorio si se informa la direccion y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:** D219 
+distrito|No|Codigo del distrito del Cliente, El codigo debe seguir la Tabla 2.1 – Distritos del Manual Tecnico. <br/>**Campo XML:** D221
+ciudad|No|Codigo de la ciudad del Cliente. Campo obligatorio si se informa la direccion y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:**D223
+**pais**|**Si**|Codigo del Pais del Cliente, Segun XSD de Codificación de Países<br/>**Campo XML:**D203
+tipoContribuyente|No|Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false<br/>**Campo XML:**D205
+documentoTipo|No|Tipo de documento del cliente <br/>**Campo XML:**D208
+documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
+telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
+celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
+email|No|Correo electronico del cliente<br/>**Campo XML:**D216
+codigo|No|Codigo del Cliente<br/>**Campo XML:**D217
+
+### Parametro del objeto data.usuario
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**documentoTipo**|**Si**|Tipo de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D141
+**documentoNumero**|**Si**|Número de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D143
+**nombre**|**Si**|Nombre o razón social del responsable de la generación del DE<br/>**Campo XML:**D144
+**cargo**|**Si**|Cargo del responsable de la generación del DE<br/>**Campo XML:**D145
+
 ### Parametro del objeto data.factura
 
 Parámetro | Requerido | Descripción
@@ -1125,35 +1159,6 @@ distritoDescripcion|| Descripcion del distrito donde se realiza la transacción 
 ciudad|| Código de la ciudad donde se realiza la transacción <br/>**Campo XML:**E321 
 ciudadDescripcion||Descripcion de la ciudad donde se realiza la transacción  <br/>**Campo XML:**E322 
 
-### Parametro del objeto data.cliente
-
-Parámetro | Requerido | Descripción
---------- | --------- | -----------
-**contribuyente** |**Si**|Si el receptor(Cliente) del DE es contribuyente  Valores: true o false  <br/>**Campo XML:** D201
-ruc |No| R.U.C. del Cliente, Obligarorio si es contribuyente. <br/>**Campo XML:** D206
-**razonSocial**|**Si**| Nombre o Razon social del cliente,En caso de DE innominado,completar con “Sin Nombre” <br/>**Campo XML:** D211
-nombreFantasia |No|Nombre de fantasia del cliente <br/>**Campo XML:** D212
-**tipoOperacion**|**Si**|Tipo de operación(1= B2B, 2= B2C, 3= B2G, 4= B2F)<br/>**Campo XML:** D202
-direccion |No|Direccion del Cliente, Campo obligatorio cuando tipoDocumento =7 o tipoOperacion=4 <br/>**Campo XML:** D213
-numeroCasa|No|Numero de Casa del Cliente, Campo obligatorio si se informa la direccion,Cuando es contribuyente debe corresponder a lo declarado en el RUC<br/>**Campo XML:** D218
-departamento|No| Codigo del departamento,Campo obligatorio si se informa la direccion y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:** D219 
-distrito|No|Codigo del distrito del Cliente, El codigo debe seguir la Tabla 2.1 – Distritos del Manual Tecnico. <br/>**Campo XML:** D221
-ciudad|No|Codigo de la ciudad del Cliente. Campo obligatorio si se informa la direccion y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:**D223
-**pais**|**Si**|Codigo del Pais del Cliente, Segun XSD de Codificación de Países<br/>**Campo XML:**D203
-tipoContribuyente|No|Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false<br/>**Campo XML:**D205
-documentoTipo|No|Tipo de documento del cliente <br/>**Campo XML:**D208
-documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
-telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
-celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
-email|No|Correo electronico del cliente<br/>**Campo XML:**D216
-codigo|No|Codigo del Cliente<br/>**Campo XML:**D217
-### Parametro del objeto data.usuario
-Parámetro | Requerido | Descripción
---------- | --------- | -----------
-**documentoTipo**|**Si**|Tipo de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D141
-**documentoNumero**|**Si**|Número de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D143
-**nombre**|**Si**|Nombre o razón social del responsable de la generación del DE<br/>**Campo XML:**D144
-**cargo**|**Si**|Cargo del responsable de la generación del DE<br/>**Campo XML:**D145
 ### Parametro del objeto data.items
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
