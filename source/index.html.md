@@ -6,11 +6,10 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='#'>FacturaSend Login</a>
+  - <a href='https://console.facturasend.com.py'>Consola de FacturaSend</a>
   - <a href='https://www.facturasend.com.py'>Inicio de FacturaSend</a>
 
 includes:
-  - errors
 
 search: true
 
@@ -152,8 +151,13 @@ curl "https://api.facturasend.com.py/<tenantId>/test" \
 ```javascript
 import axios from 'axios';
 
-axios.get(`https://api.facturasend.com.py/<tenantId>/test`)
-.then( respuesta => {
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.get(`https://api.facturasend.com.py/<tenantId>/test`, 
+  {headers}
+).then( respuesta => {
   console.log(respuesta);
 });
 ```
@@ -450,6 +454,8 @@ Se denomina proceso síncrono, cuando la SET valida e informa de forma inmediata
 
 Mediante el proceso asíncrono es posible conocer en línea si el Documento Electrónico fue aprobado o rechazado por algún error y saber qué error es para poder corregirlo, gracias a la respuesta del servicio.
 
+El documento electrónico enviado con ésta peticion puede ser visualizado en la consola de FacturaSend.
+
 ### Petición HTTP
 
 `POST http://api.facturasend.com.py/<tenantId>/de/create`
@@ -735,6 +741,7 @@ Se denomina proceso asíncrono, cuando no hay una respuesta inmediata de aprobac
 
 En éste caso NO es posible obtener en la respuesta, la información de si el Documento Electrónico fue Aprobado o Rechazado aún, pero FacturaSend se encargará de consultar esa información más tarde, invocando otro Servicio a la SET. 
 
+Todos los documentos electrónicos enviados con ésta peticion pueden ser visualizados en la consola de FacturaSend.
 
 ### Petición HTTP
 
@@ -785,17 +792,174 @@ En éste caso existen técnicas que se deben manejar para no alterar el CDC (Có
 
 ## Consulta DE por CDC
 
-## Consulta DE Asociado
+> Para consultar el DTE:
 
-## Consulta Items DE
+```shell
+# Consulta de un DTE por el Código de Control (CDC)
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694"  
+```
 
-## Consulta Info DE
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694`)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{
+  "success": true,
+  "fecha": "2022-01-22T12:07:48-03:00",
+  "respuesta_codigo": "0422",
+  "respuesta_mensaje": "CDC encontrado"
+}
+```
+Este servicio consulta la existencia de un documento electrónico en el e-Kuatia. 
+
+Esta consulta también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **Si** | Código CDC de 44 dígitos del Documento Electrónico
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
+error | boolean | El mensaje de error en caso de que haya retornado success=false.
+fecha | date-time | Fecha y hora de la consulta, ésta información es del servidor de e-kuatia
+respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0422</b>=CDC encontrado. <br/><b>0420</b>=CDC inexistente. <br/><b>0421</b>=RUC Certificado sin permiso
+respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/>0422=<b>CDC encontrado.</b> <br/>0420=<b>CDC inexistente.</b> <br/>0421=<b>RUC Certificado sin permiso</b>
 
 ## Obtener XML del DE
+> Para consultar el XML de un DTE:
+
+```shell
+# Consulta del XML de un DTE por el Código de Control (CDC)
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694"  
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+
+axios({
+  url: `https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694`,
+  method: 'GET',
+  responseType: 'blob',
+  headers
+})
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```text
+Retorna el Contenido del XML
+```
+
+Este servicio consulta el documento electrónico en formato de contenido XML que fue emitido desde FacturaSend con el CDC pasado como parámetro. 
+
+No se realizan validaciones de estado, por lo cual se pueden obtener el XML de un DE aprobado como rechazado.
+
+Recordando que el XML de un DE aprobado representa al archivo con valor fiscal y comercial almacenado en el e-Kuatia.
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **Si** | Código CDC de 44 dígitos del Documento Electrónico
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+main | text | Contenido del XML
 
 ## Obtener PDF del DE
+> Para obtener el PDF de uno o más documentos electrónicos:
 
-## Listar Documentos Electrónicos
+```shell
+# Obtiene el documento PDF de los Códigos de Control (CDC) que se pasan como parámetro
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/de/pdf" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+    cdcList : [{
+        "cdc": "01800695631001001000000612021112917595714694"
+    }]
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+    cdcList : [{
+      "cdc": "01800695631001001000000612021112917595714694"
+    }]
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/de/pdf`,
+  method: 'POST',
+  responseType: 'blob',
+  headers
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```text
+Binario o base64 del Documento PDF
+```
+Este servicio consulta el/los documento/s PDF KUDE de uno o más documentos electrónicos (como máximo 50) desde FacturaSend. 
+
+En el caso de incluir más de un CDC, el sistema recuperara 1 sólo documento, pero con varias hojas, cada una de ellas conteneniendo el KUDE de los diferentes documentos electrónicos.
+
+Este servicio no realiza validaciones de estado sobre el Documento Electronico para obtener el PDF, por lo cual debe saber que puede obtener el PDF tanto de un Documento Electrónico Aprobado como de uno Rechazado 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdcList** | **Si** | Array de códigos CDC de los cuales se desea obtener el Documento PDF KUDE<br/><br/>Los atributos de éste array se pueden encontrar en la [lista de abajo](#parametros-de-cdclist)
+type | No | Tipo de información que se desea obtener<br/><br/>Por defecto el Documento se recupera en formato Binario.<br/><br/>La opción alternativa es 'base64'
+
+### Parámetros de cdcList
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **Si** | Código CDC de 44 dígitos del Documento Electrónico
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+main | binary | Documento PDF en formato binary o base64
+
 
 ## Parámetros de creación de un DE
 
@@ -1076,6 +1240,7 @@ moneda|No|Código de la moneda de la operación de acuerdo con la norma [ISO 421
 condicionAnticipo|No|Condición del Anticipo.<br/>Valores:<br/>1=Anticipo Global. <br/>2=Anticipo por ítem.<br/>No es obligatorio informar. <br/><br/>**Campo XML:** D019.
 condicionTipoCambio|No|Condición del tipo de cambio. <br/>Valores: <br/>1=Global (un solo tipo de cambio para todo el DE). <br/>2=Por ítem (tipo de cambio distinto por ítem). <br/>Obligatorio si moneda ≠ PYG, <br/>Si la moneda es PYG no enviar éste atributo o enviar con el valor null. <br/><br/>**Campo XML:** D017.
 cambio|No|Valor del cambio de la moneda de la operación en la cotización del día. <br/>Ej.: 6500.00 si la moneda es USD. <br/>Si la moneda es PYG no enviar éste campo o enviar null <br/><br/>**Campo XML:** D018
+cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En ocasiones puede ser necesario re-utilizar el mismo CDC de un DE que ha sido rechazado anteriormente, por ejemplo si el Documento KUDE ya ha sido entregado al Cliente, corrigiendo el error y volviendo a intentar la aprobación con el mismo CDC.
 **cliente**|**Si**|Datos del Receptor del Documento Electrónico. <br/>Ver detalle en tabla [data.cliente](#parametro-del-objeto-data-cliente).<br/>
 **usuario**|**Si**|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla [data.usuario](#parametro-del-objeto-data-usuario).<br/>
 factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>Solo es necesario cuando el tipoDocumento=1 (Factura Electrónica)<br/>Ver detalle en tabla [data.factura](#parametro-del-objeto-data-factura).<br/>
@@ -1472,135 +1637,6 @@ respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
-
-# Misceláneas
-
-## Listar Departamentos
-
-## Listar Distritos
-
-## Listar Ciudades
-
-## Listar Tipos de Regimenes
-
-# Lotes
-
-
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-
-
-
-
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```http://localhost:4567/#autorizacion
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
-
 
 # Glosario
 
