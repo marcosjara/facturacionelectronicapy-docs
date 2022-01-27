@@ -1267,7 +1267,7 @@ documentoTipo|No|Tipo de documento del cliente <br/>**Campo XML:**D208
 documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
-email|No|Correo electronico del cliente<br/>**Campo XML:**D216
+email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en e-Kuatia se incluirá sólo el primero<br/><br/>**Campo XML:**D216
 codigo|No|Codigo del Cliente<br/>**Campo XML:**D217
 
 ### Parametro del objeto data.usuario
