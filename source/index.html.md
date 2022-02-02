@@ -818,7 +818,9 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/cdc/0180069563100100100
   "success": true,
   "fecha": "2022-01-22T12:07:48-03:00",
   "respuesta_codigo": "0422",
-  "respuesta_mensaje": "CDC encontrado"
+  "respuesta_mensaje": "CDC encontrado",
+  "xml": "<xml? >...<rDE>",
+  "protocolo": "93891821"
 }
 ```
 Este servicio consulta la existencia de un documento electrónico en el e-Kuatia. 
@@ -838,6 +840,8 @@ error | boolean | El mensaje de error en caso de que haya retornado success=fals
 fecha | date-time | Fecha y hora de la consulta, ésta información es del servidor de e-kuatia
 respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0422</b>=CDC encontrado. <br/><b>0420</b>=CDC inexistente. <br/><b>0421</b>=RUC Certificado sin permiso
 respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/>0422=<b>CDC encontrado.</b> <br/>0420=<b>CDC inexistente.</b> <br/>0421=<b>RUC Certificado sin permiso</b>
+xml | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el XML obtenido desde el e-Kuatia.
+protocolo | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el Protocolo de Autorización obtenido desde el e-Kuatia.
 
 ## Obtener XML del DE
 > Para consultar el XML de un DTE:
