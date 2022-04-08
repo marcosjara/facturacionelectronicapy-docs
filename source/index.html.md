@@ -1309,24 +1309,24 @@ Parámetro | Requerido | Descripción
 **direccion**|**Si**|Dirección del vendedor.En caso de extranjeros, colocar la dirección en donde se realizó la transacción. <br/>**Campo XML:** E308
 **numeroCasa**|**Si**|Número de casa del vendedor.Si no tiene numeración colocar 0 (cero)  <br/>**Campo XML:** E309
 **departamento**|**Si**|Código del departamento del vendedor  <br/>**Campo XML:** E310
-**departamentoDescripcion**|**Si**|Descripción del departamento del vendedor <br/>**Campo XML:** E311
+departamentoDescripcion|No|Descripción del departamento del vendedor <br/>**Campo XML:** E311
 **distrito**|**Si**|Código del distrito del vendedor <br/>**Campo XML:** E312
-**distritoDescripcion**|**Si**|Descripción del distrito del vendedor <br/>**Campo XML:**E313
-**ciudad**|Si|Código de la ciudad del vendedor <br/>**Campo XML:** E314
-**ciudadDescripcion**|**Si**|Descripción del ciudad del vendedor <br/>**Campo XML:** E315
-ubicacion|No| Ver detalle en tabla data.autofactura.ubicacion
+distritoDescripcion|No|Descripción del distrito del vendedor <br/>**Campo XML:**E313
+**ciudad**|**Si**|Código de la ciudad del vendedor <br/>**Campo XML:** E314
+ciudadDescripcion|No|Descripción del ciudad del vendedor <br/>**Campo XML:** E315
+**ubicacion**|**Si**| Ver detalle en tabla data.autofactura.ubicacion
 
 ### Parametro del objeto data.autofactura.ubicacion
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-lugar|| Lugar de la transacción <br/>**Campo XML:** E316
-departamento||Código del departamento donde se realiza la transacción <br/>**Campo XML:** E317
-departamentoDescripcion||| Descripcion del departamento donde se realiza la transacción <br/>**Campo XML:** E318
-distrito||<br/>Código del distrito donde se realiza la transacción **Campo XML:**E319
-distritoDescripcion|| Descripcion del distrito donde se realiza la transacción <br/>**Campo XML:**E320
-ciudad|| Código de la ciudad donde se realiza la transacción <br/>**Campo XML:**E321 
-ciudadDescripcion||Descripcion de la ciudad donde se realiza la transacción  <br/>**Campo XML:**E322 
+**lugar**|**Si**| Lugar de la transacción <br/>**Campo XML:** E316
+**departamento**|**Si**|Código del departamento donde se realiza la transacción <br/>**Campo XML:** E317
+departamentoDescripcion|No| Descripcion del departamento donde se realiza la transacción <br/>**Campo XML:** E318
+**distrito**|**Si**|<br/>Código del distrito donde se realiza la transacción **Campo XML:**E319
+distritoDescripcion|No| Descripcion del distrito donde se realiza la transacción <br/>**Campo XML:**E320
+**ciudad**|**Si**| Código de la ciudad donde se realiza la transacción <br/>**Campo XML:**E321 
+ciudadDescripcion|No|Descripcion de la ciudad donde se realiza la transacción  <br/>**Campo XML:**E322 
 
 ### Parametro del objeto data.items
 Parámetro | Requerido | Descripción
@@ -1627,7 +1627,8 @@ La respuesta de éste Servicio:
 Atributos | Tipo | Description
 --------- | ---- | -----------
 success | boolean | true si no hubo errores en la transacción
-error | string | El mensaje de Error, en el caso de que el success = false
+error | string | El mensaje de Error, en el caso de que el success = false, Si la invocación se realizó para crear 1 sólo DE por el método sincrono, entonces aquí se especificará el mensaje de error.
+errores | array | En el caso de haya invocado la API para crear varios DEs por el método asíncrono, aqui se mostrarán una lista de errores, indicando el error, y el número de índice del archivo XML con Error.
 deList | array | El array con la respuesta de cada DE procesado. Este array siempre devolverá 1 (un) sólo elemento, pero es un array por compatibilidad con el envío por lotes<br><br>Los atributos de éste array se describen en Respuesta deList
 
 ### Respuesta deList (Atributos)
