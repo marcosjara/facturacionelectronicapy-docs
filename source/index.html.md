@@ -1244,6 +1244,7 @@ moneda|No|Código de la moneda de la operación de acuerdo con la norma [ISO 421
 condicionAnticipo|No|Condición del Anticipo.<br/>Valores:<br/>1=Anticipo Global. <br/>2=Anticipo por ítem.<br/>No es obligatorio informar. <br/><br/>**Campo XML:** D019.
 condicionTipoCambio|No|Condición del tipo de cambio. <br/>Valores: <br/>1=Global (un solo tipo de cambio para todo el DE). <br/>2=Por ítem (tipo de cambio distinto por ítem). <br/>Obligatorio si moneda ≠ PYG, <br/>Si la moneda es PYG no enviar éste atributo o enviar con el valor null. <br/><br/>**Campo XML:** D017.
 cambio|No|Valor del cambio de la moneda de la operación en la cotización del día. <br/>Ej.: 6500.00 si la moneda es USD. <br/>Si la moneda es PYG no enviar éste campo o enviar null <br/><br/>**Campo XML:** D018
+porcentajeDescuento|No|% de descuento sobre el total de la Operacion<br/>Valor por defecto = 0.0 <br/><br/>**Campo XML:** F010
 cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En ocasiones puede ser necesario re-utilizar el mismo CDC de un DE que ha sido rechazado anteriormente, por ejemplo si el Documento KUDE ya ha sido entregado al Cliente, corrigiendo el error y volviendo a intentar la aprobación con el mismo CDC.
 **cliente**|**Si**|Datos del Receptor del Documento Electrónico. <br/>Ver detalle en tabla [data.cliente](#parametro-del-objeto-data-cliente).<br/>
 **usuario**|**Si**|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla [data.usuario](#parametro-del-objeto-data-usuario).<br/>
