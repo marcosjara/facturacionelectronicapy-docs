@@ -1352,10 +1352,10 @@ toleranciaPorcentaje|No|Porcentaje de quiebra o merma<br/>**Campo XML:**E718
 cdcAnticipo|No|CDC del anticipo<br/>**Campo XML:**E719
 **ivaTipo** |**Si**|Forma de afectación tributaria del IVA <br/>1= Gravado IVA<br/>2= Exonerado (Art. 83- Ley 125/91) <br/>3= Exento <br/>4= Gravado parcial Grav-Exento)<br/>**Campo XML:**E731
 **ivaBase**|**Si**|Base gravada del IVA por ítem<br/>**Campo XML:**E735
-**iva**|**Si**|Tasa del IVA<br/>**Campo XML:**E734
-lote|No|Numero de Lote del producto<br/>**Campo XML:**E751
+**iva**|**Si**|Tasa del IVA<br/>Posibles valores = 0, 5 o 10<br/><br/>**Campo XML:** E734
+lote|No|Numero de Lote del producto<br/>Valor alfanumérico<br/>Longitud: [1-80]<br/><br/>**Campo XML:** E751
 vencimiento|No|Fecha de vencimiento del producto Formato AAAA-MM-DD<br/>**Campo XML:**E752
-numeroSerie|No|Número de serie <br/>**Campo XML:**E753
+numeroSerie|No|Número de serie <br/>Valor alfanumérico<br/>Longitud: [1-10]<br/><br/>**Campo XML:** E753
 numeroPedido|No|Número de pedido<br/>**Campo XML:**E754
 numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:**E755
 
