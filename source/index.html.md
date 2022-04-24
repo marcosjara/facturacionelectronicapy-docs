@@ -190,7 +190,7 @@ curl \
     "punto" : "001",
     "numero" : 5, 
     "descripcion" : "Aparece en el documento",
-    "observacion" : "Cualquier informacion de interes",
+    "observacion" : "Cualquier informacion de marketing, publicidad, promociones, sorteos, etc. para el receptor",
     "fecha" : "2021-10-19T10:11:00",
     "tipoEmision" : 1,
     "tipoTransaccion" : 1,
@@ -284,7 +284,7 @@ curl \
     "items" : [{
         "codigo" : "A-001",
         "descripcion": "Producto o Servicio", 
-        "observacion": "Cualquier informacion de interes", 
+        "observacion": "Información adicional o complementaria sobre el producto", 
         "ncm": "123456",
         "unidadMedida": 77,
         "cantidad": 10.5,
@@ -311,7 +311,7 @@ const data = {
   "punto" : "001",
   "numero" : 5, 
   "descripcion" : "Aparece en el documento",
-  "observacion" : "Cualquier informacion de interes",
+  "observacion" : "Cualquier informacion de marketing, publicidad, promociones, sorteos, etc. para el receptor",
   "fecha" : "2021-10-19T10:11:00",
   "tipoEmision" : 1,
   "tipoTransaccion" : 1,
@@ -405,7 +405,7 @@ const data = {
   "items" : [{
       "codigo" : "A-001",
       "descripcion": "Producto o Servicio", 
-      "observacion": "Cualquier informacion de interes", 
+      "observacion": "Información adicional o complementaria sobre el producto", 
       "ncm": "123456",
       "unidadMedida": 77,
       "cantidad": 10.5,
@@ -452,7 +452,7 @@ Esta invocación, crea un documento electrónico y lo envía de forma síncrona 
 
 Se denomina proceso síncrono, cuando la SET valida e informa de forma inmediata la aprobación del documento electrónico, o el rechazo.
 
-Mediante el proceso asíncrono es posible conocer en línea si el Documento Electrónico fue aprobado o rechazado por algún error y saber qué error es para poder corregirlo, gracias a la respuesta del servicio.
+Mediante el proceso síncrono es posible conocer en línea si el Documento Electrónico fue aprobado o rechazado por algún error y saber qué error es para poder corregirlo, gracias a la respuesta del servicio.
 
 El documento electrónico enviado con ésta peticion puede ser visualizado en la consola de FacturaSend.
 
@@ -493,7 +493,7 @@ curl \
   "punto" : "001",
   "numero" : 5, 
   "descripcion" : "Aparece en el documento",
-  "observacion" : "Cualquier informacion de interes",
+  "observacion" : "Cualquier informacion de marketing, publicidad, promociones, sorteos, etc. para el receptor",
   "fecha" : "2021-10-19T10:11:00",
   "tipoEmision" : 1,
   "tipoTransaccion" : 1,
@@ -587,7 +587,7 @@ curl \
   "items" : [{
       "codigo" : "A-001",
       "descripcion": "Producto o Servicio", 
-      "observacion": "Cualquier informacion de interes", 
+      "observacion": "Información adicional o complementaria sobre el producto", 
       "ncm": "123456",
       "unidadMedida": 77,
       "cantidad": 10.5,
@@ -613,7 +613,7 @@ const data = [{
   "punto" : "001",
   "numero" : 5, 
   "descripcion" : "Aparece en el documento",
-  "observacion" : "Cualquier informacion de interes",
+  "observacion" : "Cualquier informacion de marketing, publicidad, promociones, sorteos, etc. para el receptor",
   "fecha" : "2021-10-19T10:11:00",
   "tipoEmision" : 1,
   "tipoTransaccion" : 1,
@@ -707,7 +707,7 @@ const data = [{
   "items" : [{
       "codigo" : "A-001",
       "descripcion": "Producto o Servicio", 
-      "observacion": "Cualquier informacion de interes", 
+      "observacion": "Información adicional o complementaria sobre el producto", 
       "ncm": "123456",
       "unidadMedida": 77,
       "cantidad": 10.5,
@@ -976,7 +976,7 @@ main | binary | Documento PDF en formato binary o base64
   "punto" : "001",
   "numero" : 4, 
   "descripcion" : "Aparece en el documento",
-  "observacion" : "Cualquier informacion de interes",
+  "observacion" : "Cualquier informacion de marketing, publicidad, promociones, sorteos, etc. para el receptor",
   "tipoContribuyente" : 1,
   "fecha" : "2021-10-19T10:11:00",
   "tipoEmision" : 1,
@@ -1073,7 +1073,7 @@ main | binary | Documento PDF en formato binary o base64
   "items" : [{
       "codigo" : "A-001",
       "descripcion": "Producto o Servicio", 
-      "observacion": "Cualquier informacion de interes", 
+      "observacion": "Información adicional o complementaria sobre el producto", 
       "partidaArancelaria" : 4444,
       "ncm": "123456",
       "unidadMedida": 77,
