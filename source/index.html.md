@@ -43,7 +43,7 @@ Con **FacturaSend** podrás administrar varias empresas cada una de ellas para c
 7. Invocación de eventos de la SET (Cancelación, inutilización, etc.)
 8. Consulta de RUC.
 
-Para encontrar más información en el [Manual Técnico PDF de la SET](https://ekuatia.set.gov.py/portal/ekuatia/detail?content-id=/repository/collaboration/sites/ekuatia/documents/documentacion/documentacion-tecnica/Manual%20T%C3%A9cnico%20Versi%C3%B3n%20150.pdf) y en el [Portal de e-Kuatia](https://ekuatia.set.gov.py/portal/ekuatia/).
+Para encontrar más información en el [Manual Técnico PDF de la SET](https://ekuatia.set.gov.py/portal/ekuatia/detail?content-id=/repository/collaboration/sites/ekuatia/documents/documentacion/documentacion-tecnica/Manual%20T%C3%A9cnico%20Versi%C3%B3n%20150.pdf) y en el [Portal de eKuatia](https://ekuatia.set.gov.py/portal/ekuatia/).
 
 ## Para quien fue pensado FacturaSend
 
@@ -728,8 +728,9 @@ const headers = {
 };
 
 axios.post(`https://api.facturasend.com.py/<tenantId>/lote/create`, 
-          data, 
-          {headers})
+  data, 
+  {headers}
+)
 .then( respuesta => {
   console.log(respuesta);
 });
@@ -799,13 +800,21 @@ En éste caso existen técnicas que se deben manejar para no alterar el CDC (Có
 curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694"  
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
 ```
 
 ```javascript
 # El ejemplo se muestra utilizando AXIOS
 import axios from 'axios';
 
-axios.post(`https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694`)
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694`, 
+  null, 
+  {headers}
+)
 .then( respuesta => {
   console.log(respuesta);
 });
@@ -823,7 +832,7 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/cdc/0180069563100100100
   "protocolo": "93891821"
 }
 ```
-Este servicio consulta la existencia de un documento electrónico en el e-Kuatia. 
+Este servicio consulta la existencia de un documento electrónico directamente en el SIFEN, a travéz de la API del eKuatia.
 
 Esta consulta también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
 
@@ -836,12 +845,122 @@ Parámetro | Requerido | Descripción
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
 success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
-error | boolean | El mensaje de error en caso de que haya retornado success=false.
-fecha | date-time | Fecha y hora de la consulta, ésta información es del servidor de e-kuatia
+error | string | El mensaje de error en caso de que haya retornado success=false.
+deList | date-time | Fecha y hora de la consulta, ésta información es del servidor de eKuatia
 respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0422</b>=CDC encontrado. <br/><b>0420</b>=CDC inexistente. <br/><b>0421</b>=RUC Certificado sin permiso
 respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/>0422=<b>CDC encontrado.</b> <br/>0420=<b>CDC inexistente.</b> <br/>0421=<b>RUC Certificado sin permiso</b>
-xml | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el XML obtenido desde el e-Kuatia.
-protocolo | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el Protocolo de Autorización obtenido desde el e-Kuatia.
+xml | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el XML obtenido desde el eKuatia.
+protocolo | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el Protocolo de Autorización obtenido desde el eKuatia.
+
+## Consulta de estados de DE(s) por CDC(s)
+
+> Para consultar el estado del DTE:
+
+```shell
+# Consulta el estado de un DTE en base a un array de códigos de control (CDC)
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/de/estado" 
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data-raw '{
+    cdcList : [{
+        "cdc": "01800695631001001038720612021112917595714694"
+    }, {
+        "cdc": "01800695631001001000000612021312917595714694"
+    }, {
+        "cdc": "otro.."
+    }]
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+    cdcList : [{
+        "cdc": "01800695631001001038720612021112917595714694"
+    }, {
+        "cdc": "01800695631001001000000612021312917595714694"
+    }, {
+        "cdc": "otro.."
+    }]
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/de/estado`, 
+  data, 
+  {headers}
+)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{
+  "success": true,
+  "deList" : [{
+    "cdc": "01800695631001001038720612021112917595714694",
+    "numero": "001-001-0000001",
+    "estado": "Aprobado",
+    "fecha": "2022-04-02T08:56:58-04:00",
+    "respuesta_codigo": "0260",
+    "respuesta_mensaje": "Autorización del DE satisfactoria"
+  }, {
+    "cdc": "01800695631001001000000612021312917595714694",
+    "numero": "001-001-0000002",
+    "estado": "Aprobado",
+    "fecha": "2022-04-02T08:56:58-04:00",
+    "respuesta_codigo": "0260",
+    "respuesta_mensaje": "Autorización del DE satisfactoria"
+  }, {
+    "cdc": "otro..",
+    "numero": "001-001-0000003",
+    "estado": "Aprobado",
+    "fecha": "2022-04-02T08:56:58-04:00",
+    "respuesta_codigo": "0260",
+    "respuesta_mensaje": "Autorización del DE satisfactoria"
+  }]
+}
+```
+Este servicio consulta el estado de los documentos electrónicos en FacturaSend, retornando también el código de respuesta que se obtuvo desde el SIFEN, asi como también su mensaje. 
+
+Puede utilizar éste método para consultar los estados de aquellos documentos que han sido enviados de forma asincrona y del cual no pudo conocer su situación al momento de su creación.
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdcList** | **Si** | Array de códigos CDC de los cuales se desea obtener el estado del Documento Electrónico<br/><br/>Los atributos de éste array se pueden encontrar en la [lista de abajo](#parametros-de-cdclist)
+
+### Parámetros de cdcList
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **Si** | Código CDC de 44 dígitos del Documento Electrónico
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
+error | string | El mensaje de error en caso de que haya retornado success=false.
+deList | array | El array con las respuestas de los estados de cada DE consultado cuyos campos se describen en  [esta lista](#respuesta-delist-de-consulta-de-estado)
+
+### Respuesta deList de Consulta de Estado
+
+Atributos | Tipo | Description
+--------- | ---- | -----------
+cdc | string | Id único de 44 dígitos del Documento Electrónico consultado
+fecha | date-time | Fecha de Proceso en el SIFEN en formato yyyy-MM-ddThh:mm:ss
+numero | string | Número de Documento Electrónico en formato 001-001-0000001
+estado | string | Estado del Documento Electrónico, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
+respuesta_codigo | string | Código de la Respuesta de la SET
+respuesta_mensaje | string | Mensaje de Respuesta de la SET
 
 ## Obtener XML del DE
 > Para consultar el XML de un DTE:
@@ -867,7 +986,7 @@ axios({
   url: `https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694`,
   method: 'GET',
   responseType: 'blob',
-  headers
+  {headers}
 })
 .then( respuesta => {
   console.log(respuesta);
@@ -884,7 +1003,7 @@ Este servicio consulta el documento electrónico en formato de contenido XML que
 
 No se realizan validaciones de estado, por lo cual se pueden obtener el XML de un DE aprobado como rechazado.
 
-Recordando que el XML de un DE aprobado representa al archivo con valor fiscal y comercial almacenado en el e-Kuatia.
+Recordando que el XML de un DE aprobado representa al archivo con valor fiscal y comercial almacenado en el eKuatia.
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -907,7 +1026,11 @@ curl \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
   --data-raw '{
     cdcList : [{
-        "cdc": "01800695631001001000000612021112917595714694"
+        "cdc": "01800695631001001038720612021112917595714694"
+    }, {
+        "cdc": "01800695631001001000000612021312917595714694"
+    }, {
+        "cdc": "otro.."
     }]
   }'
 ```
@@ -922,7 +1045,11 @@ const headers = {
 
 const data = {
     cdcList : [{
-      "cdc": "01800695631001001000000612021112917595714694"
+        "cdc": "01800695631001001038720612021112917595714694"
+    }, {
+        "cdc": "01800695631001001000000612021312917595714694"
+    }, {
+        "cdc": "otro.."
     }]
 };
 
@@ -930,7 +1057,7 @@ axios.post({
   url: `https://api.facturasend.com.py/<tenantId>/de/pdf`,
   method: 'POST',
   responseType: 'blob',
-  headers
+  {headers}
 }
 ).then( respuesta => {
   console.log(respuesta);
@@ -951,13 +1078,8 @@ Este servicio no realiza validaciones de estado sobre el Documento Electronico p
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**cdcList** | **Si** | Array de códigos CDC de los cuales se desea obtener el Documento PDF KUDE<br/><br/>Los atributos de éste array se pueden encontrar en la [lista de abajo](#parametros-de-cdclist)
+**cdcList** | **Si** | Array de códigos CDC de los cuales se desea obtener el Documento PDF KUDE<br/><br/>Los atributos de éste array, son iguales a la Consulta de Estados, que se pueden encontrar en la [lista de arriba](#parametros-de-cdclist)
 type | No | Tipo de información que se desea obtener<br/><br/>Por defecto el Documento se recupera en formato Binario.<br/><br/>La opción alternativa es 'base64'
-
-### Parámetros de cdcList
-Parámetro | Requerido | Descripción
---------- | --------- | -----------
-**cdc** | **Si** | Código CDC de 44 dígitos del Documento Electrónico
 
 ### Respuesta
 Atributo | Tipo | Descripción
@@ -1222,7 +1344,7 @@ A continuación se describe la estructura de atributos del parámetro requerido 
 
 A la derecha puede observarse un ejemplo con los valores obligatorios especificados, así como la relación que guardan éstos atributos con los del manual técnico. Por ejemplo el tipo de documento en el manual técnico es el C002.
 
-Algunos campos son obligatorios para el e-Kuatia, para lo cual desde FacturaSend se asumen algunos valores por defecto caso no sean proveidos en el parámetro principal.
+Algunos campos son obligatorios para el eKuatia, para lo cual desde FacturaSend se asumen algunos valores por defecto caso no sean proveidos en el parámetro principal.
 
 ### Parametros del objeto principal o data
 
@@ -1230,7 +1352,7 @@ Para los atributos del objeto JSON también puede utilizar **_ (underscore)**, e
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por e-Kuatia (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002.
+**tipoDocumento** | **Si** | Uno de los 5 tipos de documentos admitidos por eKuatia (1, 4, 5, 6, 7). Ej.:<br/>1= Factura electrónica, <br/>4= Autofactura electrónica <br/>5= Nota de crédito electrónica, <br/>6= Nota de débito electrónica, <br/>7= Nota de remisión electrónica. <br/><br/>**Campo XML:** C002.
 **establecimiento**|**Si**| Representa al código de establecimiento del emisor, se puede enviar 1 o '001' <br/><br/>**Campo XML:** C005.
 **punto**|**Si**| Es el punto de emisión del documento electrónico, se puede enviar 1 o '001'<br/><br/>**Campo XML:** C006.
 **numero**|**Si**| Es el número del documento electrónico, se puede enviar directamente el número o completar con 0 a la izquierda hasta alcanzar 7 digitos. Ej.: 1 o '0000001'. <br/><br/>**Campo XML:**C007 
@@ -1272,7 +1394,7 @@ documentoTipo|No|Tipo de documento del cliente <br/>**Campo XML:**D208
 documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
-email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en e-Kuatia se incluirá sólo el primero<br/><br/>**Campo XML:**D216
+email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en eKuatia se incluirá sólo el primero<br/><br/>**Campo XML:**D216
 codigo|No|Codigo del Cliente<br/>**Campo XML:**D217
 
 ### Parametro del objeto data.usuario
@@ -1630,9 +1752,9 @@ Atributos | Tipo | Description
 success | boolean | true si no hubo errores en la transacción
 error | string | El mensaje de Error, en el caso de que el success = false, Si la invocación se realizó para crear 1 sólo DE por el método sincrono, entonces aquí se especificará el mensaje de error.
 errores | array | En el caso de haya invocado la API para crear varios DEs por el método asíncrono, aqui se mostrarán una lista de errores, indicando el error, y el número de índice del archivo XML con Error.
-deList | array | El array con la respuesta de cada DE procesado. Este array siempre devolverá 1 (un) sólo elemento, pero es un array por compatibilidad con el envío por lotes<br><br>Los atributos de éste array se describen en Respuesta deList
+deList | array | El array con la respuesta de cada DE procesado. Este array siempre devolverá 1 (un) sólo elemento para el elemento síncrono, pero es del tipo array por compatibilidad con el envío por asincrono o por lotes<br><br>Los atributos de éste array se describen en Respuesta [deList](#atributos-de-la-respuesta-delist)
 
-### Respuesta deList (Atributos)
+### Atributos de la Respuesta deList
 
 Atributos | Tipo | Description
 --------- | ---- | -----------
