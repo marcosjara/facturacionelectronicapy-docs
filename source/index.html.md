@@ -174,8 +174,8 @@ FacturaSend utiliza una API KEY para tener autorización a los servicios de la A
 Debes reemplazar <code>&lt;hdiweuw-92jwwle...&gt;</code> con la API key específica de la Empresa.
 </aside>
 
-# Servicios del DE
-A continuación se detallan los servicios que pueden ser realizados sobre los DEs (Documentos Electrónicos) 
+# Servicios de FacturaSend
+A continuación se detallan los servicios que pueden ser realizados desde FacturaSend sobre los DEs (Documentos Electrónicos) así como también servicios adicionales que provee el SIFEN, como lo es la consulta de RUC
 
 ## Creación de un DE
 ```shell
@@ -790,6 +790,73 @@ En éste caso existen técnicas que se deben manejar para no alterar el CDC (Có
 
 - Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
 - Puede enviar como mínimo 1 documento y como máximo 50 por llamada, si tienen más debe realizarlo en una siguiente llamada.
+
+
+## Consulta DE RUC
+
+> Para consultar el DTE:
+
+```shell
+# Consulta los datos de una Empresa Física o Juridica por el RUC
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/ruc/80069563"  
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/ruc/80069563`, 
+  null, 
+  {headers}
+)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{
+  "success": true,
+  "respuesta_codigo": "0502",
+  "respuesta_mensaje": "CDC encontrado",
+  "razon_social": "TIPS S.A",
+  "estado_codigo": "ACT",
+  "estado_mensaje": "ACTIVO",
+  "facturador_electronico": true
+}
+```
+Este servicio consulta por el RUC la existencia de una Empresa directamente en el SIFEN, a travéz de la API del eKuatia.
+
+El RUC informado como parámetro no debe contener el díto verificador.
+
+Esta consulta por RUC también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**ruc** | **Si** | RUC de la Empresa, sin el dígito verificador
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
+error | string | El mensaje de error en caso de que haya retornado success=false.
+respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
+respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
+razon_social | string | Razón Social de la Empresa como se encuentra en el Marangatú.
+estado_codigo | string | Código del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/>
+estado_mensaje | string | Descripción del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/>
+facturador_electronico | boolean | true si la empresa ya se encuentra facturando electrónicamente.
+
 
 ## Consulta DE por CDC
 
