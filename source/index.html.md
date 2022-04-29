@@ -840,6 +840,8 @@ El RUC informado como parámetro no debe contener el díto verificador.
 
 Esta consulta por RUC también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
 
+Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
+
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
@@ -852,10 +854,10 @@ success | boolean | true si la consulta se ejecutó con éxito, false si dio alg
 error | string | El mensaje de error en caso de que haya retornado success=false.
 respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
 respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
-razon_social | string | Razón Social de la Empresa como se encuentra en el Marangatú.
-estado_codigo | string | Código del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/>
-estado_mensaje | string | Descripción del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/>
-facturador_electronico | boolean | true si la empresa ya se encuentra facturando electrónicamente.
+razon_social | string | Razón Social de la Empresa como se encuentra en el Marangatú.<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
+estado_codigo | string | Código del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
+estado_mensaje | string | Descripción del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
+facturador_electronico | boolean | true si la empresa ya se encuentra facturando electrónicamente.<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
 
 
 ## Consulta DE por CDC
@@ -902,6 +904,9 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/cdc/0180069563100100100
 Este servicio consulta la existencia de un documento electrónico directamente en el SIFEN, a travéz de la API del eKuatia.
 
 Esta consulta también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
+
+Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
+
 
 ### Parámetros
 Parámetro | Requerido | Descripción
