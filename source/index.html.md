@@ -1795,6 +1795,8 @@ fecha|**Si**|Fecha de emisión del documento impreso de referencia.Obligatorio s
 numeroRetencion|No|Número de comprobante de retención <br/>**Campo XML:**H012
 resolucionCreditoFiscal|No|Número de resolución de crédito fiscal <br/>**Campo XML:**H013
 tipoConstancia|No|Tipo de constancia<br/>**Campo XML:**H014
+constanciaNumero|No|Numero de constancia<br/>**Campo XML:**H016
+constanciaControl|No|Codigo de Control de la constancia<br/>**Campo XML:**H017
 
 ## Respuesta de creación de un DE
 > Ejemplo de respuesta de creación de un DE:
