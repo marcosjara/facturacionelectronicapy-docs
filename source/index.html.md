@@ -1444,6 +1444,7 @@ cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En 
 **usuario**|**Si**|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla [data.usuario](#parametro-del-objeto-data-usuario).<br/>
 factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>Solo es necesario cuando el tipoDocumento=1 (Factura Electrónica)<br/>Ver detalle en tabla [data.factura](#parametro-del-objeto-data-factura).<br/>
 autofactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autofactura](#parametro-del-objeto-data-autofactura).<br/>
+notaCreditoDebito|No|Conjunto de información relacionada a la Nota de Credito o Debito. <br/>Solo es necesario cuando el tipoDocumento=5 o tipoDocumento=6 (Nota de Credito/Nota de Debito)<br/>Ver detalle en tabla [data.notaCreditoDebito](#parametro-del-objeto-data-factura).<br/>
 
 
 ### Parametro del objeto data.cliente
@@ -1483,7 +1484,14 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:**E011
 fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:**E013
-dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla data.factura.dncp 
+dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla [data.factura.dncp]
+
+### Parametro del objeto data.notaCreditoDebito
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+motivo|Si|Motivo de la emsion<br/>1= Devolución y Ajuste de precios<br/>2= Devolución<br/>3= Descuento<br/>4= Bonificación<br/>5= Crédito incobrable<br/>6= Recupero de costo<br/>7= Recupero de gasto<br/>8= Ajuste de precio<br/><br/>**Campo XML:**E401
+
 ### Parametro del objeto data.factura.dncp
 
 Parámetro | Requerido | Descripción
@@ -1509,7 +1517,7 @@ departamentoDescripcion|No|Descripción del departamento del vendedor <br/>**Cam
 distritoDescripcion|No|Descripción del distrito del vendedor <br/>**Campo XML:**E313
 **ciudad**|**Si**|Código de la ciudad del vendedor <br/>**Campo XML:** E314
 ciudadDescripcion|No|Descripción del ciudad del vendedor <br/>**Campo XML:** E315
-**ubicacion**|**Si**| Ver detalle en tabla data.autofactura.ubicacion
+**ubicacion**|**Si**| Ver detalle en tabla [data.autofactura.ubicacion]
 
 ### Parametro del objeto data.autofactura.ubicacion
 
@@ -1597,8 +1605,8 @@ cilindradas|No|Cilindradas del motor<br/>**Campo XML:**E786
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **tipo**|**Si**|Condición de la operación. <br/>1= Contado <br/>2= Crédito<br/>**Campo XML:**E601
-entregas|No|Datos que describen la forma de pago al contado o del monto de la entrega inicial. Ver detalle en tabla data.condicion.entregas.<br/>
-credito|No|Campos que describen la operación a crédito. Ver detalle en tabla data.condicion.credito.<br/>
+entregas|No|Datos que describen la forma de pago al contado o del monto de la entrega inicial. Ver detalle en tabla [data.condicion.entregas].<br/>
+credito|No|Campos que describen la operación a crédito. Ver detalle en tabla [data.condicion.credito].<br/>
 ### Parametro del objeto data.condicion.entregas
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
@@ -1606,8 +1614,9 @@ Parámetro | Requerido | Descripción
 **monto**|**Si**| Monto por tipo de pago <br/> **Campo XML:**E608
 **moneda**|**Si**|Moneda por tipo de pago<br/>Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 Se requiere la misma moneda para todos los ítems del DE<br/> **Campo XML:**E609
 cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:**E611
-infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla data.condicion.entregas.infoTarjeta
-infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en tabla data.condicion.entregas.infoCheque
+infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla [data.condicion.entregas.infoTarjeta]
+infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en [tabla data.condicion.entregas.infoCheque]
+
 ### Parametro del objeto data.condicion.entregas.infoTarjeta
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
@@ -1690,10 +1699,11 @@ inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:
 finEstimadoTranslado|No|Fecha estimada de fin de traslado<br/>**Campo XML:**E910
 paisDestino|No|Código del país de destino <br/>**Campo XML:**E911
 paisDestinoNombre|No|Descripción del país de destino.  <br/>**Campo XML:**E912
-salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla data.detalleTransporte.salida
-entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla data.detalleTransporte.entrega
-vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla data.detalleTransporte.vehiculo
-transportista|No|Campos que identifican al transportista. Ver detalle en tabla data.detalleTransporte.transportista
+salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla [data.detalleTransporte.salida]
+entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla [data.detalleTransporte.entrega]
+vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla [data.detalleTransporte.vehiculo]
+transportista|No|Campos que identifican al transportista. Ver detalle en tabla [data.detalleTransporte.transportista]
+
 ### Parametro del objeto data.salida
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
@@ -1751,8 +1761,8 @@ direccion|No|Domicilio fiscal del transportista<br/>**Campo XML:**E992
 obs|No|Observacion del transportista
 pais|No|Código del pais de Origen del transportista
 paisDescripcion|No|Descripcion del pais Origen
-chofer|No|Campos que identifican al chofer. Ver detalle en tabla data.transportista.chofer
-agente|No|Campos que identifican al agente. Ver detalle en tabla data.transportista.agente
+chofer|No|Campos que identifican al chofer. Ver detalle en tabla [data.transportista.chofer]
+agente|No|Campos que identifican al agente. Ver detalle en tabla [data.transportista.agente]
 
 ### Parametro del objeto data.transportista.chofer
 Parámetro | Requerido | Descripción
