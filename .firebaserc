@@ -6,10 +6,10 @@
     "facturasend": {
       "hosting": {
         "facturasend-docs": [
-          "facturasend"
+          "facturasend-docs"
         ],
         "facturasend": [
-          "facturasend-docs"
+          "facturasend"
         ]
       }
     }
