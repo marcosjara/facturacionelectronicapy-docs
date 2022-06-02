@@ -982,6 +982,7 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/estado`,
     "cdc": "01800695631001001038720612021112917595714694",
     "numero": "001-001-0000001",
     "estado": "Aprobado",
+    "situacion": 2,
     "fecha": "2022-04-02T08:56:58-04:00",
     "respuesta_codigo": "0260",
     "respuesta_mensaje": "Autorización del DE satisfactoria"
@@ -989,6 +990,7 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/estado`,
     "cdc": "01800695631001001000000612021312917595714694",
     "numero": "001-001-0000002",
     "estado": "Aprobado",
+    "situacion": 2,
     "fecha": "2022-04-02T08:56:58-04:00",
     "respuesta_codigo": "0260",
     "respuesta_mensaje": "Autorización del DE satisfactoria"
@@ -996,6 +998,7 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/estado`,
     "cdc": "otro..",
     "numero": "001-001-0000003",
     "estado": "Aprobado",
+    "situacion": 2,
     "fecha": "2022-04-02T08:56:58-04:00",
     "respuesta_codigo": "0260",
     "respuesta_mensaje": "Autorización del DE satisfactoria"
@@ -1030,7 +1033,7 @@ Atributos | Tipo | Description
 cdc | string | Id único de 44 dígitos del Documento Electrónico consultado
 fecha | date-time | Fecha de Proceso en el SIFEN en formato yyyy-MM-ddThh:mm:ss
 numero | string | Número de Documento Electrónico en formato 001-001-0000001
-estado | string | Estado del Documento Electrónico, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
+situacion | number | Situacion numerica en FacturaSend, con los posibles valores:<br>0 = Generado DE<br>1 = Enviado en un Lote<br>2 = Aprobado (Caso sea sincrono es inmediato)<br>3 = Aprobado con observacion<br>4 = Rechazado.<br>Puede utilizar estos mismos estados en su Sistema<br>
 respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
 
