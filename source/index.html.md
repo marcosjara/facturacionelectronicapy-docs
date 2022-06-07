@@ -1033,7 +1033,7 @@ Atributos | Tipo | Description
 cdc | string | Id único de 44 dígitos del Documento Electrónico consultado
 fecha | date-time | Fecha de Proceso en el SIFEN en formato yyyy-MM-ddThh:mm:ss
 numero | string | Número de Documento Electrónico en formato 001-001-0000001
-situacion | number | Situacion numerica en FacturaSend, con los posibles valores:<br>0 = Generado DE<br>1 = Enviado en un Lote<br>2 = Aprobado (Caso sea sincrono es inmediato)<br>3 = Aprobado con observacion<br>4 = Rechazado.<br>Puede utilizar estos mismos estados en su Sistema<br>
+situacion | number | Situacion numerica en FacturaSend, con los posibles valores:<br>0 = Generado DE<br>1 = Enviado en un Lote<br>2 = Aprobado (Caso sea sincrono es inmediato)<br>3 = Aprobado con observacion<br>4 = Rechazado<br>98 = Inexistente<br>99 = Cancelado.<br>Puede utilizar estos mismos estados en su Sistema<br>
 respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
 
@@ -1447,7 +1447,7 @@ cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En 
 **usuario**|**Si**|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla [data.usuario](#parametro-del-objeto-data-usuario).<br/>
 factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>Solo es necesario cuando el tipoDocumento=1 (Factura Electrónica)<br/>Ver detalle en tabla [data.factura](#parametro-del-objeto-data-factura).<br/>
 autofactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autofactura](#parametro-del-objeto-data-autofactura).<br/>
-notaCreditoDebito|No|Conjunto de información relacionada a la Nota de Credito o Debito. <br/>Solo es necesario cuando el tipoDocumento=5 o tipoDocumento=6 (Nota de Credito/Nota de Debito)<br/>Ver detalle en tabla [data.notaCreditoDebito](#parametro-del-objeto-data-factura).<br/>
+notaCreditoDebito|No|Conjunto de información relacionada a la Nota de Credito o Debito. <br/>Solo es necesario cuando el tipoDocumento=5 o tipoDocumento=6 (Nota de Credito/Nota de Debito)<br/>Ver detalle en tabla [data.notaCreditoDebito](#parametro-del-objeto-data-notaCreditoDebito).<br/>
 
 
 ### Parametro del objeto data.cliente
@@ -1850,6 +1850,8 @@ numero | string | Número de Documento Electrónico generado en formato 001-001-
 estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
 respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
+xml | string | El archivo XML generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como queryParam al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/<tenantId>/de/create?xml=true 
+qr | string | El valor del codigo QR generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como queryParam al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/<tenantId>/de/create?qr=true
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
