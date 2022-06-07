@@ -1850,8 +1850,8 @@ numero | string | Número de Documento Electrónico generado en formato 001-001-
 estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
 respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
-xml | string | El archivo XML generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como queryParam al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/<tenantId>/de/create?xml=true 
-qr | string | El valor del codigo QR generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como queryParam al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/<tenantId>/de/create?qr=true
+xml<br>(opcional) | string | El archivo **XML** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?xml=true 
+qr<br>(opcional) | string | El valor del codigo **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
