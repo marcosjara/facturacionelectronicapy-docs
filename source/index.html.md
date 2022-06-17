@@ -1855,6 +1855,496 @@ qr<br>(opcional) | string | El valor del codigo **QR** generado del documento el
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
+## Evento de Cancelación
+> Evento disponible para cancelar un Documento Electrónico que ya ha sido aprobado en la SET:
+
+```shell
+# Cancela un Documento electronico emitido
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/evento/cancelacion" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+    "cdc": "01800695631001001038720612021112917595714694",
+    "motivo": "Se digito erroneamente la dirección del cliente"
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+  "cdc": "01800695631001001038720612021112917595714694",
+  "motivo": "Se digito erroneamente la dirección del cliente"
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/evento/cancelacion`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+				"ns2:dEstRes" : "Aprobado",
+				"ns2:gResProc" : {
+          "ns2:dCodRes" : "",
+					"ns2:dMsgRes" : ""
+        }
+      }
+    }
+			
+  }
+}
+```
+Este servicio ejecuta la cancelación de un documento específico teniendo como parámetro el valor de su CDC. 
+
+Sólo podrá cancelar los documentos que hayan sido emitidos y aprobados dentro del plazo de 48 horas (2 dias).
+
+Si el Documento Electrónico es cancelado de forma satisfactoria se enviará un email al cliente, avisando del evento junto con el documento electrónico cancelado. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **si** | El CDC del Documento Electrónico que desea cancelar<br/>
+**motivo** | **si** | El motivo por el cual desea cancelar el documento<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+
+## Evento de Inutilizacion
+> Evento destinado para inutilizar las numeraciones del timbrado que no fueron utilizados, para dejar constancia de su no utilizacion en la SET:
+
+```shell
+# Cancela un Documento electronico emitido
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/evento/inutilizacion" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+        tipoDocumento: 1,
+        establecimiento: `001`,
+        punto: `001`,
+        desde: 10,
+        hasta: 12,
+        motivo: `Se inutiliza la numeración por error de generacion en software`
+    }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+        tipoDocumento: 1,
+        establecimiento: `001`,
+        punto: `001`,
+        desde: 10,
+        hasta: 12,
+        motivo: `Se inutiliza la numeración por error de generacion en software`
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/evento/inutilizacion`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ 
+  "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+				"ns2:dEstRes" : "Aprobado",
+				"ns2:gResProc" : {
+          "ns2:dCodRes" : "",
+					"ns2:dMsgRes" : ""
+        }
+      }
+    }
+  }
+}
+```
+Este servicio ejecuta la inutilizacion de uno o mas numeraciones teniendo en cuenta el parametro desde y hasta incluyendo los valores limites especificados. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**tipoDocumento** | **si** | Numero entero que representa el Tipo de Documento Electronico del 1 al 7<br/>
+**establecimiento** | **si** | String conteniendo el valor del establecimiento que corresponde a la numeracion que desea inutilizar<br/>
+**punto** | **si** | String conteniendo el valor del punto que corresponde a la numeracion que desea inutilizar<br/>
+**desde** | **si** | Numero inicial a partir del cual se deben inutilizar la numeracion<br/>
+**hasta** | **si** | Numero final a partir de la cual se deben inutilizar la numeracion<br/>
+**motivo** | **si** | El motivo por el cual desea inutilizar el rango de numeraciones<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **True** si todo ocurrio bien y se inutilizaron las numeraciones del Timbrado, **False** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+## Evento de Conformidad
+> Evento destinado para dar conformidad de recepcion de un Documento Electronico generado por un Emisor a su nombre o a nombre de su Empresa. Este evento no es obligatorio registrar:
+
+```shell
+# Cancela un Documento electronico emitido
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/evento/conformidad" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+    "cdc": "01800695631001001000000812021112910953738413",
+    "tipoConformidad" : 1, //1-Parcial o 2-Total,
+    "fechaRecepcion" : "2020-01-31T00:01:01"
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+    "cdc": "01800695631001001000000812021112910953738413",
+    "tipoConformidad" : 1, //1-Parcial o 2-Total,
+    "fechaRecepcion" : "2020-01-31T00:01:01"
+  };
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/evento/conformidad`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+				"ns2:dEstRes" : "Aprobado",
+				"ns2:gResProc" : {
+          "ns2:dCodRes" : "",
+					"ns2:dMsgRes" : ""
+        }
+      }
+    }
+			
+  }
+}
+```
+Con este evento se informa a la SET que el receptor se encuentra conforme total o parcialmente con el documento electronico recibido por parte de su Proveedor asi como tambien que ha recibido la mercaderia o servicio especificado en el documento. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
+**tipoConformidad** | **si** | Valor numerico que indica si esta 1=Totalmente conforme o 2=Parcialmente conforme<br/>
+**fechaRecepcion** | **si** | Indica la fecha que ha recibido el documento electronico<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+## Evento de Disconformidad
+> Evento destinado para informar a la SET de una Disconformidad sobre un Documento Electronico recibido por parte de un tercero o un proveedor:
+
+```shell
+# Evento de disconformidad
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/evento/disconformidad" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+    "cdc": "01800695631001001038720612021112917595714694",
+    "motivo": "Se genero erroneamente este documento a nuestro nombre"
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+  "cdc": "01800695631001001038720612021112917595714694",
+  "motivo": "Se genero erroneamente este documento a nuestro nombre"
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/evento/cancelacion`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+				"ns2:dEstRes" : "Aprobado",
+				"ns2:gResProc" : {
+          "ns2:dCodRes" : "",
+					"ns2:dMsgRes" : ""
+        }
+      }
+    }
+			
+  }
+}
+```
+Con este servicio usted deja constancia en la SET que el documento electronico tiene algun inconveniente o que no le corresponde haber recibido como empresa. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
+**motivo** | **si** | El motivo por el cual esta disconforme con el documento<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+## Evento de Desconocimiento
+> Evento destinado para informar a la SET que usted no debio haber recibido dicho documento o que desconoce su origen y generacion:
+
+```shell
+# Informa a la SET de un Desconocimiento de un DTE
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/evento/desconocimiento" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+      "cdc": "01800695631001003000013712022010619364760029",    //DE o DTE
+      "fechaEmision" : "2020-01-31T00:01:01",    //Fecha pasada
+      "fechaRecepcion" : "2020-01-31T00:01:01",    //Fecha despues
+      "tipoReceptor" : 1,
+      "nombre" : "BRASIL CRESCENCIO",
+      "ruc" : "50062360-0",
+      "documentoTipo" : 11,
+      "documentoNumero" : "",
+      "motivo": "teste"
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+  "cdc": "01800695631001003000013712022010619364760029",    //DE o DTE
+  "fechaEmision" : "2020-01-31T00:01:01",    //Fecha pasada
+  "fechaRecepcion" : "2020-01-31T00:01:01",    //Fecha despues
+  "tipoReceptor" : 1,
+  "nombre" : "BRASIL CRESCENCIO",
+  "ruc" : "50062360-0",
+  "documentoTipo" : 11,
+  "documentoNumero" : "",
+  "motivo": "teste"
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/evento/desconocimiento`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+				"ns2:dEstRes" : "Aprobado",
+				"ns2:gResProc" : {
+          "ns2:dCodRes" : "",
+					"ns2:dMsgRes" : ""
+        }
+      }
+    }
+			
+  }
+}
+```
+Este servicio informa a la SET que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
+**fechaEmision** | **si** | Fecha de emision del Documento Electronico
+**fechaRecepcion** | **si** | Fecha de recepcion del documento electronico
+**tipoReceptor** | **si** | Tipo de Receptor
+**nombre** | **si** | Nombre del Receptor
+**ruc** | **si** | RUC del Receptor con el digito verificador
+**documentoTipo** | **si** | Tipo de Documento
+**documentoNumero** | **si** | Numero de documento
+**motivo** | **si** | El motivo por el cual desea cancelar el documento<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+## Evento de Notificacion
+> Evento destinado para informar a la SET que conoce dicho documento, sin embargo, aún no tiene condiciones para manifestarse de forma conclusiva (con Conformidad, Disconformidad o Desconocimiento). 
+> 
+> Es un evento opcional.
+```shell
+# Notifica a la SET de que se ha recepcionado un DTE
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/evento/notificacion" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+      "cdc": "01800695631001003000013712022010619364760029",    //DE o DTE
+      "fechaEmision" : "2020-01-31T00:01:01",    //Fecha pasada
+      "fechaRecepcion" : "2020-01-31T00:01:01",    //Fecha despues
+      "tipoReceptor" : 1,
+      "nombre" : "BRASIL CRESCENCIO",
+      "ruc" : "50062360-0",
+      "documentoTipo" : 11,
+      "documentoNumero" : "",
+      "totalPYG": "150000"
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+  "cdc": "01800695631001003000013712022010619364760029",    //DE o DTE
+  "fechaEmision" : "2020-01-31T00:01:01",    //Fecha pasada
+  "fechaRecepcion" : "2020-01-31T00:01:01",    //Fecha despues
+  "tipoReceptor" : 1,
+  "nombre" : "BRASIL CRESCENCIO",
+  "ruc" : "50062360-0",
+  "documentoTipo" : 11,
+  "documentoNumero" : "",
+  "totalPYG": "150000"
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/evento/notificacion`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+				"ns2:dEstRes" : "Aprobado",
+				"ns2:gResProc" : {
+          "ns2:dCodRes" : "",
+					"ns2:dMsgRes" : ""
+        }
+      }
+    }
+			
+  }
+}
+```
+Este servicio informa a la SET que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
+**fechaEmision** | **si** | Fecha de emision del Documento Electronico
+**fechaRecepcion** | **si** | Fecha de recepcion del documento electronico
+**tipoReceptor** | **si** | Tipo de Receptor
+**nombre** | **si** | Nombre del Receptor
+**ruc** | **si** | RUC del Receptor con el digito verificador
+**documentoTipo** | **si** | Tipo de Documento
+**documentoNumero** | **si** | Numero de documento
+**totalPYG** | **si** | Monto total del documento en GS<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+
 # Glosario
 
 Parameter | Description
