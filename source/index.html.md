@@ -1621,7 +1621,7 @@ Parámetro | Requerido | Descripción
 cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:**E611
 infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla [data.condicion.entregas.infoTarjeta]
 infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en [tabla data.condicion.entregas.infoCheque]
-extras|No|Objeto de datos extras de la entrega en formato **key=value** que puede ser enviado de forma adicional por cada condicion de entrega para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"vuelto" : 8500, <br/>&nbsp;&nbsp;"numeroDoce": "T-3232323"<br/>}<br/>
+extras|No|Objeto de datos extras de la entrega en formato **key=value** que puede ser enviado de forma adicional por cada condicion de entrega para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"vuelto" : 8500, <br/>&nbsp;&nbsp;"numeroDoc": "T-3232323"<br/>}<br/>
 
 
 ### Parametro del objeto data.condicion.entregas.infoTarjeta
