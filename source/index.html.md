@@ -1448,7 +1448,7 @@ cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En 
 factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>Solo es necesario cuando el tipoDocumento=1 (Factura Electrónica)<br/>Ver detalle en tabla [data.factura](#parametro-del-objeto-data-factura).<br/>
 autofactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autofactura](#parametro-del-objeto-data-autofactura).<br/>
 notaCreditoDebito|No|Conjunto de información relacionada a la Nota de Credito o Debito. <br/>Solo es necesario cuando el tipoDocumento=5 o tipoDocumento=6 (Nota de Credito/Nota de Debito)<br/>Ver detalle en tabla [data.notaCreditoDebito](#parametro-del-objeto-data-notaCreditoDebito).<br/>
-
+extras|No|Objeto de datos extras del Documento Electronico en formato **key=value** que puede ser enviado de forma adicional para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"pedidoCliente" : "2123-1", <br/>&nbsp;&nbsp;"numeroPresupuesto": "P/001", <br/>&nbsp;&nbsp;"posTicketId" : 39271<br/>}<br/>
 
 ### Parametro del objeto data.cliente
 
@@ -1563,6 +1563,7 @@ vencimiento|No|Fecha de vencimiento del producto Formato AAAA-MM-DD<br/>**Campo 
 numeroSerie|No|Número de serie <br/>Valor alfanumérico<br/>Longitud: [1-10]<br/><br/>**Campo XML:** E753
 numeroPedido|No|Número de pedido<br/>**Campo XML:**E754
 numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:**E755
+extras|No|Objeto de datos extras del item en formato **key=value** que puede ser enviado de forma adicional por cada item para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"taxRate" : "15%", <br/>&nbsp;&nbsp;"barCode": "7937638273256", <br/>&nbsp;&nbsp;"storeId" : 3<br/>}<br/>
 
 ### Parametro del objeto data.items.dncp
 
@@ -1610,6 +1611,7 @@ Parámetro | Requerido | Descripción
 **tipo**|**Si**|Condición de la operación. <br/>1= Contado <br/>2= Crédito<br/>**Campo XML:**E601
 entregas|No|Datos que describen la forma de pago al contado o del monto de la entrega inicial. Ver detalle en tabla [data.condicion.entregas].<br/>
 credito|No|Campos que describen la operación a crédito. Ver detalle en tabla [data.condicion.credito].<br/>
+
 ### Parametro del objeto data.condicion.entregas
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
@@ -1619,6 +1621,8 @@ Parámetro | Requerido | Descripción
 cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:**E611
 infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla [data.condicion.entregas.infoTarjeta]
 infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en [tabla data.condicion.entregas.infoCheque]
+extras|No|Objeto de datos extras de la entrega en formato **key=value** que puede ser enviado de forma adicional por cada condicion de entrega para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"vuelto" : 8500, <br/>&nbsp;&nbsp;"numeroDoce": "T-3232323"<br/>}<br/>
+
 
 ### Parametro del objeto data.condicion.entregas.infoTarjeta
 Parámetro | Requerido | Descripción
@@ -2252,9 +2256,10 @@ success | boolean | **True** si todo ocurrio bien y se canceló el Documento Ele
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Notificacion
-> Evento destinado para informar a la SET que conoce dicho documento, sin embargo, aún no tiene condiciones para manifestarse de forma conclusiva (con Conformidad, Disconformidad o Desconocimiento). 
-> 
-> Es un evento opcional.
+Evento destinado para informar a la SET que conoce dicho documento, sin embargo, aún no tiene condiciones para manifestarse de forma conclusiva (con Conformidad, Disconformidad o Desconocimiento). 
+
+Es un evento opcional.
+
 ```shell
 # Notifica a la SET de que se ha recepcionado un DTE
 curl \
