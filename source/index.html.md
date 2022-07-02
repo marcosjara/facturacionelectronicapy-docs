@@ -1302,10 +1302,10 @@ main | binary | Documento PDF en formato binary o base64
       "importador" : {
           "nombre" : "Importadora Parana S.A.",
           "direccion" : "Importadora Parana S.A.",
-          "registroImportador" : "Importadora Parana S.A.",
-          "registroSenave" : "Importadora Parana S.A.",
-          "registroEntidadComercial" : "Importadora Parana S.A."
+          "registroImportador" : "Importadora Parana S.A."
       },
+      "registroSenave" : "RS-0821221",
+      "registroEntidadComercial" : "REC-8923/2022",
       "sectorAutomotor" : {
           "tipo" : 1,
           "chasis" : "4525234523542353245",
@@ -1563,6 +1563,8 @@ vencimiento|No|Fecha de vencimiento del producto Formato AAAA-MM-DD<br/>**Campo 
 numeroSerie|No|Número de serie <br/>Valor alfanumérico<br/>Longitud: [1-10]<br/><br/>**Campo XML:** E753
 numeroPedido|No|Número de pedido<br/>**Campo XML:**E754
 numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:**E755
+registroSenave|No|Número de registro del producto otorgado por el SENAVE<br/>Obligados por la RG N° 16/2019 y la RG N° 24/2019 – Agroquímicos<br/>**Campo XML:**E759
+registroEntidadComercial|No|Número de registro de entidad comercial otorgado por el SENAVE<br/>**Campo XML:**E760
 extras|No|Objeto de datos extras del item en formato **key=value** que puede ser enviado de forma adicional por cada item para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"taxRate" : "15%", <br/>&nbsp;&nbsp;"barCode": "7937638273256", <br/>&nbsp;&nbsp;"storeId" : 3<br/>}<br/>
 
 ### Parametro del objeto data.items.dncp
@@ -1580,9 +1582,6 @@ Parámetro | Requerido | Descripción
 nombre|No|Nombre del Importador. Obligados por la RG N° 16/2019 – Agroquímicos<br/>**Campo XML:**E756
 direccion|No|Dirección de Importador<br/>**Campo XML:**E757
 registroImportador|No|Número de registro de la firma del importador<br/>**Campo XML:**E758
-registroSenave|No|Número de registro del producto otorgado por el SENAVE<br/>Obligados por la RG N° 16/2019 y la RG N° 24/2019 – Agroquímicos<br/>**Campo XML:**E759
-registroEntidadComercial|No|Número de registro de entidad comercial otorgado por el SENAVE<br/>**Campo XML:**E760
-
 
 ### Parametro del objeto data.items.sectorAutomotor
 
