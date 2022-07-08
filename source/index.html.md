@@ -1548,7 +1548,6 @@ descuento|No|Descuento particular sobre el precio unitario por ítem (incluidos 
 descuentoGlobal|No|Descuento global sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA004
 anticipo|No|Anticipo particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA006
 anticipoGlobal|No|Anticipo global sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA007
-subtotal||<br/>**Campo XML:**
 pais|No|<br/>Código del país de origen del producto**Campo XML:**E712
 paisDescripcion|No|Nombre del país de origen del producto<br/>**Campo XML:**E713
 tolerancia|No|Código de datos de relevancia de los productos<br/>**Campo XML:**E715
