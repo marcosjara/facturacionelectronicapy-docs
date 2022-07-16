@@ -1446,6 +1446,7 @@ cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En 
 factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>Solo es necesario cuando el tipoDocumento=1 (Factura Electrónica)<br/>Ver detalle en tabla [data.factura](#parametro-del-objeto-data-factura).<br/>
 autofactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autofactura](#parametro-del-objeto-data-autofactura).<br/>
 notaCreditoDebito|No|Conjunto de información relacionada a la Nota de Credito o Debito. <br/>Solo es necesario cuando el tipoDocumento=5 o tipoDocumento=6 (Nota de Credito/Nota de Debito)<br/>Ver detalle en tabla [data.notaCreditoDebito](#parametro-del-objeto-data-notaCreditoDebito).<br/>
+remision|No|Conjunto de información relacionada a la Remisión. <br/>Solo es necesario cuando el tipoDocumento=7 (Nota de Remisión)<br/>Ver detalle en tabla [data.remision](#parametro-del-objeto-data-remision).<br/>
 extras|No|Objeto de datos extras del Documento Electronico en formato **key=value** que puede ser enviado de forma adicional para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"pedidoCliente" : "2123-1", <br/>&nbsp;&nbsp;"numeroPresupuesto": "P/001", <br/>&nbsp;&nbsp;"posTicketId" : 39271<br/>}<br/>
 
 ### Parametro del objeto data.cliente
@@ -1487,12 +1488,6 @@ presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operaci�
 fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:**E013
 dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla [data.factura.dncp]
 
-### Parametro del objeto data.notaCreditoDebito
-
-Parámetro | Requerido | Descripción
---------- | --------- | -----------
-motivo|Si|Motivo de la emsion<br/>1= Devolución y Ajuste de precios<br/>2= Devolución<br/>3= Descuento<br/>4= Bonificación<br/>5= Crédito incobrable<br/>6= Recupero de costo<br/>7= Recupero de gasto<br/>8= Ajuste de precio<br/><br/>**Campo XML:**E401
-
 ### Parametro del objeto data.factura.dncp
 
 Parámetro | Requerido | Descripción
@@ -1502,6 +1497,7 @@ Parámetro | Requerido | Descripción
 **año**|**Si**|Año - Código emitido por la DNCP<br/>**Campo XML:**E023
 **secuencia**|**Si**|Secuencia - emitido por la DNCP <br/>**Campo XML:**E024
 **fecha**|**Si**|Fecha de emisión del código de contratación por la DNCP<br/>**Campo XML:**E025
+
 ### Parametro del objeto data.autofactura
 
 Parámetro | Requerido | Descripción
@@ -1531,6 +1527,21 @@ departamentoDescripcion|No| Descripcion del departamento donde se realiza la tra
 distritoDescripcion|No| Descripcion del distrito donde se realiza la transacción <br/>**Campo XML:**E320
 **ciudad**|**Si**| Código de la ciudad donde se realiza la transacción <br/>**Campo XML:**E321 
 ciudadDescripcion|No|Descripcion de la ciudad donde se realiza la transacción  <br/>**Campo XML:**E322 
+
+### Parametro del objeto data.notaCreditoDebito
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+motivo|Si|Motivo de la emisión<br/>1= Devolución y Ajuste de precios<br/>2= Devolución<br/>3= Descuento<br/>4= Bonificación<br/>5= Crédito incobrable<br/>6= Recupero de costo<br/>7= Recupero de gasto<br/>8= Ajuste de precio<br/><br/>**Campo XML:**E401
+
+### Parametro del objeto data.remision
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+motivo|Si|Valor numério del Motivo de la emisión:<br/>1= Traslado por venta<br>2= Traslado por consignación<br>3= Exportación<br>4= Traslado por compra<br>5= Importación<br>6= Traslado por devolución<br>7= Traslado entre locales de la empresa<br>8= Traslado de bienes por transformación<br>9= Traslado de bienes por reparación<br>10= Traslado por emisor móvil<br>11= Exhibición o demostración<br>12= Participación en ferias<br>13= Traslado de encomienda<br>14= Decomiso<br>99=Otro (deberá consignarse expresamente el o los motivos diferentes a los mencionados anteriormente)<br><br>Obs.: Cuando el motivo sea por operaciones internas de la empresa, el RUC del receptor debe ser igual al RUC del emisor.<br><br>**Campo XML:**E501
+motivoDescripcion|No|Descripción del Motivo de la emisión, caso el motivo sea igual a 99<br><br>**Campo XML:** E502
+tipoResponsable|Si|Responsable de la emisión de la Nota Remisión Electrónica:<br>1= Emisor de la factura<br>2= Poseedor de la factura y bienes<br>3= Empresa transportista<br>4= Despachante de Aduanas<br>5= Agente de transporte o intermediario<br><br>**Campo XML:** E503
+kms|No|Kilómetros estimados de recorrido<br><br>**Campo XML:** E503
 
 ### Parametro del objeto data.items
 Parámetro | Requerido | Descripción
