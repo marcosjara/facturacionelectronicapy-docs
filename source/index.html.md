@@ -1394,7 +1394,7 @@ main | binary | Documento PDF en formato binary o base64
           "documentoNumero" : "232323-1",
           "obs" : "",
           "numeroMatricula" : "ALTO PARANA",
-          "numeroVuelo" : "32123"
+          "numeroVuelo" : null
       },
       "transportista" : null
   },
@@ -1754,15 +1754,16 @@ distritoDescripcion|No|Descripción de distrito del local de entrega<br/>**Campo
 pais|No|Código de  pais de salida
 paisDescripcion|No|Descripcion del pais de salida
 telefonoContacto|No|Teléfono de contacto del local de la entrega<br/>**Campo XML:**E951 
+
 ### Parametro del objeto data.vehiculo
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-**tipo**|**Si**|Tipo de vehículo<br/>**Campo XML:**E961
+**tipo**|**Si**|Tipo de vehículo. Ejemplo: Camioneta, Barcaza, Elicoptero, Debe ser acorde al tipo de transporte<br/><br/>**Campo XML:** E961
 **marca**|**Si**|Marca<br/>**Campo XML:**E962
 **documentoTipo**|**Si**|Tipo de identificación del vehículo <br/>1=Número de identificación del vehículo<br/>2=Número de matrícula del vehículo<br/>**Campo XML:**E967
-documentoNumero|No|Número de identificación del vehículo<br/>**Campo XML:**E963
+documentoNumero|No|Número de identificación del vehículo. Debe informarse cuando el documentoTipo=1<br/>**Campo XML:**E963
 obs|No|Datos adicionales del vehículo <br/>**Campo XML:**E964
-numeroMatricula|No|Número de matrícula del vehículo.Debe informarse cuando el documentoTipo=2 <br/>**Campo XML:**E965
+numeroMatricula|No|Número de matrícula del vehículo. Debe informarse cuando el documentoTipo=2 <br/>**Campo XML:**E965
 numeroVuelo|No|Número de vuelo<br/>**Campo XML:**E966
 
 ### Parametro del objeto data.transportista
