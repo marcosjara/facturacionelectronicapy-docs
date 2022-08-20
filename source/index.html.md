@@ -215,9 +215,9 @@ curl \
         "tipoContribuyente" : 1,
         "documentoTipo" : 1,
         "documentoNumero" : "2324234",
-        "telefono" : "xyz",
-        "celular" : "xyz",
-        "email" : "cliente@cliente.com",
+        "telefono" : "061229382",
+        "celular" : "0983123765",
+        "email" : "cliente@empresa.com, cliente@personal.com",
         "codigo" : "1548"
     },
     "usuario" : {
@@ -336,9 +336,9 @@ const data = {
       "tipoContribuyente" : 1,
       "documentoTipo" : 1,
       "documentoNumero" : "2324234",
-      "telefono" : "xyz",
-      "celular" : "xyz",
-      "email" : "cliente@cliente.com",
+      "telefono" : "061229382",
+      "celular" : "0983123765",
+      "email" : "cliente@empresa.com, cliente@personal.com",
       "codigo" : "1548"
   },
   "usuario" : {
@@ -518,9 +518,9 @@ curl \
       "tipoContribuyente" : 1,
       "documentoTipo" : 1,
       "documentoNumero" : "2324234",
-      "telefono" : "xyz",
-      "celular" : "xyz",
-      "email" : "cliente@cliente.com",
+      "telefono" : "061229382",
+      "celular" : "0983123765",
+      "email" : "cliente@empresa.com, cliente@personal.com",
       "codigo" : "1548"
   },
   "usuario" : {
@@ -638,9 +638,9 @@ const data = [{
       "tipoContribuyente" : 1,
       "documentoTipo" : 1,
       "documentoNumero" : "2324234",
-      "telefono" : "xyz",
-      "celular" : "xyz",
-      "email" : "cliente@cliente.com",
+      "telefono" : "061229382",
+      "celular" : "0983123765",
+      "email" : "cliente@empresa.com, cliente@personal.com",
       "codigo" : "1548"
   },
   "usuario" : {
@@ -1198,9 +1198,9 @@ main | binary | Documento PDF en formato binary o base64
       "tipoContribuyente" : 1,
       "documentoTipo" : 1,
       "documentoNumero" : "2324234",
-      "telefono" : "xyz",
-      "celular" : "xyz",
-      "email" : "cliente@cliente.com",
+      "telefono" : "061229382",
+      "celular" : "0983123765",
+      "email" : "cliente@empresa.com, cliente@personal.com",
       "codigo" : "1548"
   },
   "usuario" : {
@@ -1374,7 +1374,7 @@ main | binary | Documento PDF en formato binary o base64
           "distrito" : 143,
           "ciudad" : 3344,
           "pais" : "PRY",
-          "telefonoContacto" : "097x"
+          "telefonoContacto" : "0973987654"
       },
       "entrega" : {
           "direccion" : "Paraguay",
@@ -1385,7 +1385,7 @@ main | binary | Documento PDF en formato binary o base64
           "distrito" : 143,
           "ciudad" : 3344,
           "pais" : "PRY",
-          "telefonoContacto" : "097x"
+          "telefonoContacto" : "0973987654"
       },
       "vehiculo" : {
           "tipo" : "Camioneta",
