@@ -174,7 +174,7 @@ FacturaSend utiliza una API KEY para tener autorización a los servicios de la A
 Debes reemplazar <code>&lt;hdiweuw-92jwwle...&gt;</code> con la API key específica de la Empresa.
 </aside>
 
-# Servicios de FacturaSend
+# Servicios del DE
 A continuación se detallan los servicios que pueden ser realizados desde FacturaSend sobre los DEs (Documentos Electrónicos) así como también servicios adicionales que provee el SIFEN, como lo es la consulta de RUC
 
 ## Creación de un DE
@@ -1869,6 +1869,8 @@ qr<br>(opcional) | string | El valor del codigo **QR** generado del documento el
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
+# Eventos del DE
+
 ## Evento de Cancelación
 > Evento disponible para cancelar un Documento Electrónico que ya ha sido aprobado en la SET:
 
@@ -2339,6 +2341,187 @@ axios.post({
 }
 ```
 Este servicio informa a la SET que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
+
+# Otros servicios
+A continuación se presentan otros servicios que pueden ser invocados desde FacturaSend
+
+## Consulta de Departamentos
+Servicio que obtiene la lista de todos los departamentos del Paraguay admitidos por el SIFEN. En cada elemento se recupera el código y la descripción del Departamento.
+
+```shell
+# Obtiene los departamentos
+curl \
+  GET "https://api.facturasend.com.py/<tenantId>/departamentos" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" 
+
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/departamentos`,
+  method: 'GET',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ 
+  "success" : true,
+  "result" : [{
+      "codigo": 17,
+      "descripcion": "ALTO PARAGUAY"
+    },
+    {
+      "codigo": 11,
+      "descripcion": "ALTO PARANA"
+    },
+    {
+      "codigo": 99,
+      "descripcion": "OTROS"
+    }]
+}
+```
+Puede utilizar este servicio para mantener actualizado los datos de los departamentos en su Sistema. 
+
+## Consulta de Distritos
+
+Servicio que obtiene la lista de todos los distritos del Paraguay admitidos por el SIFEN. En cada elemento se recupera el código y la descripción, y el Departamento al cual pertenece el Distrito.
+
+Puede especificar un departamento específico del cual desea obtener los distritos, en la ruta /<departamentoId>/ de la URL, o puede especificar en dicho campo el valor NULL si desea recuperar todos los distritos.
+
+También es posible realizar busquedas por nombres de distritos parecidos enviando un parámetro ?nombre=, indicando el valor para el filtro. 
+
+```shell
+# Obtiene los distritos del departamento y filtrando por el nombre
+curl \
+  GET "https://api.facturasend.com.py/<tenantId>/distritos/<departamentoId>?nombre=bahia" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" 
+
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/distritos/<departamentoId>?nombre=bahia`,
+  method: 'GET',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ 
+  "success" : true,
+  "result" : [{
+    "codigo": 196,
+    "descripcion": "BAHIA NEGRA",
+    "departamento": {
+        "codigo": 17,
+        "descripcion": "ALTO PARAGUAY"
+    }
+  }]
+}
+```
+Puede utilizar este servicio para mantener actualizado los datos de los distritos en su Sistema. 
+
+## Consulta de Ciudades
+
+Servicio que obtiene la lista de todas las ciudades del Paraguay admitidos por el SIFEN. En cada elemento se recupera el código y la descripción, y el objeto Distrito al cual pertenece la Ciudad.
+
+Puede especificar un distrito específico del cual desea obtener las ciudades, en la ruta /<distritoId>/ de la URL, o puede especificar en dicho campo el valor NULL si desea recuperar todos las Ciudades.
+
+También es posible realizar busquedas por nombres de ciudades parecidos enviando un parámetro ?nombre=, indicando el valor para el filtro. 
+
+```shell
+# Obtiene los distritos del departamento y filtrando por el nombre
+curl \
+  GET "https://api.facturasend.com.py/<tenantId>/ciudades/<distritoId>?nombre=asuncion" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" 
+
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/ciudades/<distritoId>?nombre=asuncion`,
+  method: 'GET',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ 
+  "success" : true,
+  "result" : [{
+      "codigo": 5666,
+      "descripcion": "B.AEREA NVA.ASUNCION (PICUIBA)",
+      "distrito": {
+          "codigo": 234,
+          "descripcion": "GRAL. EUGENIO A. GARAY",
+          "departamento": {
+              "codigo": 16,
+              "descripcion": "BOQUERON"
+          }
+      }
+    }, {
+      "codigo": 5678,
+      "descripcion": "NUEVA ASUNCION",
+      "distrito": {
+          "codigo": 234,
+          "descripcion": "GRAL. EUGENIO A. GARAY",
+          "departamento": {
+              "codigo": 16,
+              "descripcion": "BOQUERON"
+          }
+      }
+    }, {
+      "codigo": 999,
+      "descripcion": "Otros",
+      "distrito": {
+          "codigo": 999,
+          "descripcion": "Otros",
+          "departamento": {
+              "codigo": 999,
+              "descripcion": "Otros"
+          }
+      }
+    }]
+}
+```
+Puede utilizar este servicio para mantener actualizado los datos de los distritos en su Sistema. 
 
 ### Parámetros
 Parámetro | Requerido | Descripción
