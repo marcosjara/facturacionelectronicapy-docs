@@ -2342,6 +2342,25 @@ axios.post({
 ```
 Este servicio informa a la SET que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
 
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
+**fechaEmision** | **si** | Fecha de emision del Documento Electronico
+**fechaRecepcion** | **si** | Fecha de recepcion del documento electronico
+**tipoReceptor** | **si** | Tipo de Receptor
+**nombre** | **si** | Nombre del Receptor
+**ruc** | **si** | RUC del Receptor con el digito verificador
+**documentoTipo** | **si** | Tipo de Documento
+**documentoNumero** | **si** | Numero de documento
+**totalPYG** | **si** | Monto total del documento en GS<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
 # Otros servicios
 A continuación se presentan otros servicios que pueden ser invocados desde FacturaSend
 
@@ -2522,26 +2541,6 @@ axios.post({
 }
 ```
 Puede utilizar este servicio para mantener actualizado los datos de los distritos en su Sistema. 
-
-### Parámetros
-Parámetro | Requerido | Descripción
---------- | --------- | -----------
-**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
-**fechaEmision** | **si** | Fecha de emision del Documento Electronico
-**fechaRecepcion** | **si** | Fecha de recepcion del documento electronico
-**tipoReceptor** | **si** | Tipo de Receptor
-**nombre** | **si** | Nombre del Receptor
-**ruc** | **si** | RUC del Receptor con el digito verificador
-**documentoTipo** | **si** | Tipo de Documento
-**documentoNumero** | **si** | Numero de documento
-**totalPYG** | **si** | Monto total del documento en GS<br/>
-
-### Respuesta
-Atributo | Tipo | Descripción
---------- | --------- | -----------
-success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
-result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
-
 
 # Glosario
 
