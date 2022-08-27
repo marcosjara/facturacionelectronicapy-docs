@@ -247,7 +247,6 @@ curl \
                 "numero" : 1234,
                 "tipo" : 1,
                 "tipoDescripcion" : "Dinelco",
-                "numeroTarjeta": 3232,
                 "titular" : "Marcos Jara",
                 "ruc" : "69695654-1",
                 "razonSocial" : "Bancard",
@@ -368,7 +367,6 @@ const data = {
               "numero" : 1234,
               "tipo" : 1,
               "tipoDescripcion" : "Dinelco",
-              "numeroTarjeta": 3232,
               "titular" : "Marcos Jara",
               "ruc" : "69695654-1",
               "razonSocial" : "Bancard",
@@ -550,7 +548,6 @@ curl \
               "numero" : 1234,
               "tipo" : 1,
               "tipoDescripcion" : "Dinelco",
-              "numeroTarjeta": 3232,
               "titular" : "Marcos Jara",
               "ruc" : "69695654-1",
               "razonSocial" : "Bancard",
@@ -670,7 +667,6 @@ const data = [{
               "numero" : 1234,
               "tipo" : 1,
               "tipoDescripcion" : "Dinelco",
-              "numeroTarjeta": 3232,
               "titular" : "Marcos Jara",
               "ruc" : "69695654-1",
               "razonSocial" : "Bancard",
@@ -1235,7 +1231,6 @@ main | binary | Documento PDF en formato binary o base64
           "infoTarjeta" : {
               "numero" : 1234,
               "tipo" : 1,
-              "numeroTarjeta": 3232,
               "titular" : "Marcos Jara",
               "ruc" : "69695654-1",
               "razonSocial" : "Bancard",
@@ -1638,7 +1633,7 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **tipo**|**Si**|Denominación de la tarjeta.<br/>1= Visa<br/>2= Mastercard<br/>3= American Express<br/>4= Maestro<br/>5= Panal<br/>6= Cabal<br/>99= Otro <br/>**Campo XML:**E621
 **tipoDescripcion**|**Si**|<br/>Descripción de denominación de la tarjeta. Si tipo =99 informar la descripción de la denominación de la tarjeta**Campo XML:**E622
-numeroTarjeta|No|Número de la tarjeta. Cuatro últimos dígitos de la tarjeta<br/>**Campo XML:**E629
+numero|No|Número de la tarjeta. Cuatro últimos dígitos de la tarjeta<br/>**Campo XML:**E629
 titular|No|Nombre del titular de la tarjeta <br/>**Campo XML:**E628
 ruc|No|RUC de la procesadora de tarjeta<br/>**Campo XML:**E624
 razonSocial|No|Razón social de la procesadora de tarjeta<br/>**Campo XML:**E623
