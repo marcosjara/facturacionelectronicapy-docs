@@ -747,22 +747,16 @@ Todos los documentos electrónicos enviados con ésta peticion pueden ser visual
 > El comando de arriba, retornará lo siguiente:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{ 
+  "success" : true,
+  "deList" : [{
+    "cdc": "01800695631001002100694612021112410311184194",
+    "numero": "001-001-0000001",
+    "estado": "Aprobado",
+    "respuesta_codigo": "",
+    "respuesta_mensaje": ""
+  }]
+}
 ```
 
 ### Parámetros
