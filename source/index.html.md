@@ -781,16 +781,15 @@ En éste caso existen técnicas que se deben manejar para no alterar el CDC (Có
 - Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
 - Puede enviar como mínimo 1 documento y como máximo 50 por llamada, si tienen más debe realizarlo en una siguiente llamada.
 
+## Consulta DE por ID
 
-## Consulta DE RUC
-
-> Para consultar el DTE:
+> Para consultar el DE:
 
 ```shell
-# Consulta los datos de una Empresa Física o Juridica por el RUC
+# Consulta de un DE por el Id de Registro de FacturaSend
 curl \
   -X \
-  POST "https://api.facturasend.com.py/<tenantId>/ruc/80069563"  
+  GET "https://api.facturasend.com.py/<tenantId>/de/id/24"  
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
 ```
 
@@ -802,8 +801,7 @@ const headers = {
   `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
 };
 
-axios.post(`https://api.facturasend.com.py/<tenantId>/ruc/80069563`, 
-  null, 
+axios.get(`https://api.facturasend.com.py/<tenantId>/de/id/24`, 
   {headers}
 )
 .then( respuesta => {
@@ -816,46 +814,44 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/ruc/80069563`,
 ```json
 {
   "success": true,
-  "respuesta_codigo": "0502",
-  "respuesta_mensaje": "CDC encontrado",
-  "razon_social": "TIPS S.A",
-  "estado_codigo": "ACT",
-  "estado_mensaje": "ACTIVO",
-  "facturador_electronico": true
+  "result": {
+    "id": 24,
+    "fecha": "2022-08-11T18:49:26.840Z",
+    "rde": {
+      //Contenido del XML en formato JSON
+    },
+    "situacion": 4,
+    "is_conectado": 1,
+    "is_borrado": 0,
+    "lote_id": 404,
+    "lote_estado": 3,
+    "info_codigo": "1001",
+    "info_descripcion": "CDC duplicado"
+  }
 }
 ```
-Este servicio consulta por el RUC la existencia de una Empresa directamente en el SIFEN, a travéz de la API del eKuatia.
+Este servicio consulta los datos del DE por el Id de registro de FacturaSend, recuperando informaciones importantes sobre el DE.
 
-El RUC informado como parámetro no debe contener el díto verificador.
-
-Esta consulta por RUC también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
-
-Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
+Este servicio es similar al servicio "Consulta DE por CDC", con la diferencia del parámetro de entrada
 
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**ruc** | **Si** | RUC de la Empresa, sin el dígito verificador
+**id** | **Si** | Id de Registro de FacturaSend
 
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
 success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
 error | string | El mensaje de error en caso de que haya retornado success=false.
-respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
-respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
-razon_social | string | Razón Social de la Empresa como se encuentra en el Marangatú.<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
-estado_codigo | string | Código del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
-estado_mensaje | string | Descripción del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
-facturador_electronico | boolean | true si la empresa ya se encuentra facturando electrónicamente.<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
-
+result | objeto | Datos del Registro caso exista el DE, como id del registro, fecha, situacion, is_conectado, is_borrado, lote_estado, info_codigo e info_descripcion
 
 ## Consulta DE por CDC
 
-> Para consultar el DTE:
+> Para consultar el DE por el CDC:
 
 ```shell
-# Consulta de un DTE por el Código de Control (CDC)
+# Consulta de un DE por el Código de Control (CDC)
 curl \
   -X \
   GET "https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694"  
@@ -883,19 +879,25 @@ axios.get(`https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000
 ```json
 {
   "success": true,
-  "fecha": "2022-01-22T12:07:48-03:00",
-  "respuesta_codigo": "0422",
-  "respuesta_mensaje": "CDC encontrado",
-  "xml": "<xml? >...<rDE>",
-  "protocolo": "93891821"
+  "result": {
+    "id": 764,
+    "fecha": "2022-08-11T18:49:26.840Z",
+    "rde": {
+      //Contenido del XML en formato JSON
+    },
+    "situacion": 4,
+    "is_conectado": 1,
+    "is_borrado": 0,
+    "lote_id": 404,
+    "lote_estado": 3,
+    "info_codigo": "1001",
+    "info_descripcion": "CDC duplicado"
+  }
 }
 ```
-Este servicio consulta la existencia de un documento electrónico directamente en el SIFEN, a travéz de la API del eKuatia.
+Este servicio consulta los datos del DE del registro de FacturaSend, recuperando informaciones importantes para el control de flujo.
 
-Esta consulta también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
-
-Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
-
+Este servicio es similar al servicio "Consulta DE por ID", con la diferencia del parámetro de entrada
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -907,11 +909,7 @@ Atributo | Tipo | Descripción
 --------- | --------- | -----------
 success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
 error | string | El mensaje de error en caso de que haya retornado success=false.
-deList | date-time | Fecha y hora de la consulta, ésta información es del servidor de eKuatia
-respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0422</b>=CDC encontrado. <br/><b>0420</b>=CDC inexistente. <br/><b>0421</b>=RUC Certificado sin permiso
-respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/>0422=<b>CDC encontrado.</b> <br/>0420=<b>CDC inexistente.</b> <br/>0421=<b>RUC Certificado sin permiso</b>
-xml | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el XML obtenido desde el eKuatia.
-protocolo | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el Protocolo de Autorización obtenido desde el eKuatia.
+result | objeto | Datos del Registro caso exista el DE, como id del registro, fecha, situacion, is_conectado, is_borrado, lote_estado, info_codigo e info_descripcion
 
 ## Consulta de estados de DE(s) por CDC(s)
 
@@ -1856,6 +1854,138 @@ xml<br>(opcional) | string | El archivo **XML** generado del documento electroni
 qr<br>(opcional) | string | El valor del codigo **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
+
+# Consultas de la SET
+
+## Consulta DE RUC
+
+> Para consultar el DTE:
+
+```shell
+# Consulta los datos de una Empresa Física o Juridica por el RUC
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/ruc/80069563"  
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/ruc/80069563`, 
+  null, 
+  {headers}
+)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{
+  "success": true,
+  "respuesta_codigo": "0502",
+  "respuesta_mensaje": "CDC encontrado",
+  "razon_social": "TIPS S.A",
+  "estado_codigo": "ACT",
+  "estado_mensaje": "ACTIVO",
+  "facturador_electronico": true
+}
+```
+Este servicio consulta por el RUC la existencia de una Empresa directamente en el SIFEN, a travéz de la API del eKuatia.
+
+El RUC informado como parámetro no debe contener el díto verificador.
+
+Esta consulta por RUC también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
+
+Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**ruc** | **Si** | RUC de la Empresa, sin el dígito verificador
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
+error | string | El mensaje de error en caso de que haya retornado success=false.
+respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
+respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/><b>0500</b>=RUC no existe. <br/><b>0501</b>=RUC sin permiso consulta WS. <br/><b>0502</b>=RUC encontrado.
+razon_social | string | Razón Social de la Empresa como se encuentra en el Marangatú.<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
+estado_codigo | string | Código del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
+estado_mensaje | string | Descripción del Estado o situación fiscal de la Empresa, con los posibles valores:<br/><b>ACT</b>=Activo<br/><b>SUS</b>=Suspensión Temporal<br/><b>SAD</b>=Suspensión Administrativa<br/><b>BLQ</b>=Bloqueado<br/><b>CAN</b>=Cancelado<br/><b>CDE</b>=Cancelado Definitivo<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
+facturador_electronico | boolean | true si la empresa ya se encuentra facturando electrónicamente.<br/><br/>Este atributo solo retorna si respuesta_codigo=0502
+
+## Consulta DTE por CDC
+
+> Para consultar el DTE:
+
+```shell
+# Consulta de un DTE por el Código de Control (CDC)
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/dte/cdc/01800695631001001000000612021112917595714694"  
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/dte/cdc/01800695631001001000000612021112917595714694`, 
+  {headers}
+)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{
+  "success": true,
+  "fecha": "2022-01-22T12:07:48-03:00",
+  "respuesta_codigo": "0422",
+  "respuesta_mensaje": "CDC encontrado",
+  "xml": "<xml? >...<rDE>",
+  "protocolo": "93891821"
+}
+```
+Este servicio consulta la existencia de un documento electrónico directamente en el SIFEN, a travéz de la API del eKuatia.
+
+Esta consulta también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
+
+Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
+
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **Si** | Código CDC de 44 dígitos del Documento Electrónico
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
+error | string | El mensaje de error en caso de que haya retornado success=false.
+deList | date-time | Fecha y hora de la consulta, ésta información es del servidor de eKuatia
+respuesta_codigo | string | Código de respuesta de la consulta.<br/>Valores: <br/><b>0422</b>=CDC encontrado. <br/><b>0420</b>=CDC inexistente. <br/><b>0421</b>=RUC Certificado sin permiso
+respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: <br/>0422=<b>CDC encontrado.</b> <br/>0420=<b>CDC inexistente.</b> <br/>0421=<b>RUC Certificado sin permiso</b>
+xml | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el XML obtenido desde el eKuatia.
+protocolo | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el Protocolo de Autorización obtenido desde el eKuatia.
 
 # Eventos del DE
 
