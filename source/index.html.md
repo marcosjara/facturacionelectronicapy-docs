@@ -858,7 +858,7 @@ facturador_electronico | boolean | true si la empresa ya se encuentra facturando
 # Consulta de un DTE por el Código de Control (CDC)
 curl \
   -X \
-  POST "https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694"  
+  GET "https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694"  
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
 ```
 
@@ -870,8 +870,7 @@ const headers = {
   `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
 };
 
-axios.post(`https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694`, 
-  null, 
+axios.get(`https://api.facturasend.com.py/<tenantId>/de/cdc/01800695631001001000000612021112917595714694`, 
   {headers}
 )
 .then( respuesta => {
