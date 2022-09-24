@@ -1020,7 +1020,7 @@ Atributos | Tipo | Description
 cdc | string | Id único de 44 dígitos del Documento Electrónico consultado
 fecha | date-time | Fecha de Proceso en el SIFEN en formato yyyy-MM-ddThh:mm:ss
 numero | string | Número de Documento Electrónico en formato 001-001-0000001
-situacion | number | Situacion numerica en FacturaSend, con los posibles valores:<br>0 = Generado DE<br>1 = Enviado en un Lote<br>2 = Aprobado (Caso sea sincrono es inmediato)<br>3 = Aprobado con observacion<br>4 = Rechazado<br>98 = Inexistente<br>99 = Cancelado.<br>Puede utilizar estos mismos estados en su Sistema<br>
+situacion | number | Situacion numerica en FacturaSend, con los posibles valores:<br>-1 = Borrador<br>0 = Generado DE<br>1 = Enviado en un Lote<br>2 = Aprobado (Caso sea sincrono es inmediato)<br>3 = Aprobado con observacion<br>4 = Rechazado<br>98 = Inexistente<br>99 = Cancelado.<br>Puede utilizar estos mismos estados en su Sistema<br>
 respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
 
@@ -1611,6 +1611,7 @@ credito|No|Campos que describen la operación a crédito. Ver detalle en tabla [
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **tipo**|**Si**|Tipo de pago Ej.:1= Efectivo, 2= Cheque,3= Tarjeta de crédito, 4= Tarjeta de débito. Existe mas tipos de pagos ver en: <br/> **Campo XML:**E606
+tipoDescripcion|No|Descripción del Tipo de pago. Cuando el tipo = 99 es obligatorio especificar el tipo de pago personalizado : <br/> **Campo XML:**E607
 **monto**|**Si**| Monto por tipo de pago <br/> **Campo XML:**E608
 **moneda**|**Si**|Moneda por tipo de pago<br/>Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 Se requiere la misma moneda para todos los ítems del DE<br/> **Campo XML:**E609
 cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:**E611
@@ -1823,7 +1824,8 @@ constanciaControl|No|Codigo de Control de la constancia<br/>**Campo XML:** H017
     "estado": "Aprobado",
     "respuesta_codigo": "",
     "respuesta_mensaje": ""
-  }]
+  }],
+  "loteId" : 12
 }
 ```
 
@@ -1840,6 +1842,7 @@ success | boolean | true si no hubo errores en la transacción
 error | string | El mensaje de Error, en el caso de que el success = false, Si la invocación se realizó para crear 1 sólo DE por el método sincrono, entonces aquí se especificará el mensaje de error.
 errores | array | En el caso de haya invocado la API para crear varios DEs por el método asíncrono, aqui se mostrarán una lista de errores, indicando el error, y el número de índice del archivo XML con Error.
 deList | array | El array con la respuesta de cada DE procesado. Este array siempre devolverá 1 (un) sólo elemento para el elemento síncrono, pero es del tipo array por compatibilidad con el envío por asincrono o por lotes<br><br>Los atributos de éste array se describen en Respuesta [deList](#atributos-de-la-respuesta-delist)
+loteId | number | El número de lote generado para la solicitud.
 
 ### Atributos de la Respuesta deList
 
