@@ -1472,6 +1472,7 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:**E011
 fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:**E013
+ticket|No|Indica si el KUDE del DE debe generarse en formato Ticket.<br/><br/>Esta opción sobreescribe a la opción especificada en el establecimiento<br/><br/>Valores:<br/>**true**=Especifica que el KUDE del DE saldrá en modo Ticket<br/>**false**=Especifica que el KUDE del DE saldrá en modo A4<br/>
 dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla [data.factura.dncp]
 
 ### Parametro del objeto data.factura.dncp
