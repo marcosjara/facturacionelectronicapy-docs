@@ -1433,6 +1433,8 @@ factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>
 autofactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autofactura](#parametro-del-objeto-data-autofactura).<br/>
 notaCreditoDebito|No|Conjunto de información relacionada a la Nota de Credito o Debito. <br/>Solo es necesario cuando el tipoDocumento=5 o tipoDocumento=6 (Nota de Credito/Nota de Debito)<br/>Ver detalle en tabla [data.notaCreditoDebito](#parametro-del-objeto-data-notaCreditoDebito).<br/>
 remision|No|Conjunto de información relacionada a la Remisión. <br/>Solo es necesario cuando el tipoDocumento=7 (Nota de Remisión)<br/>Ver detalle en tabla [data.remision](#parametro-del-objeto-data-remision).<br/>
+descuentoGlobal|No|Descuento global de la Operación<br/>**Campo XML:** Relacionado a EA004
+anticipoGlobal|No|Anticipo global de la Operación<br/>**Campo XML:** Relacionado a EA007
 extras|No|Objeto de datos extras del Documento Electronico en formato **key=value** que puede ser enviado de forma adicional para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"pedidoCliente" : "2123-1", <br/>&nbsp;&nbsp;"numeroPresupuesto": "P/001", <br/>&nbsp;&nbsp;"posTicketId" : 39271<br/>}<br/>
 
 ### Parametro del objeto data.cliente
@@ -1543,9 +1545,7 @@ ncm|No|Nomenclatura común del Mercosur (NCM)<br/>**Campo XML:**E703
 **precioUnitario**|**Si**|Precio unitario del producto y/o servicio (incluidos impuestos)<br/>**Campo XML:**E721
 cambio|No|Tipo de cambio por ítem<br/>**Campo XML:**E725
 descuento|No|Descuento particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA002
-descuentoGlobal|No|Descuento global sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA004
 anticipo|No|Anticipo particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA006
-anticipoGlobal|No|Anticipo global sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA007
 pais|No|<br/>Código del país de origen del producto**Campo XML:**E712
 paisDescripcion|No|Nombre del país de origen del producto<br/>**Campo XML:**E713
 tolerancia|No|Código de datos de relevancia de los productos<br/>**Campo XML:**E715
