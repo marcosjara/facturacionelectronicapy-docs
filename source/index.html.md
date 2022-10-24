@@ -454,6 +454,10 @@ Mediante el proceso síncrono es posible conocer en línea si el Documento Elect
 
 El documento electrónico enviado con ésta peticion puede ser visualizado en la consola de FacturaSend.
 
+<aside class="notice">
+El servicio sincrono sólo está disponible en ambiente TEST de eKuatia, no así en producción.
+</aside>
+
 ### Petición HTTP
 
 `POST http://api.facturasend.com.py/<tenantId>/de/create`
@@ -1161,7 +1165,6 @@ main | binary | Documento PDF en formato binary o base64
   "numero" : 4, 
   "descripcion" : "Aparece en el documento",
   "observacion" : "Cualquier informacion de marketing, publicidad, promociones, sorteos, etc. para el receptor",
-  "tipoContribuyente" : 1,
   "fecha" : "2021-10-19T10:11:00",
   "tipoEmision" : 1,
   "tipoTransaccion" : 1,
@@ -1453,7 +1456,7 @@ distrito|No|Codigo del distrito del Cliente, El codigo debe seguir la Tabla 2.1 
 ciudad|No|Codigo de la ciudad del Cliente. Campo obligatorio si se informa la direccion y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:**D223
 **pais**|**Si**|Codigo del Pais del Cliente, Segun XSD de Codificación de Países<br/>**Campo XML:**D203
 tipoContribuyente|No|Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false<br/>**Campo XML:**D205
-documentoTipo|No|Tipo de documento del cliente <br/>**Campo XML:**D208
+documentoTipo|No|Tipo de documento del cliente, de acuerdo a <br/><br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/>5=Innominado<br/>6=Tarjeta Diplomática de exoneración fiscal<br/>9=Informar data.documentoTipoDescripcion<br/><br/>**Campo XML:**D208
 documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
