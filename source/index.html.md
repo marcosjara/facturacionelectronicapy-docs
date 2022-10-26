@@ -1433,7 +1433,7 @@ cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En 
 **cliente**|**Si**|Datos del Receptor del Documento Electrónico. <br/>Ver detalle en tabla [data.cliente](#parametro-del-objeto-data-cliente).<br/>
 **usuario**|**Si**|Campos que identifican al responsable de la generación del DE. Ver detalle en tabla [data.usuario](#parametro-del-objeto-data-usuario).<br/>
 factura|No|Conjunto de información relacionada a la Factura Electrónica. <br/>Solo es necesario cuando el tipoDocumento=1 (Factura Electrónica)<br/>Ver detalle en tabla [data.factura](#parametro-del-objeto-data-factura).<br/>
-autofactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autofactura](#parametro-del-objeto-data-autofactura).<br/>
+autoFactura|No|Conjunto de información relacionada a la Autofactura Electrónica<br/>Solo es necesario cuando el tipoDocumento=4 (Autofactura Electrónica<br/> Ver detalle en tabla [data.autoFactura](#parametro-del-objeto-data-autofactura).<br/>
 notaCreditoDebito|No|Conjunto de información relacionada a la Nota de Credito o Debito. <br/>Solo es necesario cuando el tipoDocumento=5 o tipoDocumento=6 (Nota de Credito/Nota de Debito)<br/>Ver detalle en tabla [data.notaCreditoDebito](#parametro-del-objeto-data-notaCreditoDebito).<br/>
 remision|No|Conjunto de información relacionada a la Remisión. <br/>Solo es necesario cuando el tipoDocumento=7 (Nota de Remisión)<br/>Ver detalle en tabla [data.remision](#parametro-del-objeto-data-remision).<br/>
 descuentoGlobal|No|Descuento global de la Operación<br/>**Campo XML:** Relacionado a EA004
@@ -1490,7 +1490,7 @@ Parámetro | Requerido | Descripción
 **secuencia**|**Si**|Secuencia - emitido por la DNCP <br/>**Campo XML:**E024
 **fecha**|**Si**|Fecha de emisión del código de contratación por la DNCP<br/>**Campo XML:**E025
 
-### Parametro del objeto data.autofactura
+### Parametro del objeto data.autoFactura
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
@@ -1506,9 +1506,9 @@ departamentoDescripcion|No|Descripción del departamento del vendedor <br/>**Cam
 distritoDescripcion|No|Descripción del distrito del vendedor <br/>**Campo XML:**E313
 **ciudad**|**Si**|Código de la ciudad del vendedor <br/>**Campo XML:** E314
 ciudadDescripcion|No|Descripción del ciudad del vendedor <br/>**Campo XML:** E315
-**ubicacion**|**Si**| Ver detalle en tabla [data.autofactura.ubicacion]
+**ubicacion**|**Si**| Ver detalle en tabla [data.autoFactura.ubicacion](#parametro-del-objeto-data-autofactura-ubicacion)
 
-### Parametro del objeto data.autofactura.ubicacion
+### Parametro del objeto data.autoFactura.ubicacion
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
