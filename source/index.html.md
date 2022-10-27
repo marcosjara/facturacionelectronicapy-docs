@@ -1706,12 +1706,12 @@ inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:
 finEstimadoTranslado|No|Fecha estimada de fin de traslado<br/>**Campo XML:**E910
 paisDestino|No|Código del país de destino <br/>**Campo XML:**E911
 paisDestinoNombre|No|Descripción del país de destino.  <br/>**Campo XML:**E912
-salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla [data.detalleTransporte.salida]
-entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla [data.detalleTransporte.entrega]
-vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla [data.detalleTransporte.vehiculo]
-transportista|No|Campos que identifican al transportista. Ver detalle en tabla [data.detalleTransporte.transportista]
+salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla [data.detalleTransporte.salida](#parametro-del-objeto-data-detalletransporte-salida)
+entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla [data.detalleTransporte.entrega](#parametro-del-objeto-data-detalletransporte-entrega)
+vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla [data.detalleTransporte.vehiculo](#parametro-del-objeto-data-detalletransporte-vehiculo)
+transportista|No|Campos que identifican al transportista. Ver detalle en tabla [data.detalleTransporte.transportista](#parametro-del-objeto-data-detalletransporte-transportista)
 
-### Parametro del objeto data.salida
+### Parametro del objeto data.detalleTransporte.salida
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **direccion**|**Si**|Dirección del local de salida. Nombre de la calle principal <br/>**Campo XML:**E921
@@ -1729,7 +1729,7 @@ paisDescripcion|No|Código de la ciudad del local de salida
 telefonoContacto|No|Teléfono de contacto del local de salida<br/>**Campo XML:**E931 
 
 
-### Parametro del objeto data.entrega
+### Parametro del objeto data.detalleTransporte.entrega
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **direccion**|**Si**|Dirección del local de entrega. Nombre de la calle principal <br/>**Campo XML:**E941
@@ -1746,7 +1746,7 @@ pais|No|Código de  pais de salida
 paisDescripcion|No|Descripcion del pais de salida
 telefonoContacto|No|Teléfono de contacto del local de la entrega<br/>**Campo XML:**E951 
 
-### Parametro del objeto data.vehiculo
+### Parametro del objeto data.detalleTransporte.vehiculo
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **tipo**|**Si**|Tipo de vehículo. Ejemplo: Camioneta, Barcaza, Elicoptero, Debe ser acorde al tipo de transporte<br/><br/>**Campo XML:** E961
@@ -1772,7 +1772,7 @@ paisDescripcion|No|Descripcion del pais Origen
 chofer|No|Campos que identifican al chofer. Ver detalle en tabla [data.transportista.chofer]
 agente|No|Campos que identifican al agente. Ver detalle en tabla [data.transportista.agente]
 
-### Parametro del objeto data.transportista.chofer
+### Parametro del objeto data.detalleTransporte.transportista.chofer
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **documentoNumero**|**Si**|Número de documento de identidad del chofer<br/>**Campo XML:**E990
