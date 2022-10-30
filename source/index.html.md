@@ -1343,7 +1343,7 @@ main | binary | Documento PDF en formato binary o base64
       "numeroContrato" : "AF-2541",
       "saldoAnterior" : 1550000
   },
-  "detalleTransporte" : {
+  "ransporte" : {
       "tipo" : 1,
       "modalidad" : 1,
       "tipoResponsable" : 1,
@@ -1565,6 +1565,7 @@ numeroPedido|No|Número de pedido<br/>**Campo XML:**E754
 numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:**E755
 registroSenave|No|Número de registro del producto otorgado por el SENAVE<br/>Obligados por la RG N° 16/2019 y la RG N° 24/2019 – Agroquímicos<br/>**Campo XML:**E759
 registroEntidadComercial|No|Número de registro de entidad comercial otorgado por el SENAVE<br/>**Campo XML:**E760
+dncp|No|Identificación de los datos de la DNCP<br/>Ver detalle en tabla [data.items.dncp](#parametro-del-objeto-data-items-dncp)<br/>
 extras|No|Objeto de datos extras del item en formato **key=value** que puede ser enviado de forma adicional por cada item para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"taxRate" : "15%", <br/>&nbsp;&nbsp;"barCode": "7937638273256", <br/>&nbsp;&nbsp;"storeId" : 3<br/>}<br/>
 
 ### Parametro del objeto data.items.dncp
@@ -1693,7 +1694,7 @@ vencimientoPago|No|Fecha de vencimiento para el pago<br/>**Campo XML:**E824
 numeroContrato|No|Número de contrato E<br/>**Campo XML:**E825
 saldoAnterior|No|Saldo anterior<br/>**Campo XML:**E826
 
-### Parametro del objeto data.detalleTransporte
+### Parametro del objeto data.transporte
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 tipo|No|Tipo de transporte. Obligatorio si tipoDocumento = 7. <br/>1= Propio<br/>2= Tercero<br/>**Campo XML:**E901
@@ -1706,12 +1707,12 @@ inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:
 finEstimadoTranslado|No|Fecha estimada de fin de traslado<br/>**Campo XML:**E910
 paisDestino|No|Código del país de destino <br/>**Campo XML:**E911
 paisDestinoNombre|No|Descripción del país de destino.  <br/>**Campo XML:**E912
-salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla [data.detalleTransporte.salida](#parametro-del-objeto-data-detalletransporte-salida)
-entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla [data.detalleTransporte.entrega](#parametro-del-objeto-data-detalletransporte-entrega)
-vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla [data.detalleTransporte.vehiculo](#parametro-del-objeto-data-detalletransporte-vehiculo)
-transportista|No|Campos que identifican al transportista. Ver detalle en tabla [data.detalleTransporte.transportista](#parametro-del-objeto-data-detalletransporte-transportista)
+salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla [data.transporte.salida](#parametro-del-objeto-data-transporte-salida)
+entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla [data.transporte.entrega](#parametro-del-objeto-data-transporte-entrega)
+vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla [data.transporte.vehiculo](#parametro-del-objeto-data-transporte-vehiculo)
+transportista|No|Campos que identifican al transportista. Ver detalle en tabla [data.transporte.transportista](#parametro-del-objeto-data-transporte-transportista)
 
-### Parametro del objeto data.detalleTransporte.salida
+### Parametro del objeto data.transporte.salida
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **direccion**|**Si**|Dirección del local de salida. Nombre de la calle principal <br/>**Campo XML:**E921
@@ -1729,7 +1730,7 @@ paisDescripcion|No|Código de la ciudad del local de salida
 telefonoContacto|No|Teléfono de contacto del local de salida<br/>**Campo XML:**E931 
 
 
-### Parametro del objeto data.detalleTransporte.entrega
+### Parametro del objeto data.transporte.entrega
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **direccion**|**Si**|Dirección del local de entrega. Nombre de la calle principal <br/>**Campo XML:**E941
@@ -1746,7 +1747,7 @@ pais|No|Código de  pais de salida
 paisDescripcion|No|Descripcion del pais de salida
 telefonoContacto|No|Teléfono de contacto del local de la entrega<br/>**Campo XML:**E951 
 
-### Parametro del objeto data.detalleTransporte.vehiculo
+### Parametro del objeto data.transporte.vehiculo
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **tipo**|**Si**|Tipo de vehículo. Ejemplo: Camioneta, Barcaza, Elicoptero, Debe ser acorde al tipo de transporte<br/><br/>**Campo XML:** E961
@@ -1769,17 +1770,17 @@ direccion|No|Domicilio fiscal del transportista<br/>**Campo XML:**E992
 obs|No|Observacion del transportista
 pais|No|Código del pais de Origen del transportista
 paisDescripcion|No|Descripcion del pais Origen
-chofer|No|Campos que identifican al chofer. Ver detalle en tabla [data.transportista.chofer]
-agente|No|Campos que identifican al agente. Ver detalle en tabla [data.transportista.agente]
+chofer|No|Campos que identifican al chofer. Ver detalle en tabla [data.transporte.transportista.chofer](#parametro-del-objeto-data-transporte-transportista-chofer)
+agente|No|Campos que identifican al agente. Ver detalle en tabla [data.transporte.transportista.agente](#parametro-del-objeto-data-transporte-transportista-agente)
 
-### Parametro del objeto data.detalleTransporte.transportista.chofer
+### Parametro del objeto data.transporte.transportista.chofer
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **documentoNumero**|**Si**|Número de documento de identidad del chofer<br/>**Campo XML:**E990
 **nombre**|**Si**|Nombre y apellido del chofer <br/>**Campo XML:**E991
 direccion|No|Dirección del chofer<br/>**Campo XML:**E993
 
-### Parametro del objeto data.transportista.agente
+### Parametro del objeto data.transporte.transportista.agente
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 nombre|No|Nombre o razón social del agente. Casos particulares según RG N°41/14 <br/>**Campo XML:**E994
@@ -1812,7 +1813,7 @@ numero|**Si**|Número del documento<br/>**Campo XML:** H008
 fecha|**Si**|Fecha de emisión del documento impreso de referencia. Obligatorio si existe el campo establecimiento.<br/>Formato AAAA-MM-DD <br/>No Informar si campo establecimiento no existe<br/>**Campo XML:** H011
 numeroRetencion|No|Número de comprobante de retención <br/>**Campo XML:** H012
 resolucionCreditoFiscal|No|Número de resolución de crédito fiscal <br/>**Campo XML:** H013
-tipoConstancia|No|Tipo de constancia<br/>**Campo XML:** H014
+constanciaTipo|No|Tipo de constancia<br/>**Campo XML:** H014
 constanciaNumero|No|Numero de constancia<br/>**Campo XML:** H016
 constanciaControl|No|Codigo de Control de la constancia<br/>**Campo XML:** H017
 
