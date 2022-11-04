@@ -1287,11 +1287,6 @@ main | binary | Documento PDF en formato binary o base64
       "numeroSerie" : "",
       "numeroPedido" : "",
       "numeroSeguimiento" : "",
-      "importador" : {
-          "nombre" : "Importadora Parana S.A.",
-          "direccion" : "Importadora Parana S.A.",
-          "registroImportador" : "Importadora Parana S.A."
-      },
       "registroSenave" : "RS-0821221",
       "registroEntidadComercial" : "REC-8923/2022",
       "sectorAutomotor" : {
@@ -1532,8 +1527,10 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 motivo|Si|Valor numério del Motivo de la emisión:<br/>1= Traslado por venta<br>2= Traslado por consignación<br>3= Exportación<br>4= Traslado por compra<br>5= Importación<br>6= Traslado por devolución<br>7= Traslado entre locales de la empresa<br>8= Traslado de bienes por transformación<br>9= Traslado de bienes por reparación<br>10= Traslado por emisor móvil<br>11= Exhibición o demostración<br>12= Participación en ferias<br>13= Traslado de encomienda<br>14= Decomiso<br>99=Otro (deberá consignarse expresamente el o los motivos diferentes a los mencionados anteriormente)<br><br>Obs.: Cuando el motivo sea por operaciones internas de la empresa, el RUC del receptor debe ser igual al RUC del emisor.<br><br>**Campo XML:**E501
 motivoDescripcion|No|Descripción del Motivo de la emisión, caso el motivo sea igual a 99<br><br>**Campo XML:** E502
-tipoResponsable|Si|Responsable de la emisión de la Nota Remisión Electrónica:<br>1= Emisor de la factura<br>2= Poseedor de la factura y bienes<br>3= Empresa transportista<br>4= Despachante de Aduanas<br>5= Agente de transporte o intermediario<br><br>**Campo XML:** E503
-kms|No|Kilómetros estimados de recorrido<br><br>**Campo XML:** E503
+tipoResponsable|Si|Responsable de la emisión de la Nota Remisión Electrónica:<br>1= Emisor de la factura<br>2= Poseedor de la factura y bienes<br>3= Empresa transportista<br>4= Despachante de Aduanas<br>5= Agente de transporte o intermediario<br><br>**Campo XML:** E503, E504
+kms|Si|Kilómetros estimados de recorrido<br><br>**Campo XML:** E505
+fechaFactura|No|Fecha futura de emisión de la factura (AAAA-MM-DD)<br><br>**Campo XML:** E506
+costoFlete|No|Costo del Flete N(15,8)<br><br>**Campo XML:** E507
 
 ### Parametro del objeto data.items
 Parámetro | Requerido | Descripción
@@ -1564,7 +1561,8 @@ numeroSerie|No|Número de serie <br/>Valor alfanumérico<br/>Longitud: [1-10]<br
 numeroPedido|No|Número de pedido<br/>**Campo XML:**E754
 numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:**E755
 registroSenave|No|Número de registro del producto otorgado por el SENAVE<br/>Obligados por la RG N° 16/2019 y la RG N° 24/2019 – Agroquímicos<br/>**Campo XML:**E759
-registroEntidadComercial|No|Número de registro de entidad comercial otorgado por el SENAVE<br/>**Campo XML:**E760
+registroEntidadComercial|No|Número de registro de entidad comercial otorgado por el SENAVE<br/><br/>**Campo XML: **E760
+nombreProducto|No|Obligados por el Art. 1 de la RG N° 106/2021 – Agroquímicos<br/><br/>**Campo XML: **E761
 dncp|No|Identificación de los datos de la DNCP<br/>Ver detalle en tabla [data.items.dncp](#parametro-del-objeto-data-items-dncp)<br/>
 extras|No|Objeto de datos extras del item en formato **key=value** que puede ser enviado de forma adicional por cada item para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"taxRate" : "15%", <br/>&nbsp;&nbsp;"barCode": "7937638273256", <br/>&nbsp;&nbsp;"storeId" : 3<br/>}<br/>
 
@@ -1576,6 +1574,9 @@ codigoNivelGeneral|No|Código DNCP – Nivel General. Obligatorio si tipoOperaci
 codigoNivelEspecifico|No|Código DNCP – Nivel Especifico. Obligatorio si existe el campo codigoNivelGeneral <br/>**Campo XML:**E705
 codigoGtinProducto|No|Código GTIN por producto. Informar si la mercadería tiene GTIN <br/>**Campo XML:**E706
 codigoNivelPaquete|No|Código GTIN por paquete. Informar si el paquete tiene GTIN<br/>**Campo XML:**E707
+
+<!---
+se retira en nt 009
 ### Parametro del objeto data.items.importador
 
 Parámetro | Requerido | Descripción
@@ -1583,6 +1584,7 @@ Parámetro | Requerido | Descripción
 nombre|No|Nombre del Importador. Obligados por la RG N° 16/2019 – Agroquímicos<br/>**Campo XML:**E756
 direccion|No|Dirección de Importador<br/>**Campo XML:**E757
 registroImportador|No|Número de registro de la firma del importador<br/>**Campo XML:**E758
+-->
 
 ### Parametro del objeto data.items.sectorAutomotor
 
@@ -1700,7 +1702,7 @@ Parámetro | Requerido | Descripción
 tipo|No|Tipo de transporte. Obligatorio si tipoDocumento = 7. <br/>1= Propio<br/>2= Tercero<br/>**Campo XML:**E901
 **modalidad**|**Si**|Modalidad del transporte<br/>1=Terrestre<br/>2= Fluvial<br/>3= Aéreo<br/>4= Multimodal<br/>**Campo XML:**E903
 **tipoResponsable**|**Si**|Responsable del costo del flete<br/>1= Emisor de la Factura Electrónica<br/>2= Receptor de la Factura Electrónica <br/>3= Tercero<br/>4= Agente intermediario del transporte (cuando intervenga)<br/>5= Transporte propio <br/>**Campo XML:**E905
-**condicionNegociacion**|**Si**|Condición de la negociación<br/>**Campo XML:**E905
+**condicionNegociacion**|**Si**|Condición de la negociación segun las opciones:<br/><br/>CFR Costo y flete<br/>CIF Costo, seguro y flete<br/>CIP Transporte y seguro pagados hasta<br/>CPT Transporte pagado hasta<br/>DAP Entregada en lugar convenido<br/>DAT Entregada en terminal<br/>DDP Entregada derechos pagados<br/>EXW En fabrica<br/>FAS Franco al costado del buque<br/>FCA Franco transportista<br/>FOB Franco a bordo<br/><br/>**Campo XML: **E906
 numeroManifiesto|No|Número de manifiesto o conocimiento de carga/declaración de tránsito aduanero/ Carta de porte internacional <br/>**Campo XML:**E907
 numeroDespachoImportacion|No|Número de despacho de importación<br/>**Campo XML:**E908
 inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:**E909
@@ -1770,7 +1772,7 @@ direccion|No|Domicilio fiscal del transportista<br/>**Campo XML:**E992
 obs|No|Observacion del transportista
 pais|No|Código del pais de Origen del transportista
 paisDescripcion|No|Descripcion del pais Origen
-chofer|No|Campos que identifican al chofer. Ver detalle en tabla [data.transporte.transportista.chofer](#parametro-del-objeto-data-transporte-transportista-chofer)
+chofer|Si|Campos que identifican al chofer. Ver detalle en tabla [data.transporte.transportista.chofer](#parametro-del-objeto-data-transporte-transportista-chofer)
 agente|No|Campos que identifican al agente. Ver detalle en tabla [data.transporte.transportista.agente](#parametro-del-objeto-data-transporte-transportista-agente)
 
 ### Parametro del objeto data.transporte.transportista.chofer
@@ -1778,7 +1780,7 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **documentoNumero**|**Si**|Número de documento de identidad del chofer<br/>**Campo XML:**E990
 **nombre**|**Si**|Nombre y apellido del chofer <br/>**Campo XML:**E991
-direccion|No|Dirección del chofer<br/>**Campo XML:**E993
+direccion|Si|Dirección del chofer<br/>**Campo XML:**E993
 
 ### Parametro del objeto data.transporte.transportista.agente
 Parámetro | Requerido | Descripción
