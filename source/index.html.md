@@ -1034,8 +1034,7 @@ respuesta_mensaje | string | Mensaje de Respuesta de la SET
 ```shell
 # Consulta del XML de un DTE por el Código de Control (CDC)
 curl \
-  -X \
-  POST "https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694"  
+  GET "https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694"  
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
 ```
 
@@ -1414,6 +1413,7 @@ Parámetro | Requerido | Descripción
 **establecimiento**|**Si**| Representa al código de establecimiento del emisor, se puede enviar 1 o '001' <br/><br/>**Campo XML:** C005.
 **punto**|**Si**| Es el punto de emisión del documento electrónico, se puede enviar 1 o '001'<br/><br/>**Campo XML:** C006.
 **numero**|**Si**| Es el número del documento electrónico, se puede enviar directamente el número o completar con 0 a la izquierda hasta alcanzar 7 digitos. Ej.: 1 o '0000001'. <br/><br/>**Campo XML:**C007 
+**serie**|**No**| Serie de 2 digitos de la numeración del documento electrónico. Solo debe enviarse cuando se utiliza la totalidad de la numeración de 7 dígitos, empezando por la serie AA, AB, AC, BA, BB, BC...ZZ. <br/><br/>**Campo XML:**C010 
 descripcion|No| Información de interés del Fisco respecto al DE.<br/><br/>**Campo XML:** B006.
 observacion|No| Información de interés del emisor respecto al DE.<br/><br/>**Campo XML:** B005.
 **fecha**|**Si**| Fecha y hora de emisión del DE. <br/><br/>**Campo XML:** D002.
@@ -1470,8 +1470,8 @@ Parámetro | Requerido | Descripción
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:**E011
-fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:**E013
+presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:** E011
+fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:** E013
 ticket|No|Indica si el KUDE del DE debe generarse en formato Ticket.<br/><br/>Esta opción sobreescribe a la opción especificada en el establecimiento<br/><br/>Valores:<br/>**true**=Especifica que el KUDE del DE saldrá en modo Ticket<br/>**false**=Especifica que el KUDE del DE saldrá en modo A4<br/>
 dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla [data.factura.dncp]
 
@@ -1479,11 +1479,11 @@ dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla [data.
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**modalidad**|**Si**|Modalidad - Código emitido por la DNCP <br/>**Campo XML:**E021
-**entidad**|**Si**|Entidad - Código emitido por la DNCP<br/>**Campo XML:**E022
-**año**|**Si**|Año - Código emitido por la DNCP<br/>**Campo XML:**E023
-**secuencia**|**Si**|Secuencia - emitido por la DNCP <br/>**Campo XML:**E024
-**fecha**|**Si**|Fecha de emisión del código de contratación por la DNCP<br/>**Campo XML:**E025
+**modalidad**|**Si**|Modalidad - Código emitido por la DNCP <br/>**Campo XML:** E021
+**entidad**|**Si**|Entidad - Código emitido por la DNCP<br/>**Campo XML:** E022
+**año**|**Si**|Año - Código emitido por la DNCP<br/>**Campo XML:** E023
+**secuencia**|**Si**|Secuencia - emitido por la DNCP <br/>**Campo XML:** E024
+**fecha**|**Si**|Fecha de emisión del código de contratación por la DNCP<br/>**Campo XML:** E025
 
 ### Parametro del objeto data.autoFactura
 
@@ -1498,7 +1498,7 @@ Parámetro | Requerido | Descripción
 **departamento**|**Si**|Código del departamento del vendedor  <br/>**Campo XML:** E310
 departamentoDescripcion|No|Descripción del departamento del vendedor <br/>**Campo XML:** E311
 **distrito**|**Si**|Código del distrito del vendedor <br/>**Campo XML:** E312
-distritoDescripcion|No|Descripción del distrito del vendedor <br/>**Campo XML:**E313
+distritoDescripcion|No|Descripción del distrito del vendedor <br/>**Campo XML:** E313
 **ciudad**|**Si**|Código de la ciudad del vendedor <br/>**Campo XML:** E314
 ciudadDescripcion|No|Descripción del ciudad del vendedor <br/>**Campo XML:** E315
 **ubicacion**|**Si**| Ver detalle en tabla [data.autoFactura.ubicacion](#parametro-del-objeto-data-autofactura-ubicacion)
@@ -1510,22 +1510,22 @@ Parámetro | Requerido | Descripción
 **lugar**|**Si**| Lugar de la transacción <br/>**Campo XML:** E316
 **departamento**|**Si**|Código del departamento donde se realiza la transacción <br/>**Campo XML:** E317
 departamentoDescripcion|No| Descripcion del departamento donde se realiza la transacción <br/>**Campo XML:** E318
-**distrito**|**Si**|<br/>Código del distrito donde se realiza la transacción **Campo XML:**E319
-distritoDescripcion|No| Descripcion del distrito donde se realiza la transacción <br/>**Campo XML:**E320
-**ciudad**|**Si**| Código de la ciudad donde se realiza la transacción <br/>**Campo XML:**E321 
-ciudadDescripcion|No|Descripcion de la ciudad donde se realiza la transacción  <br/>**Campo XML:**E322 
+**distrito**|**Si**|<br/>Código del distrito donde se realiza la transacción **Campo XML:** E319
+distritoDescripcion|No| Descripcion del distrito donde se realiza la transacción <br/>**Campo XML:** E320
+**ciudad**|**Si**| Código de la ciudad donde se realiza la transacción <br/>**Campo XML:** E321 
+ciudadDescripcion|No|Descripcion de la ciudad donde se realiza la transacción  <br/>**Campo XML:** E322 
 
 ### Parametro del objeto data.notaCreditoDebito
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-motivo|Si|Motivo de la emisión<br/>1= Devolución y Ajuste de precios<br/>2= Devolución<br/>3= Descuento<br/>4= Bonificación<br/>5= Crédito incobrable<br/>6= Recupero de costo<br/>7= Recupero de gasto<br/>8= Ajuste de precio<br/><br/>**Campo XML:**E401
+motivo|Si|Motivo de la emisión<br/>1= Devolución y Ajuste de precios<br/>2= Devolución<br/>3= Descuento<br/>4= Bonificación<br/>5= Crédito incobrable<br/>6= Recupero de costo<br/>7= Recupero de gasto<br/>8= Ajuste de precio<br/><br/>**Campo XML:** E401
 
 ### Parametro del objeto data.remision
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-motivo|Si|Valor numério del Motivo de la emisión:<br/>1= Traslado por venta<br>2= Traslado por consignación<br>3= Exportación<br>4= Traslado por compra<br>5= Importación<br>6= Traslado por devolución<br>7= Traslado entre locales de la empresa<br>8= Traslado de bienes por transformación<br>9= Traslado de bienes por reparación<br>10= Traslado por emisor móvil<br>11= Exhibición o demostración<br>12= Participación en ferias<br>13= Traslado de encomienda<br>14= Decomiso<br>99=Otro (deberá consignarse expresamente el o los motivos diferentes a los mencionados anteriormente)<br><br>Obs.: Cuando el motivo sea por operaciones internas de la empresa, el RUC del receptor debe ser igual al RUC del emisor.<br><br>**Campo XML:**E501
+motivo|Si|Valor numério del Motivo de la emisión:<br/>1= Traslado por venta<br>2= Traslado por consignación<br>3= Exportación<br>4= Traslado por compra<br>5= Importación<br>6= Traslado por devolución<br>7= Traslado entre locales de la empresa<br>8= Traslado de bienes por transformación<br>9= Traslado de bienes por reparación<br>10= Traslado por emisor móvil<br>11= Exhibición o demostración<br>12= Participación en ferias<br>13= Traslado de encomienda<br>14= Decomiso<br>99=Otro (deberá consignarse expresamente el o los motivos diferentes a los mencionados anteriormente)<br><br>Obs.: Cuando el motivo sea por operaciones internas de la empresa, el RUC del receptor debe ser igual al RUC del emisor.<br><br>**Campo XML:** E501
 motivoDescripcion|No|Descripción del Motivo de la emisión, caso el motivo sea igual a 99<br><br>**Campo XML:** E502
 tipoResponsable|Si|Responsable de la emisión de la Nota Remisión Electrónica:<br>1= Emisor de la factura<br>2= Poseedor de la factura y bienes<br>3= Empresa transportista<br>4= Despachante de Aduanas<br>5= Agente de transporte o intermediario<br><br>**Campo XML:** E503, E504
 kms|Si|Kilómetros estimados de recorrido<br><br>**Campo XML:** E505
@@ -1535,32 +1535,32 @@ costoFlete|No|Costo del Flete N(15,8)<br><br>**Campo XML:** E507
 ### Parametro del objeto data.items
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**codigo** |**Si**|Código interno de identificación de la mercadería o servicio de responsabilidad del emisor<br/>**Campo XML:**E701 
-**descripcion**|**Si** |Descripción del producto y/o servicio. Equivalente a nombre del producto establecido en la RG 24/2019<br/>**Campo XML:**E708
-observacion|No|Informacion de intetes acerca del item<br/>**Campo XML:**E714
-partidaArancelaria|No|Partida arancelaria<br/>**Campo XML:**E702
-ncm|No|Nomenclatura común del Mercosur (NCM)<br/>**Campo XML:**E703
-**unidadMedida**|**Si**|Es la unidad de medida del producto <br/>**Campo XML:**E709
-**cantidad**|**Si**|Cantidad del producto y/o servicio <br/>**Campo XML:**E711
-**precioUnitario**|**Si**|Precio unitario del producto y/o servicio (incluidos impuestos)<br/>**Campo XML:**E721
-cambio|No|Tipo de cambio por ítem<br/>**Campo XML:**E725
-descuento|No|Descuento particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA002
-anticipo|No|Anticipo particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:**EA006
-pais|No|<br/>Código del país de origen del producto**Campo XML:**E712
-paisDescripcion|No|Nombre del país de origen del producto<br/>**Campo XML:**E713
-tolerancia|No|Código de datos de relevancia de los productos<br/>**Campo XML:**E715
-toleranciaCantidad|No|Cantidad de quiebra o merma<br/>**Campo XML:**E717
-toleranciaPorcentaje|No|Porcentaje de quiebra o merma<br/>**Campo XML:**E718
-cdcAnticipo|No|CDC del anticipo<br/>**Campo XML:**E719
-**ivaTipo** |**Si**|Forma de afectación tributaria del IVA <br/>1= Gravado IVA<br/>2= Exonerado (Art. 83- Ley 125/91) <br/>3= Exento <br/>4= Gravado parcial Grav-Exento)<br/>**Campo XML:**E731
-**ivaBase**|**Si**|Base gravada del IVA por ítem<br/>**Campo XML:**E735
+**codigo** |**Si**|Código interno de identificación de la mercadería o servicio de responsabilidad del emisor<br/>**Campo XML:** E701 
+**descripcion**|**Si** |Descripción del producto y/o servicio. Equivalente a nombre del producto establecido en la RG 24/2019<br/>**Campo XML:** E708
+observacion|No|Informacion de intetes acerca del item<br/>**Campo XML:** E714
+partidaArancelaria|No|Partida arancelaria<br/>**Campo XML:** E702
+ncm|No|Nomenclatura común del Mercosur (NCM)<br/>**Campo XML:** E703
+**unidadMedida**|**Si**|Es la unidad de medida del producto <br/>**Campo XML:** E709
+**cantidad**|**Si**|Cantidad del producto y/o servicio <br/>**Campo XML:** E711
+**precioUnitario**|**Si**|Precio unitario del producto y/o servicio (incluidos impuestos)<br/>**Campo XML:** E721
+cambio|No|Tipo de cambio por ítem<br/>**Campo XML:** E725
+descuento|No|Descuento particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:** EA002
+anticipo|No|Anticipo particular sobre el precio unitario por ítem (incluidos impuestos)<br/>**Campo XML:** EA006
+pais|No|<br/>Código del país de origen del producto**Campo XML:** E712
+paisDescripcion|No|Nombre del país de origen del producto<br/>**Campo XML:** E713
+tolerancia|No|Código de tolerancia de merma de los productos<br/>Opcional si C002 = 7<br/><br/> 1=Tolerancia de quiebra<br/>2= Tolerancia de merma<br/><br/>Según RG 41/14. **Campo XML:** E715
+toleranciaCantidad|No|Cantidad de quiebra o merma<br/>**Campo XML:** E717
+toleranciaPorcentaje|No|Porcentaje de quiebra o merma<br/>**Campo XML:** E718
+cdcAnticipo|No|CDC del anticipo<br/>**Campo XML:** E719
+**ivaTipo** |**Si**|Forma de afectación tributaria del IVA <br/>1= Gravado IVA<br/>2= Exonerado (Art. 83- Ley 125/91) <br/>3= Exento <br/>4= Gravado parcial Grav-Exento)<br/>**Campo XML:** E731
+**ivaBase**|**Si**|Base gravada del IVA por ítem<br/>**Campo XML:** E735
 **iva**|**Si**|Tasa del IVA<br/>Posibles valores = 0, 5 o 10<br/><br/>**Campo XML:** E734
 lote|No|Numero de Lote del producto<br/>Valor alfanumérico<br/>Longitud: [1-80]<br/><br/>**Campo XML:** E751
-vencimiento|No|Fecha de vencimiento del producto Formato AAAA-MM-DD<br/>**Campo XML:**E752
+vencimiento|No|Fecha de vencimiento del producto Formato AAAA-MM-DD<br/>**Campo XML:** E752
 numeroSerie|No|Número de serie <br/>Valor alfanumérico<br/>Longitud: [1-10]<br/><br/>**Campo XML:** E753
-numeroPedido|No|Número de pedido<br/>**Campo XML:**E754
-numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:**E755
-registroSenave|No|Número de registro del producto otorgado por el SENAVE<br/>Obligados por la RG N° 16/2019 y la RG N° 24/2019 – Agroquímicos<br/>**Campo XML:**E759
+numeroPedido|No|Número de pedido<br/>**Campo XML:** E754
+numeroSeguimiento|No|Número de seguimiento del envío<br/>**Campo XML:** E755
+registroSenave|No|Número de registro del producto otorgado por el SENAVE<br/>Obligados por la RG N° 16/2019 y la RG N° 24/2019 – Agroquímicos<br/>**Campo XML:** E759
 registroEntidadComercial|No|Número de registro de entidad comercial otorgado por el SENAVE<br/><br/>**Campo XML: **E760
 nombreProducto|No|Obligados por el Art. 1 de la RG N° 106/2021 – Agroquímicos<br/><br/>**Campo XML: **E761
 dncp|No|Identificación de los datos de la DNCP<br/>Ver detalle en tabla [data.items.dncp](#parametro-del-objeto-data-items-dncp)<br/>
@@ -1570,10 +1570,10 @@ extras|No|Objeto de datos extras del item en formato **key=value** que puede ser
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-codigoNivelGeneral|No|Código DNCP – Nivel General. Obligatorio si tipoOperacion = 3 <br/>**Campo XML:**E704
-codigoNivelEspecifico|No|Código DNCP – Nivel Especifico. Obligatorio si existe el campo codigoNivelGeneral <br/>**Campo XML:**E705
-codigoGtinProducto|No|Código GTIN por producto. Informar si la mercadería tiene GTIN <br/>**Campo XML:**E706
-codigoNivelPaquete|No|Código GTIN por paquete. Informar si el paquete tiene GTIN<br/>**Campo XML:**E707
+codigoNivelGeneral|No|Código DNCP – Nivel General. Obligatorio si tipoOperacion = 3 <br/>**Campo XML:** E704
+codigoNivelEspecifico|No|Código DNCP – Nivel Especifico. Obligatorio si existe el campo codigoNivelGeneral <br/>**Campo XML:** E705
+codigoGtinProducto|No|Código GTIN por producto. Informar si la mercadería tiene GTIN <br/>**Campo XML:** E706
+codigoNivelPaquete|No|Código GTIN por paquete. Informar si el paquete tiene GTIN<br/>**Campo XML:** E707
 
 <!---
 se retira en nt 009
@@ -1581,47 +1581,47 @@ se retira en nt 009
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-nombre|No|Nombre del Importador. Obligados por la RG N° 16/2019 – Agroquímicos<br/>**Campo XML:**E756
-direccion|No|Dirección de Importador<br/>**Campo XML:**E757
-registroImportador|No|Número de registro de la firma del importador<br/>**Campo XML:**E758
+nombre|No|Nombre del Importador. Obligados por la RG N° 16/2019 – Agroquímicos<br/>**Campo XML:** E756
+direccion|No|Dirección de Importador<br/>**Campo XML:** E757
+registroImportador|No|Número de registro de la firma del importador<br/>**Campo XML:** E758
 -->
 
 ### Parametro del objeto data.items.sectorAutomotor
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-tipo|No|Tipo de operación de venta de vehículos<br/>1= Venta a representante<br/>2= Venta al consumidor final<br/>3= Venta a gobierno<br/>4= Venta a flota de vehículos<br/>**Campo XML:**E771
-chasis|No|Chasis del vehículo<br/>**Campo XML:**E773
-color|No|Color del vehículo<br/>**Campo XML:**E774
-potencia|No|Potencia del motor (CV) <br/>**Campo XML:**E775
-capacidadMotor|No|Capacidad del motor. Expresa en centímetros cúbicos (cc) <br/>**Campo XML:**E776
-capacidadPasajeros|No|Capacidad máxima de pasajeros sentados<br/>**Campo XML:**E785
-pesoBruto|No|Peso bruto del vehiculo. En toneladas<br/>**Campo XML:**E778
-pesoNeto|No|Peso neto del vehiculo. En toneladas<br/>**Campo XML:**E777
-tipoCombustible|No|Tipo de combustible <br/>1= Gasolina<br/>2= Diésel<br/>3= Etanol<br/>4= GNV<br/>5= Flex<br/>9= Otro<br/>**Campo XML:**E779
-tipoCombustibleDescripcion|No|Descripción del tipo de combustible. <br/>**Campo XML:**E780
-numeroMotor|No|<br/>Número del motor**Campo XML:**E781
-capacidadTraccion|No|Capacidad máxima de tracción <br/>**Campo XML:**E782
-año|No|Año de fabricación<br/>**Campo XML:**E783
-tipoVehiculo|No|Tipo de vehículo<br/>**Campo XML:**E784
-cilindradas|No|Cilindradas del motor<br/>**Campo XML:**E786
+tipo|No|Tipo de operación de venta de vehículos<br/>1= Venta a representante<br/>2= Venta al consumidor final<br/>3= Venta a gobierno<br/>4= Venta a flota de vehículos<br/>**Campo XML:** E771
+chasis|No|Chasis del vehículo<br/>**Campo XML:** E773
+color|No|Color del vehículo<br/>**Campo XML:** E774
+potencia|No|Potencia del motor (CV) <br/>**Campo XML:** E775
+capacidadMotor|No|Capacidad del motor. Expresa en centímetros cúbicos (cc) <br/>**Campo XML:** E776
+capacidadPasajeros|No|Capacidad máxima de pasajeros sentados<br/>**Campo XML:** E785
+pesoBruto|No|Peso bruto del vehiculo. En toneladas<br/>**Campo XML:** E778
+pesoNeto|No|Peso neto del vehiculo. En toneladas<br/>**Campo XML:** E777
+tipoCombustible|No|Tipo de combustible <br/>1= Gasolina<br/>2= Diésel<br/>3= Etanol<br/>4= GNV<br/>5= Flex<br/>9= Otro<br/>**Campo XML:** E779
+tipoCombustibleDescripcion|No|Descripción del tipo de combustible. <br/>**Campo XML:** E780
+numeroMotor|No|<br/>Número del motor**Campo XML:** E781
+capacidadTraccion|No|Capacidad máxima de tracción <br/>**Campo XML:** E782
+año|No|Año de fabricación<br/>**Campo XML:** E783
+tipoVehiculo|No|Tipo de vehículo<br/>**Campo XML:** E784
+cilindradas|No|Cilindradas del motor<br/>**Campo XML:** E786
 
 ### Parametro del objeto data.condicion
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipo**|**Si**|Condición de la operación. <br/>1= Contado <br/>2= Crédito<br/>**Campo XML:**E601
+**tipo**|**Si**|Condición de la operación. <br/>1= Contado <br/>2= Crédito<br/>**Campo XML:** E601
 entregas|No|Datos que describen la forma de pago al contado o del monto de la entrega inicial. Ver detalle en tabla [data.condicion.entregas].<br/>
 credito|No|Campos que describen la operación a crédito. Ver detalle en tabla [data.condicion.credito].<br/>
 
 ### Parametro del objeto data.condicion.entregas
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipo**|**Si**|Tipo de pago Ej.:1= Efectivo, 2= Cheque,3= Tarjeta de crédito, 4= Tarjeta de débito. Existe mas tipos de pagos ver en: <br/> **Campo XML:**E606
-tipoDescripcion|No|Descripción del Tipo de pago. Cuando el tipo = 99 es obligatorio especificar el tipo de pago personalizado : <br/> **Campo XML:**E607
-**monto**|**Si**| Monto por tipo de pago <br/> **Campo XML:**E608
-**moneda**|**Si**|Moneda por tipo de pago<br/>Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 Se requiere la misma moneda para todos los ítems del DE<br/> **Campo XML:**E609
-cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:**E611
+**tipo**|**Si**|Tipo de pago Ej.:1= Efectivo, 2= Cheque,3= Tarjeta de crédito, 4= Tarjeta de débito. Existe mas tipos de pagos ver en: <br/> **Campo XML:** E606
+tipoDescripcion|No|Descripción del Tipo de pago. Cuando el tipo = 99 es obligatorio especificar el tipo de pago personalizado : <br/> **Campo XML:** E607
+**monto**|**Si**| Monto por tipo de pago <br/> **Campo XML:** E608
+**moneda**|**Si**|Moneda por tipo de pago<br/>Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 Se requiere la misma moneda para todos los ítems del DE<br/> **Campo XML:** E609
+cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:** E611
 infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla [data.condicion.entregas.infoTarjeta]
 infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en [tabla data.condicion.entregas.infoCheque]
 extras|No|Objeto de datos extras de la entrega en formato **key=value** que puede ser enviado de forma adicional por cada condicion de entrega para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"vuelto" : 8500, <br/>&nbsp;&nbsp;"numeroDoc": "T-3232323"<br/>}<br/>
@@ -1630,85 +1630,85 @@ extras|No|Objeto de datos extras de la entrega en formato **key=value** que pued
 ### Parametro del objeto data.condicion.entregas.infoTarjeta
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipo**|**Si**|Denominación de la tarjeta.<br/>1= Visa<br/>2= Mastercard<br/>3= American Express<br/>4= Maestro<br/>5= Panal<br/>6= Cabal<br/>99= Otro <br/>**Campo XML:**E621
-**tipoDescripcion**|**Si**|<br/>Descripción de denominación de la tarjeta. Si tipo =99 informar la descripción de la denominación de la tarjeta**Campo XML:**E622
-numero|No|Número de la tarjeta. Cuatro últimos dígitos de la tarjeta<br/>**Campo XML:**E629
-titular|No|Nombre del titular de la tarjeta <br/>**Campo XML:**E628
-ruc|No|RUC de la procesadora de tarjeta<br/>**Campo XML:**E624
-razonSocial|No|Razón social de la procesadora de tarjeta<br/>**Campo XML:**E623
-**medioPago**|**Si**|Forma de procesamiento de pago.<br/>1= POS. <br/>2= Pago Electrónico (Ejemplo:compras por Internet)<br/>9= Otro<br/>**Campo XML:**E626
-codigoAutorizacion|No|Código de autorización de la operación <br/>**Campo XML:**E627
+**tipo**|**Si**|Denominación de la tarjeta.<br/>1= Visa<br/>2= Mastercard<br/>3= American Express<br/>4= Maestro<br/>5= Panal<br/>6= Cabal<br/>99= Otro <br/>**Campo XML:** E621
+**tipoDescripcion**|**Si**|<br/>Descripción de denominación de la tarjeta. Si tipo =99 informar la descripción de la denominación de la tarjeta**Campo XML:** E622
+numero|No|Número de la tarjeta. Cuatro últimos dígitos de la tarjeta<br/>**Campo XML:** E629
+titular|No|Nombre del titular de la tarjeta <br/>**Campo XML:** E628
+ruc|No|RUC de la procesadora de tarjeta<br/>**Campo XML:** E624
+razonSocial|No|Razón social de la procesadora de tarjeta<br/>**Campo XML:** E623
+**medioPago**|**Si**|Forma de procesamiento de pago.<br/>1= POS. <br/>2= Pago Electrónico (Ejemplo:compras por Internet)<br/>9= Otro<br/>**Campo XML:** E626
+codigoAutorizacion|No|Código de autorización de la operación <br/>**Campo XML:** E627
     
 ### Parametro del objeto data.condicion.entregas.infoCheque
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------     
-**numeroCheque**|**Si**|Número de cheque. Completar con 0 (cero) a la izquierda hasta alcanzar 8 (ocho) cifras<br/>**Campo XML:**E631
-**banco**|**Si**|Banco emisor<br/>**Campo XML:**E632
+**numeroCheque**|**Si**|Número de cheque. Completar con 0 (cero) a la izquierda hasta alcanzar 8 (ocho) cifras<br/>**Campo XML:** E631
+**banco**|**Si**|Banco emisor<br/>**Campo XML:** E632
 ### Parametro del objeto data.condicion.credito
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------   
-**tipo**|**Si**|Condición de la operación a crédito <br/>1= Plazo <br/>2= Cuota<br/>**Campo XML:**E641
-plazo |No|Plazo del crédito. Obligatorio si tipo = 1 <br/>Ejemplo: 30 días, 12 meses<br/>**Campo XML:**E643
-cuotas|No|Cantidad de cuotas. Plazo del crédito.  Obligatorio si tipo = 2<br/>Ejemplo: 12, 24, 36 <br/>**Campo XML:**E644
+**tipo**|**Si**|Condición de la operación a crédito <br/>1= Plazo <br/>2= Cuota<br/>**Campo XML:** E641
+plazo |No|Plazo del crédito. Obligatorio si tipo = 1 <br/>Ejemplo: 30 días, 12 meses<br/>**Campo XML:** E643
+cuotas|No|Cantidad de cuotas. Plazo del crédito.  Obligatorio si tipo = 2<br/>Ejemplo: 12, 24, 36 <br/>**Campo XML:** E644
 infoCuotas|No|Campos que describen las cuotas.Ver detalle en tabla data.condicion.credito.infoCuotas
 ### Parametro del objeto data.condicion.credito.infoCuotas
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-**moneda**|**Si**|Moneda de las cuotas.Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 <br/>**Campo XML:**E653
-**monto**|**Si**|Monto de cada cuota<br/>**Campo XML:**E651
-vencimiento|No|Fecha de vencimiento de cada cuota<br/>**Campo XML:**E652
+**moneda**|**Si**|Moneda de las cuotas.Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 <br/>**Campo XML:** E653
+**monto**|**Si**|Monto de cada cuota<br/>**Campo XML:** E651
+vencimiento|No|Fecha de vencimiento de cada cuota<br/>**Campo XML:** E652
 ### Parametro del objeto data.sectorEnergiaElectrica
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-numeroMedidor|No|Número de medidor<br/>**Campo XML:**E792
-codigoActividad|No|Código de actividad<br/>**Campo XML:**E793
-codigoCategoria|No|Código de categoría E<br/>**Campo XML:**E794
-lecturaAnterior|No|Lectura anterior<br/>**Campo XML:**E795
-lecturaActual|No|Lectura actual <br/>**Campo XML:**E796
+numeroMedidor|No|Número de medidor<br/>**Campo XML:** E792
+codigoActividad|No|Código de actividad<br/>**Campo XML:** E793
+codigoCategoria|No|Código de categoría E<br/>**Campo XML:** E794
+lecturaAnterior|No|Lectura anterior<br/>**Campo XML:** E795
+lecturaActual|No|Lectura actual <br/>**Campo XML:** E796
 ### Parametro del objeto data.sectorSeguros
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-codigoAseguradora|No|Código de la empresa de seguros en la Superintendencia de Seguros<br/>**Campo XML:**E801
-**codigoPoliza**|**Si**|Código de la póliza<br/>**Campo XML:**EA791
-**numeroPoliza**|**Si**|Número de la póliza<br/>**Campo XML:**EA794
-**vigencia**|**Si**|Descripción de la unidad de tiempo de vigencia<br/>**Campo XML:**EA792
-**vigenciaUnidad**|**Si**|Vigencia de la póliza<br/>**Campo XML:**EA793
-inicioVigencia|No|Fecha de inicio de vigencia<br/>**Campo XML:**EA795
-finVigencia|No|Fecha de fin de vigencia <br/>**Campo XML:**EA796
-codigoInternoItem|No|Código interno del ítem<br/>**Campo XML:**EA797
+codigoAseguradora|No|Código de la empresa de seguros en la Superintendencia de Seguros<br/>**Campo XML:** E801
+**codigoPoliza**|**Si**|Código de la póliza<br/>**Campo XML:** EA791
+**numeroPoliza**|**Si**|Número de la póliza<br/>**Campo XML:** EA794
+**vigencia**|**Si**|Descripción de la unidad de tiempo de vigencia<br/>**Campo XML:** EA792
+**vigenciaUnidad**|**Si**|Vigencia de la póliza<br/>**Campo XML:** EA793
+inicioVigencia|No|Fecha de inicio de vigencia<br/>**Campo XML:** EA795
+finVigencia|No|Fecha de fin de vigencia <br/>**Campo XML:** EA796
+codigoInternoItem|No|Código interno del ítem<br/>**Campo XML:** EA797
 
 ### Parametro del objeto data.sectorSupermercados
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-nombreCajero|No|Nombre del cajero<br/>**Campo XML:**E811
-efectivo|No|Efectivo<br/>**Campo XML:**E812
-vuelto|No|Vuelto<br/>**Campo XML:**E813
-donacion|No|Monto de la donación<br/>**Campo XML:**E814
-donacionDescripcion|No|Descripción de la donación<br/>**Campo XML:**E815
+nombreCajero|No|Nombre del cajero<br/>**Campo XML:** E811
+efectivo|No|Efectivo<br/>**Campo XML:** E812
+vuelto|No|Vuelto<br/>**Campo XML:** E813
+donacion|No|Monto de la donación<br/>**Campo XML:** E814
+donacionDescripcion|No|Descripción de la donación<br/>**Campo XML:** E815
 
 ### Parametro del objeto data.sectorAdicional
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-ciclo|No|Ciclo<br/>**Campo XML:**E821
-inicioCiclo|No|Fecha de inicio de ciclo<br/>**Campo XML:**E822
-finCiclo|No|Fecha de fin de ciclo<br/>**Campo XML:**E823
-vencimientoPago|No|Fecha de vencimiento para el pago<br/>**Campo XML:**E824
-numeroContrato|No|Número de contrato E<br/>**Campo XML:**E825
-saldoAnterior|No|Saldo anterior<br/>**Campo XML:**E826
+ciclo|No|Ciclo<br/>**Campo XML:** E821
+inicioCiclo|No|Fecha de inicio de ciclo<br/>**Campo XML:** E822
+finCiclo|No|Fecha de fin de ciclo<br/>**Campo XML:** E823
+vencimientoPago|No|Fecha de vencimiento para el pago<br/>**Campo XML:** E824
+numeroContrato|No|Número de contrato E<br/>**Campo XML:** E825
+saldoAnterior|No|Saldo anterior<br/>**Campo XML:** E826
 
 ### Parametro del objeto data.transporte
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-tipo|No|Tipo de transporte. Obligatorio si tipoDocumento = 7. <br/>1= Propio<br/>2= Tercero<br/>**Campo XML:**E901
-**modalidad**|**Si**|Modalidad del transporte<br/>1=Terrestre<br/>2= Fluvial<br/>3= Aéreo<br/>4= Multimodal<br/>**Campo XML:**E903
-**tipoResponsable**|**Si**|Responsable del costo del flete<br/>1= Emisor de la Factura Electrónica<br/>2= Receptor de la Factura Electrónica <br/>3= Tercero<br/>4= Agente intermediario del transporte (cuando intervenga)<br/>5= Transporte propio <br/>**Campo XML:**E905
+tipo|No|Tipo de transporte. Obligatorio si tipoDocumento = 7. <br/>1= Propio<br/>2= Tercero<br/>**Campo XML:** E901
+**modalidad**|**Si**|Modalidad del transporte<br/>1=Terrestre<br/>2= Fluvial<br/>3= Aéreo<br/>4= Multimodal<br/>**Campo XML:** E903
+**tipoResponsable**|**Si**|Responsable del costo del flete<br/>1= Emisor de la Factura Electrónica<br/>2= Receptor de la Factura Electrónica <br/>3= Tercero<br/>4= Agente intermediario del transporte (cuando intervenga)<br/>5= Transporte propio <br/>**Campo XML:** E905
 **condicionNegociacion**|**Si**|Condición de la negociación segun las opciones:<br/><br/>CFR Costo y flete<br/>CIF Costo, seguro y flete<br/>CIP Transporte y seguro pagados hasta<br/>CPT Transporte pagado hasta<br/>DAP Entregada en lugar convenido<br/>DAT Entregada en terminal<br/>DDP Entregada derechos pagados<br/>EXW En fabrica<br/>FAS Franco al costado del buque<br/>FCA Franco transportista<br/>FOB Franco a bordo<br/><br/>**Campo XML: **E906
-numeroManifiesto|No|Número de manifiesto o conocimiento de carga/declaración de tránsito aduanero/ Carta de porte internacional <br/>**Campo XML:**E907
-numeroDespachoImportacion|No|Número de despacho de importación<br/>**Campo XML:**E908
-inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:**E909
-finEstimadoTranslado|No|Fecha estimada de fin de traslado<br/>**Campo XML:**E910
-paisDestino|No|Código del país de destino <br/>**Campo XML:**E911
-paisDestinoNombre|No|Descripción del país de destino.  <br/>**Campo XML:**E912
+numeroManifiesto|No|Número de manifiesto o conocimiento de carga/declaración de tránsito aduanero/ Carta de porte internacional <br/>**Campo XML:** E907
+numeroDespachoImportacion|No|Número de despacho de importación<br/>**Campo XML:** E908
+inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:** E909
+finEstimadoTranslado|No|Fecha estimada de fin de traslado<br/>**Campo XML:** E910
+paisDestino|No|Código del país de destino <br/>**Campo XML:** E911
+paisDestinoNombre|No|Descripción del país de destino.  <br/>**Campo XML:** E912
 salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla [data.transporte.salida](#parametro-del-objeto-data-transporte-salida)
 entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla [data.transporte.entrega](#parametro-del-objeto-data-transporte-entrega)
 vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla [data.transporte.vehiculo](#parametro-del-objeto-data-transporte-vehiculo)
@@ -1717,58 +1717,58 @@ transportista|No|Campos que identifican al transportista. Ver detalle en tabla [
 ### Parametro del objeto data.transporte.salida
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-**direccion**|**Si**|Dirección del local de salida. Nombre de la calle principal <br/>**Campo XML:**E921
-**numeroCasa**|**Si**|Número de casa de salida<br/>**Campo XML:**E922
-complementoDireccion1|No|Complemento de dirección 1 salida. Nombre de la calle secundaria<br/>**Campo XML:**E923
-complementoDireccion2|No|Complemento de dirección 2 salida. Número de departamento/piso/ local/ edificio/ deposito del local de salida de la mercadería<br/>**Campo XML:**E924
-**departamento**|**Si**|Código del departamento del local de salida. Según XSD de Departamentos<br/>**Campo XML:**E925
-**departamentoDescripcion**|**Si**|Descripción del departamento del local de salida<br/>**Campo XML:**E926
-distrito|No|Código del distrito del local de salida<br/>**Campo XML:**E927
-distritoDescripcion|No|Descripción de distrito del local de salida<br/>**Campo XML:**E927
-**ciudad**|**Si**|Código de la ciudad del local de salida<br/>**Campo XML:**E929
-**ciudadDescripcion**|**Si**|Descripción de ciudad del local de salida<br/>**Campo XML:**E930
+**direccion**|**Si**|Dirección del local de salida. Nombre de la calle principal <br/>**Campo XML:** E921
+**numeroCasa**|**Si**|Número de casa de salida<br/>**Campo XML:** E922
+complementoDireccion1|No|Complemento de dirección 1 salida. Nombre de la calle secundaria<br/>**Campo XML:** E923
+complementoDireccion2|No|Complemento de dirección 2 salida. Número de departamento/piso/ local/ edificio/ deposito del local de salida de la mercadería<br/>**Campo XML:** E924
+**departamento**|**Si**|Código del departamento del local de salida. Según XSD de Departamentos<br/>**Campo XML:** E925
+**departamentoDescripcion**|**Si**|Descripción del departamento del local de salida<br/>**Campo XML:** E926
+distrito|No|Código del distrito del local de salida<br/>**Campo XML:** E927
+distritoDescripcion|No|Descripción de distrito del local de salida<br/>**Campo XML:** E927
+**ciudad**|**Si**|Código de la ciudad del local de salida<br/>**Campo XML:** E929
+**ciudadDescripcion**|**Si**|Descripción de ciudad del local de salida<br/>**Campo XML:** E930
 pais|No|Código de la ciudad del local de salida
 paisDescripcion|No|Código de la ciudad del local de salida
-telefonoContacto|No|Teléfono de contacto del local de salida<br/>**Campo XML:**E931 
+telefonoContacto|No|Teléfono de contacto del local de salida<br/>**Campo XML:** E931 
 
 
 ### Parametro del objeto data.transporte.entrega
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-**direccion**|**Si**|Dirección del local de entrega. Nombre de la calle principal <br/>**Campo XML:**E941
-**numeroCasa**|**Si**|Número de casa de entrega<br/>**Campo XML:**E942
-complementoDireccion1|No|Complemento de dirección 1 entrega. Nombre de la calle secundaria<br/>**Campo XML:**E943
-complementoDireccion2|No|Complemento de dirección 2 salida. Número de departamento/piso/ local/ edificio/ deposito del local de salida de la mercadería<br/>**Campo XML:**E944
-**departamento**|**Si**|Código del departamento del local de entrega. Según XSD de Departamentos<br/>**Campo XML:**E945
-**departamentoDescripcion**|**Si**|Descripción del departamento del local de salida<br/>**Campo XML:**E946
-distrito|No|Código del distrito del local de entrega<br/>**Campo XML:**E947
-distritoDescripcion|No|Descripción de distrito del local de entrega<br/>**Campo XML:**E948
-**ciudad**|**Si**|Código de la ciudad del local de salida<br/>**Campo XML:**E949
-**ciudadDescripcion**|**Si**|Descripción de ciudad del local de salida<br/>**Campo XML:**E950
+**direccion**|**Si**|Dirección del local de entrega. Nombre de la calle principal <br/>**Campo XML:** E941
+**numeroCasa**|**Si**|Número de casa de entrega<br/>**Campo XML:** E942
+complementoDireccion1|No|Complemento de dirección 1 entrega. Nombre de la calle secundaria<br/>**Campo XML:** E943
+complementoDireccion2|No|Complemento de dirección 2 salida. Número de departamento/piso/ local/ edificio/ deposito del local de salida de la mercadería<br/>**Campo XML:** E944
+**departamento**|**Si**|Código del departamento del local de entrega. Según XSD de Departamentos<br/>**Campo XML:** E945
+**departamentoDescripcion**|**Si**|Descripción del departamento del local de salida<br/>**Campo XML:** E946
+distrito|No|Código del distrito del local de entrega<br/>**Campo XML:** E947
+distritoDescripcion|No|Descripción de distrito del local de entrega<br/>**Campo XML:** E948
+**ciudad**|**Si**|Código de la ciudad del local de salida<br/>**Campo XML:** E949
+**ciudadDescripcion**|**Si**|Descripción de ciudad del local de salida<br/>**Campo XML:** E950
 pais|No|Código de  pais de salida
 paisDescripcion|No|Descripcion del pais de salida
-telefonoContacto|No|Teléfono de contacto del local de la entrega<br/>**Campo XML:**E951 
+telefonoContacto|No|Teléfono de contacto del local de la entrega<br/>**Campo XML:** E951 
 
 ### Parametro del objeto data.transporte.vehiculo
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **tipo**|**Si**|Tipo de vehículo. Ejemplo: Camioneta, Barcaza, Elicoptero, Debe ser acorde al tipo de transporte<br/><br/>**Campo XML:** E961
-**marca**|**Si**|Marca<br/>**Campo XML:**E962
-**documentoTipo**|**Si**|Tipo de identificación del vehículo <br/>1=Número de identificación del vehículo<br/>2=Número de matrícula del vehículo<br/>**Campo XML:**E967
-documentoNumero|No|Número de identificación del vehículo. Debe informarse cuando el documentoTipo=1<br/>**Campo XML:**E963
-obs|No|Datos adicionales del vehículo <br/>**Campo XML:**E964
-numeroMatricula|No|Número de matrícula del vehículo. Debe informarse cuando el documentoTipo=2 <br/>**Campo XML:**E965
-numeroVuelo|No|Número de vuelo<br/>**Campo XML:**E966
+**marca**|**Si**|Marca<br/>**Campo XML:** E962
+**documentoTipo**|**Si**|Tipo de identificación del vehículo <br/>1=Número de identificación del vehículo<br/>2=Número de matrícula del vehículo<br/>**Campo XML:** E967
+documentoNumero|No|Número de identificación del vehículo. Debe informarse cuando el documentoTipo=1<br/>**Campo XML:** E963
+obs|No|Datos adicionales del vehículo <br/>**Campo XML:** E964
+numeroMatricula|No|Número de matrícula del vehículo. Debe informarse cuando el documentoTipo=2 <br/>**Campo XML:** E965
+numeroVuelo|No|Número de vuelo<br/>**Campo XML:** E966
 
 ### Parametro del objeto data.transportista
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-**contribuyente**|**Si**|Naturaleza del transportista(true o false)<br/>**Campo XML:**E980
-**nombre**|**Si**|Nombre o razón social del transportista <br/>**Campo XML:**E982
-**ruc**|**Si**|RUC del transportista<br/>**Campo XML:**E983
-documentoTipo|No|Tipo de documento de identidad del transportista<br/>**Campo XML:**E985
-documentoNumero||Número de documento de identidad del transportista. Obligatorio si existe el campo documentoTipo<br/>**Campo XML:**E987
-direccion|No|Domicilio fiscal del transportista<br/>**Campo XML:**E992
+**contribuyente**|**Si**|Naturaleza del transportista(true o false)<br/>**Campo XML:** E980
+**nombre**|**Si**|Nombre o razón social del transportista <br/>**Campo XML:** E982
+**ruc**|**Si**|RUC del transportista<br/>**Campo XML:** E983
+documentoTipo|No|Tipo de documento de identidad del transportista<br/>**Campo XML:** E985
+documentoNumero||Número de documento de identidad del transportista. Obligatorio si existe el campo documentoTipo<br/>**Campo XML:** E987
+direccion|No|Domicilio fiscal del transportista<br/>**Campo XML:** E992
 obs|No|Observacion del transportista
 pais|No|Código del pais de Origen del transportista
 paisDescripcion|No|Descripcion del pais Origen
@@ -1778,16 +1778,16 @@ agente|No|Campos que identifican al agente. Ver detalle en tabla [data.transport
 ### Parametro del objeto data.transporte.transportista.chofer
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**documentoNumero**|**Si**|Número de documento de identidad del chofer<br/>**Campo XML:**E990
-**nombre**|**Si**|Nombre y apellido del chofer <br/>**Campo XML:**E991
-direccion|Si|Dirección del chofer<br/>**Campo XML:**E993
+**documentoNumero**|**Si**|Número de documento de identidad del chofer<br/>**Campo XML:** E990
+**nombre**|**Si**|Nombre y apellido del chofer <br/>**Campo XML:** E991
+direccion|Si|Dirección del chofer<br/>**Campo XML:** E993
 
 ### Parametro del objeto data.transporte.transportista.agente
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-nombre|No|Nombre o razón social del agente. Casos particulares según RG N°41/14 <br/>**Campo XML:**E994
-ruc|No|RUC del agente<br/>**Campo XML:**E995
-direccion|No|Dirección del agente<br/>**Campo XML:**E997
+nombre|No|Nombre o razón social del agente. Casos particulares según RG N°41/14 <br/>**Campo XML:** E994
+ruc|No|RUC del agente<br/>**Campo XML:** E995
+direccion|No|Dirección del agente<br/>**Campo XML:** E997
 
 ### Parametro del objeto data.complementarios
 Parámetro | Requerido | Descripción
