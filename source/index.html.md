@@ -1760,7 +1760,7 @@ obs|No|Datos adicionales del vehículo <br/>**Campo XML:** E964
 numeroMatricula|No|Número de matrícula del vehículo. Debe informarse cuando el documentoTipo=2 <br/>**Campo XML:** E965
 numeroVuelo|No|Número de vuelo<br/>**Campo XML:** E966
 
-### Parametro del objeto data.transportista
+### Parametro del objeto data.transporte.transportista
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **contribuyente**|**Si**|Naturaleza del transportista(true o false)<br/>**Campo XML:** E980
@@ -2150,6 +2150,7 @@ Parámetro | Requerido | Descripción
 **punto** | **si** | String conteniendo el valor del punto que corresponde a la numeracion que desea inutilizar<br/>
 **desde** | **si** | Numero inicial a partir del cual se deben inutilizar la numeracion<br/>
 **hasta** | **si** | Numero final a partir de la cual se deben inutilizar la numeracion<br/>
+serie | no | Numero de serie del rango de números que se desean inutilizar<br/>
 **motivo** | **si** | El motivo por el cual desea inutilizar el rango de numeraciones<br/>
 
 ### Respuesta
