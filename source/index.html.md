@@ -1034,7 +1034,7 @@ respuesta_mensaje | string | Mensaje de Respuesta de la SET
 ```shell
 # Consulta del XML de un DTE por el Código de Control (CDC)
 curl \
-  GET "https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694"  
+  GET "https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694?json=false"  
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
 ```
 
@@ -1048,7 +1048,7 @@ const headers = {
 
 
 axios({
-  url: `https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694`,
+  url: `https://api.facturasend.com.py/<tenantId>/de/xml/01800695631001001000000612021112917595714694?json=false`,
   method: 'GET',
   responseType: 'blob',
   {headers}
@@ -1074,6 +1074,7 @@ Recordando que el XML de un DE aprobado representa al archivo con valor fiscal y
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **cdc** | **Si** | Código CDC de 44 dígitos del Documento Electrónico
+json | No | Si se envia como 'true' en la queryParam (?json=true) entonces se recuperará el contenido del Archivo XML pero en formato de objeto JSON
 
 ### Respuesta
 Atributo | Tipo | Descripción
@@ -1093,10 +1094,12 @@ curl \
     cdcList : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
-        "cdc": "01800695631001001000000612021312917595714694"
+        "cdc": "01800695631001001000000612021312917595714695"
     }, {
         "cdc": "otro.."
-    }]
+    }],
+    "type": "base64",
+    "ticket": true
   }'
 ```
 
@@ -1112,10 +1115,12 @@ const data = {
     cdcList : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
-        "cdc": "01800695631001001000000612021312917595714694"
+        "cdc": "01800695631001001000000612021312917595714695"
     }, {
         "cdc": "otro.."
-    }]
+    }],
+    "type": "base64",
+    "ticket": true
 };
 
 axios.post({
@@ -1145,6 +1150,7 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **cdcList** | **Si** | Array de códigos CDC de los cuales se desea obtener el Documento PDF KUDE<br/><br/>Los atributos de éste array, son iguales a la Consulta de Estados, que se pueden encontrar en la [lista de arriba](#parametros-de-cdclist)
 type | No | Tipo de información que se desea obtener<br/><br/>Por defecto el Documento se recupera en formato Binario.<br/><br/>La opción alternativa es 'base64'
+ticket | No | Si se especifica 'true' entonces obtiene el KUDE en formato Ticket, no importando si esté configurado como formato A4 en la definición del establecimiento
 
 ### Respuesta
 Atributo | Tipo | Descripción
@@ -1611,10 +1617,10 @@ cilindradas|No|Cilindradas del motor<br/>**Campo XML:** E786
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **tipo**|**Si**|Condición de la operación. <br/>1= Contado <br/>2= Crédito<br/>**Campo XML:** E601
-entregas|No|Datos que describen la forma de pago al contado o del monto de la entrega inicial. Ver detalle en tabla [data.condicion.entregas].<br/>
-credito|No|Campos que describen la operación a crédito. Ver detalle en tabla [data.condicion.credito].<br/>
+entregas|No|Datos que describen la forma de pago al contado o del monto de la entrega inicial. Ver detalle en tabla [data.condicion.entregas](#parametros-del-objeto-data-condicion-entregas).<br/>
+credito|No|Campos que describen la operación a crédito. Ver detalle en tabla [data.condicion.credito](#parametros-del-objeto-data-condicion-credito).<br/>
 
-### Parametro del objeto data.condicion.entregas
+### Parametros del objeto data.condicion.entregas
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **tipo**|**Si**|Tipo de pago Ej.:1= Efectivo, 2= Cheque,3= Tarjeta de crédito, 4= Tarjeta de débito. Existe mas tipos de pagos ver en: <br/> **Campo XML:** E606
@@ -1622,12 +1628,12 @@ tipoDescripcion|No|Descripción del Tipo de pago. Cuando el tipo = 99 es obligat
 **monto**|**Si**| Monto por tipo de pago <br/> **Campo XML:** E608
 **moneda**|**Si**|Moneda por tipo de pago<br/>Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 Se requiere la misma moneda para todos los ítems del DE<br/> **Campo XML:** E609
 cambio|No|Tipo de cambio por tipo de pago.<br/>Obligatorio si moneda ≠ PYG <br/> **Campo XML:** E611
-infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla [data.condicion.entregas.infoTarjeta]
-infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en [tabla data.condicion.entregas.infoCheque]
+infoTarjeta|No|Campos que describen el pago o entrega inicial de la operación con tarjeta de crédito/débito. Ver detalle en tabla [data.condicion.entregas.infoTarjeta](#parametros-del-objeto-data-condicion-entregas-infotarjeta)
+infoCheque|No|Campos que describen el pago o entrega inicial de la operación con cheque. Ver detalle en [tabla data.condicion.entregas.infoCheque](#parametros-del-objeto-data-condicion-entregas-infocheque)
 extras|No|Objeto de datos extras de la entrega en formato **key=value** que puede ser enviado de forma adicional por cada condicion de entrega para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"vuelto" : 8500, <br/>&nbsp;&nbsp;"numeroDoc": "T-3232323"<br/>}<br/>
 
 
-### Parametro del objeto data.condicion.entregas.infoTarjeta
+### Parametros del objeto data.condicion.entregas.infoTarjeta
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **tipo**|**Si**|Denominación de la tarjeta.<br/>1= Visa<br/>2= Mastercard<br/>3= American Express<br/>4= Maestro<br/>5= Panal<br/>6= Cabal<br/>99= Otro <br/>**Campo XML:** E621
@@ -1639,24 +1645,27 @@ razonSocial|No|Razón social de la procesadora de tarjeta<br/>**Campo XML:** E62
 **medioPago**|**Si**|Forma de procesamiento de pago.<br/>1= POS. <br/>2= Pago Electrónico (Ejemplo:compras por Internet)<br/>9= Otro<br/>**Campo XML:** E626
 codigoAutorizacion|No|Código de autorización de la operación <br/>**Campo XML:** E627
     
-### Parametro del objeto data.condicion.entregas.infoCheque
+### Parametros del objeto data.condicion.entregas.infoCheque
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------     
 **numeroCheque**|**Si**|Número de cheque. Completar con 0 (cero) a la izquierda hasta alcanzar 8 (ocho) cifras<br/>**Campo XML:** E631
 **banco**|**Si**|Banco emisor<br/>**Campo XML:** E632
-### Parametro del objeto data.condicion.credito
+
+### Parametros del objeto data.condicion.credito
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------   
 **tipo**|**Si**|Condición de la operación a crédito <br/>1= Plazo <br/>2= Cuota<br/>**Campo XML:** E641
 plazo |No|Plazo del crédito. Obligatorio si tipo = 1 <br/>Ejemplo: 30 días, 12 meses<br/>**Campo XML:** E643
 cuotas|No|Cantidad de cuotas. Plazo del crédito.  Obligatorio si tipo = 2<br/>Ejemplo: 12, 24, 36 <br/>**Campo XML:** E644
-infoCuotas|No|Campos que describen las cuotas.Ver detalle en tabla data.condicion.credito.infoCuotas
-### Parametro del objeto data.condicion.credito.infoCuotas
+infoCuotas|No|Campos que describen las cuotas.Ver detalle en tabla [data.condicion.credito.infoCuotas](#parametros-del-objeto-data-condicion-credito-infocuotas)
+
+### Parametros del objeto data.condicion.credito.infoCuotas
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
 **moneda**|**Si**|Moneda de las cuotas.Según tabla de códigos para monedas de acuerdo con la norma ISO 4217 <br/>**Campo XML:** E653
 **monto**|**Si**|Monto de cada cuota<br/>**Campo XML:** E651
 vencimiento|No|Fecha de vencimiento de cada cuota<br/>**Campo XML:** E652
+
 ### Parametro del objeto data.sectorEnergiaElectrica
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
