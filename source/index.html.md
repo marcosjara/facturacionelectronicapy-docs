@@ -1150,7 +1150,7 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **cdcList** | **Si** | Array de códigos CDC de los cuales se desea obtener el Documento PDF KUDE<br/><br/>Los atributos de éste array, son iguales a la Consulta de Estados, que se pueden encontrar en la [lista de arriba](#parametros-de-cdclist)
 type | No | Tipo de información que se desea obtener<br/><br/>Por defecto el Documento se recupera en formato Binario.<br/><br/>La opción alternativa es 'base64'
-format | No | Especifique el formato de impresión para el Documento Electrónico, "ticket" o "custom". Si va imprimir el formato normal de Factura ignore ésta opción.
+format | No | Especifique el formato de impresión para el Documento Electrónico, "ticket" o "custom". Si desea obtener el PDF en el formato normal de Factura (especificado en el establecimiento) ignore ésta opción.
 
 ### Respuesta
 Atributo | Tipo | Descripción
@@ -1440,6 +1440,7 @@ remision|No|Conjunto de información relacionada a la Remisión. <br/>Solo es ne
 descuentoGlobal|No|Descuento global de la Operación<br/>**Campo XML:** Relacionado a EA004
 anticipoGlobal|No|Anticipo global de la Operación<br/>**Campo XML:** Relacionado a EA007
 extras|No|Objeto de datos extras del Documento Electronico en formato **key=value** que puede ser enviado de forma adicional para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"pedidoCliente" : "2123-1", <br/>&nbsp;&nbsp;"numeroPresupuesto": "P/001", <br/>&nbsp;&nbsp;"posTicketId" : 39271<br/>}<br/>
+format|No|Indica la configuración del formato de impresión (Factura, Ticket o Personalizado) con el cual se guardará el Documento Electrónico, y el cual será su valor por defecto. Si no se pasa éste atributo, se asumirá el configurado en el establecimiento a travez de la consola.<br/><br/>Al enviar un DE por correo o imprimir un ticket se utilizará ésta opción guardada. <br/><br/>También podrá, posteriormente, indicar explicitamente el formato que desea al momento de obtener el PDF del KUDE<br/><br/>Posibles Valores:<br/>**ticket**=Especifica que el KUDE del DE quedará guardado en modo Ticket<br/>**custom**=Especifica que el KUDE del DE quedará guardado con el formato personalizado. (Sólo vàlido para tipoDocumento=1) <br/><br/>Para emitir en formato normal ignore ésta opción<br/>
 
 ### Parametro del objeto data.cliente
 
@@ -1478,7 +1479,6 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:** E011
 fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:** E013
-format|No|Indica si el KUDE del DE debe generarse en formato Ticket o Custom.<br/><br/>Esta opción sobreescribe a la opción especificada en el establecimiento<br/><br/>Valores:<br/>**ticket**=Especifica que el KUDE del DE saldrá en modo Ticket<br/>**custom**=Especifica que el KUDE del DE saldrá en el formato personalizado. <br/><br/>Para emitir en formato normal ignore ésta opción<br/>
 dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla [data.factura.dncp]
 
 ### Parametro del objeto data.factura.dncp
