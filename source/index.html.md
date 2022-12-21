@@ -1555,8 +1555,8 @@ anticipo|No|Anticipo particular sobre el precio unitario por ítem (incluidos im
 pais|No|<br/>Código del país de origen del producto**Campo XML:** E712
 paisDescripcion|No|Nombre del país de origen del producto<br/>**Campo XML:** E713
 tolerancia|No|Código de tolerancia de merma de los productos<br/>Opcional si C002 = 7<br/><br/> 1=Tolerancia de quiebra<br/>2= Tolerancia de merma<br/><br/>Según RG 41/14. **Campo XML:** E715
-toleranciaCantidad|No|Cantidad de quiebra o merma<br/>**Campo XML:** E717
-toleranciaPorcentaje|No|Porcentaje de quiebra o merma<br/>**Campo XML:** E718
+toleranciaCantidad|No|Cantidad de quiebra o merma<br/><br/>Obligatorio si se envia la tolerancia<br/>**Campo XML:** E717
+toleranciaPorcentaje|No|Porcentaje de quiebra o merma<br/><br/>Obligatorio si se envia la tolerancia<br/>**Campo XML:** E718
 cdcAnticipo|No|CDC del anticipo<br/>**Campo XML:** E719
 **ivaTipo** |**Si**|Forma de afectación tributaria del IVA <br/>1= Gravado IVA<br/>2= Exonerado (Art. 83- Ley 125/91) <br/>3= Exento <br/>4= Gravado parcial Grav-Exento)<br/>**Campo XML:** E731
 **ivaBase**|**Si**|Base gravada del IVA por ítem<br/>**Campo XML:** E735
@@ -1711,7 +1711,7 @@ Parámetro | Requerido | Descripción
 tipo|No|Tipo de transporte. Obligatorio si tipoDocumento = 7. <br/>1= Propio<br/>2= Tercero<br/>**Campo XML:** E901
 **modalidad**|**Si**|Modalidad del transporte<br/>1=Terrestre<br/>2= Fluvial<br/>3= Aéreo<br/>4= Multimodal<br/>**Campo XML:** E903
 **tipoResponsable**|**Si**|Responsable del costo del flete<br/>1= Emisor de la Factura Electrónica<br/>2= Receptor de la Factura Electrónica <br/>3= Tercero<br/>4= Agente intermediario del transporte (cuando intervenga)<br/>5= Transporte propio <br/>**Campo XML:** E905
-**condicionNegociacion**|**Si**|Condición de la negociación segun las opciones:<br/><br/>CFR Costo y flete<br/>CIF Costo, seguro y flete<br/>CIP Transporte y seguro pagados hasta<br/>CPT Transporte pagado hasta<br/>DAP Entregada en lugar convenido<br/>DAT Entregada en terminal<br/>DDP Entregada derechos pagados<br/>EXW En fabrica<br/>FAS Franco al costado del buque<br/>FCA Franco transportista<br/>FOB Franco a bordo<br/><br/>**Campo XML: **E906
+condicionNegociacion|No|Condición de la negociación segun las opciones:<br/><br/>CFR Costo y flete<br/>CIF Costo, seguro y flete<br/>CIP Transporte y seguro pagados hasta<br/>CPT Transporte pagado hasta<br/>DAP Entregada en lugar convenido<br/>DAT Entregada en terminal<br/>DDP Entregada derechos pagados<br/>EXW En fabrica<br/>FAS Franco al costado del buque<br/>FCA Franco transportista<br/>FOB Franco a bordo<br/><br/>**Campo XML: **E906
 numeroManifiesto|No|Número de manifiesto o conocimiento de carga/declaración de tránsito aduanero/ Carta de porte internacional <br/>**Campo XML:** E907
 numeroDespachoImportacion|No|Número de despacho de importación<br/>**Campo XML:** E908
 inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:** E909
