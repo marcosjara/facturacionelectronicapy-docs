@@ -1419,7 +1419,7 @@ Parámetro | Requerido | Descripción
 **establecimiento**|**Si**| Representa al código de establecimiento del emisor, se puede enviar 1 o '001' <br/><br/>**Campo XML:** C005.
 **punto**|**Si**| Es el punto de emisión del documento electrónico, se puede enviar 1 o '001'<br/><br/>**Campo XML:** C006.
 **numero**|**Si**| Es el número del documento electrónico, se puede enviar directamente el número o completar con 0 a la izquierda hasta alcanzar 7 digitos. Ej.: 1 o '0000001'. <br/><br/>**Campo XML:**C007 
-**serie**|**No**| Serie de 2 digitos de la numeración del documento electrónico. Solo debe enviarse cuando se utiliza la totalidad de la numeración de 7 dígitos, empezando por la serie AA, AB, AC, BA, BB, BC...ZZ. <br/><br/>**Campo XML:**C010 
+serie|No| Serie de 2 digitos de la numeración del documento electrónico. Solo debe enviarse cuando se utiliza la totalidad de la numeración de 7 dígitos, empezando por la serie AA, AB, AC, BA, BB, BC...ZZ. <br/><br/>**Campo XML:**C010 
 descripcion|No| Información de interés del Fisco respecto al DE.<br/><br/>**Campo XML:** B006.
 observacion|No| Información de interés del emisor respecto al DE.<br/><br/>**Campo XML:** B005.
 **fecha**|**Si**| Fecha y hora de emisión del DE. <br/><br/>**Campo XML:** D002.
@@ -1472,6 +1472,7 @@ Parámetro | Requerido | Descripción
 **documentoNumero**|**Si**|Número de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D143
 **nombre**|**Si**|Nombre o razón social del responsable de la generación del DE<br/>**Campo XML:**D144
 **cargo**|**Si**|Cargo del responsable de la generación del DE<br/>**Campo XML:**D145
+**email**|No|Email del responsable de la generación del DE (Esta información no se envía a la SET)<br/><br/>Si se pasa un email válido, también se notifican a éste correo los mensajes de FacturaSend.<br/>
 
 ### Parametro del objeto data.factura
 
