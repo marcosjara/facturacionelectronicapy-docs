@@ -1343,7 +1343,7 @@ main | binary | Documento PDF en formato binary o base64
       "numeroContrato" : "AF-2541",
       "saldoAnterior" : 1550000
   },
-  "ransporte" : {
+  "transporte" : {
       "tipo" : 1,
       "modalidad" : 1,
       "tipoResponsable" : 1,
