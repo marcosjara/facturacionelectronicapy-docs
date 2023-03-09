@@ -1719,10 +1719,10 @@ inicioEstimadoTranslado|No|Fecha estimada de inicio de traslado<br/>**Campo XML:
 finEstimadoTranslado|No|Fecha estimada de fin de traslado<br/>**Campo XML:** E910
 paisDestino|No|Código del país de destino <br/>**Campo XML:** E911
 paisDestinoNombre|No|Descripción del país de destino.  <br/>**Campo XML:** E912
-salida|No|Campos que identifican el local de salida de las mercaderías. Ver detalle en tabla [data.transporte.salida](#parametro-del-objeto-data-transporte-salida)
-entrega|No|Campos que identifican el local de entrega de las mercaderías. Ver detalle en tabla [data.transporte.entrega](#parametro-del-objeto-data-transporte-entrega)
-vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. Ver detalle en tabla [data.transporte.vehiculo](#parametro-del-objeto-data-transporte-vehiculo)
-transportista|No|Campos que identifican al transportista. Ver detalle en tabla [data.transporte.transportista](#parametro-del-objeto-data-transporte-transportista)
+salida|No|Campos que identifican el local de salida de las mercaderías. <br/>Obligatorio si tipoDocumento = 7.<br/> Ver detalle en tabla [data.transporte.salida](#parametro-del-objeto-data-transporte-salida)
+entrega|No|Campos que identifican el local de entrega de las mercaderías. <br/>Obligatorio si tipoDocumento = 7.<br/> Ver detalle en tabla [data.transporte.entrega](#parametro-del-objeto-data-transporte-entrega)
+vehiculo|No|Campos que identifican el vehículo de traslado de mercaderías. <br/>Obligatorio si tipoDocumento = 7.<br/> Ver detalle en tabla [data.transporte.vehiculo](#parametro-del-objeto-data-transporte-vehiculo)
+transportista|No|Campos que identifican al transportista. <br/>Obligatorio si tipoDocumento = 7.<br/> Ver detalle en tabla [data.transporte.transportista](#parametro-del-objeto-data-transporte-transportista)
 
 ### Parametro del objeto data.transporte.salida
 Parámetro | Requerido | Descripción
@@ -1776,9 +1776,9 @@ Parámetro | Requerido | Descripción
 **contribuyente**|**Si**|Naturaleza del transportista(true o false)<br/>**Campo XML:** E980
 **nombre**|**Si**|Nombre o razón social del transportista <br/>**Campo XML:** E982
 **ruc**|**Si**|RUC del transportista<br/>**Campo XML:** E983
-documentoTipo|No|Tipo de documento de identidad del transportista<br/>**Campo XML:** E985
-documentoNumero||Número de documento de identidad del transportista. Obligatorio si existe el campo documentoTipo<br/>**Campo XML:** E987
-direccion|No|Domicilio fiscal del transportista<br/>**Campo XML:** E992
+documentoTipo|No|Tipo de documento de identidad del transportista<br/>Obligatorio si contribuyente=false<br/><br/>Valores:<br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/><br/>**Campo XML:** E985
+documentoNumero|No|Número de documento de identidad del transportista. Obligatorio si existe el campo documentoTipo<br/>**Campo XML:** E987
+**direccion**|Si|Domicilio fiscal del transportista<br/>**Campo XML:** E992
 obs|No|Observacion del transportista
 pais|No|Código del pais de Origen del transportista
 paisDescripcion|No|Descripcion del pais Origen
