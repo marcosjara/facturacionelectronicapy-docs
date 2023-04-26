@@ -1807,24 +1807,20 @@ direccion|No|Dirección del agente<br/>**Campo XML:** E997
 ### Parametro del objeto data.complementarios
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-ordenCompra|No|Número de orden de compra<br/>**Campo XML:**G002
-ordenVenta|No|Número de orden de venta<br/>**Campo XML:**G003
-numeroAsiento|No|Número de asiento contable <br/>**Campo XML:**G004
+ordenCompra|No|Número de orden de compra<br/>**Campo XML:** G002
+ordenVenta|No|Número de orden de venta<br/>**Campo XML:** G003
+numeroAsiento|No|Número de asiento contable <br/>**Campo XML:** G004
 carga|No|Campos generales de la carga
 
 ### Parametro del objeto data.complementarios.carga
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-unidadMedidaVolumenTotal|No|Unidad de medida del total de volumen de la mercadería <br/>**Campo XML:**G051
-volumenTotal|No|Volumen total de la mercadería <br/>**Campo XML:**G053
-unidadMedidaPesoTotal|No|Unidad de medida del peso total de la mercadería<br/>**Campo XML:**G054
-pesoTotal|No|Peso total de la mercadería<br/>**Campo XML:**G056
-caracteristicaCarga|No|1 – Mercaderías con cadena de frío<br\>
-2 – Carga peligrosa <br\>
-3 – Otro de características similares (especificar)<br\>
-Obligatorio cuando lo exige la RG 41/14<br/>**Campo XML:**G057
-caracteristicaCargaDescripcion|No|Descripcion de la caracteristica de carga<br/>
-Solo especificar cuando caracteristicaCarga = 3<br/>**Campo XML:**G058
+unidadMedidaVolumenTotal|No|Unidad de medida del total de volumen de la mercadería <br/>**Campo XML:** G051
+volumenTotal|No|Volumen total de la mercadería <br/>**Campo XML:** G053
+unidadMedidaPesoTotal|No|Unidad de medida del peso total de la mercadería<br/>**Campo XML:** G054
+pesoTotal|No|Peso total de la mercadería<br/>**Campo XML:** G056
+caracteristicaCarga|No|1 – Mercaderías con cadena de frío<br/>2 – Carga peligrosa <br/>3 – Otro de características similares (especificar)<br/>Obligatorio cuando lo exige la RG 41/14<br/>**Campo XML:** G057
+caracteristicaCargaDescripcion|No|Descripcion de la caracteristica de carga<br/>Solo especificar cuando caracteristicaCarga = 3<br/>**Campo XML:** G058
 
 ### Parametro del objeto data.documentoAsociado
 Parámetro | Requerido | Descripción
