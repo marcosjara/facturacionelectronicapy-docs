@@ -1157,6 +1157,71 @@ Atributo | Tipo | Descripción
 --------- | --------- | -----------
 main | binary | Documento PDF en formato binary o base64
 
+## Reenviar correo de un DE
+> Para enviar un correo electrónico al receptor del DE, utilize la siguiente API:
+
+```shell
+# Re-envia el correo al receptor
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/de/email" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+    cdcList : [{
+        "cdc": "01800695631001001038720612021112917595714694"
+    }, {
+        "cdc": "01800695631001001000000612021312917595714695"
+    }, {
+        "cdc": "otro.."
+    }]
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+    cdcList : [{
+        "cdc": "01800695631001001038720612021112917595714694"
+    }, {
+        "cdc": "01800695631001001000000612021312917595714695"
+    }, {
+        "cdc": "otro.."
+    }]
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/de/email`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> El envio de email se ejecutará de forma asincrona
+
+Reenvia un correo electrónico al receptor. Utilice en aquellos casos donde el correo no llego al destinatario.
+
+No es posible cambiar la dirección de destino.
+
+Tenga en cuenta que al Crear el DE, y si el parámetro de envio de email está activo, ya se envía el correo a los destinatarios del DE, cuyas direcciones se especificand en data.cliente.
+
+Por lo general, el re-envio de email no es necesario, si su receptor no recibe su correo inmediatamente puede ser por el sistema de envio o servidor de correos o por que le pudo haber llegado en la carpeta SPAM.
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdcList** | **Si** | Array de códigos CDC de los cuales se desea enviar el email<br/><br/>
+
+### Respuesta
+Recibirá una respuesta true, inmediatamente luego de ejecutado esta API
 
 ## Parámetros de creación de un DE
 
