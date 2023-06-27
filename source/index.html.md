@@ -765,9 +765,22 @@ Todos los documentos electrónicos enviados con ésta peticion pueden ser visual
 
 ### Parámetros
 
-Los parámetros se envían en formato JSON y tienen la misma estructura que el de creación de 1 (un) sólo DE. 
+Los parámetros del Documento Electrónico se envían en formato JSON y tienen la misma estructura que el de creación de 1 (un) sólo DE. 
 
 Para detalles de la estructura completa de atributos JSON que puede ser enviado como parámetro consulte la sección [Parámetros del Objeto Principal](#parametros-de-creacion-de-un-de)
+
+También se pueden especificar algunos parametros de consulta junto con la URL:
+### Parámetros de Consulta (QueryParam)
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+draft | No | Especifique **true** para generar el documento electrónico en borrador. Un DE en borrador no se envia a la SET hasta que se cofnirma. Su valor por defecto es **false**.
+xml | No | Especifique **true** para obtener en el resultado el/los XML/s generado/s en la operación. Su valor por defecto es **false**.
+qr | No | Especifique **true** para obtener en el resultado el/los QR/s generado/s en la operación. Su valor por defecto es **false**.
+
+Por ejemplo, la petición puede ser realizado de ésta manera:
+POST http://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?draft=true&xml=true&qr=true.
+
+Para confirmar/descartar un borrador, vea la sección XYZ
 
 Tenga en cuenta que a diferencia del método anterior, aqui se recibe un array de objetos, por lo cual se debe empezar el JSON con corchetes [] aunque vaya a enviar 1 (un) sólo documento. El límite de objetos es hasta 50 documentos electrónicos por cada invocación.
 
@@ -2574,6 +2587,118 @@ Atributo | Tipo | Descripción
 --------- | --------- | -----------
 success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+
+
+
+
+# Lote en Borrador
+Un lote puede ser enviado como borrador a FacturaSend, indicando el parametro de consulta **draft=true**, al crear el Lote.
+
+Un lote en borrador no se envia a la SET hasta que se envie un comando de Confirmación. 
+
+Esta opción es muy util para simular el comportamiento completo de un envio de lote, como asi también el flujo que sigue dentro de su sistema, asi como también para poder visualizar el KUDE y estar seguro de sus datos, antes de enviar a la SET.
+
+Un lote en borrador puede ser CONFIRMADO o DESCARTADO, Si se Confirma, entonces se da la señal para que este lote se envie a la SET y si se Descarta nunca se envia ese Lote a la SET.
+
+## Confirmar un Lote en Borrador
+
+> Para confirmar un Lote en Borrador:
+
+```shell
+# Confirma un Lote que ha sido enviado anteriormente como un borrador.
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/lote/draft-confirm/<loteId>"  
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/lote/draft-confirm/<loteId>`, 
+  null, 
+  {headers}
+)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{
+  "success": true
+}
+```
+Este servicio confirma un lote que habia sido enviado originalmente como borrador a FacturaSend, procesandolo y enviandolo a la SET para su proceso.
+
+Debe tener en cuenta que un lote en borrador no puede ser confirmado despues de las 72hs. de su creación, por motivo de la Firma Digital.
+
+### Parámetros (QueryParam)
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**loteId** | **Si** | El Id del lote que desea confirmar
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | true si la confirmación se ejecutó con éxito, false si dio algún error
+error | string | El mensaje de error en caso de que haya retornado success=false.
+
+## Rechazar un Lote en Borrador
+
+> Para rechazar un Lote en Borrador:
+
+```shell
+# Rechazar un Lote que ha sido enviado anteriormente como un borrador.
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/lote/draft-reject/<loteId>"  
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/lote/draft-reject/<loteId>`, 
+  null, 
+  {headers}
+)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+Este servicio rechaza/descarta un lote que habia sido enviado originalmente como borrador a FacturaSend, no enviandolo finalmente a la SET y de esta forma dando por cerrado al envio de lote.
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**loteId** | **Si** | El Id del lote que desea confirmar
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | true si la consulta se ejecutó con éxito, false si dio algún error
+error | string | El mensaje de error en caso de que haya retornado success=false.
+
+
+
+
+
+
 
 # Otros servicios
 A continuación se presentan otros servicios que pueden ser invocados desde FacturaSend
