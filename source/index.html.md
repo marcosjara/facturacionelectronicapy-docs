@@ -36,7 +36,7 @@ Con **FacturaSend** podrás administrar varias empresas cada una de ellas para c
 
 1. Generación del documento XML segín el manual técnico de la SET.
 2. Firma del documento XML, utilizando el certificado digital de la Empresa contribuyente.
-3. Generación de la URL del Codigo QR dentro del documento XML.
+3. Generación de la URL del Código QR dentro del documento XML.
 4. Comunicación con la SET (Envío de documentos XML, generación de lotes de envio, consulta de documentos, etc.)
 5. Generacion del Documento KUDE (Archivo PDF de la Factura o Documento electronico, personalizado de acuerdo al Logo del Emisor).
 6. Envío de email del documento electrónico al contribuyente receptor.
@@ -1536,17 +1536,17 @@ nombreFantasia |No|Nombre de fantasia del cliente <br/>**Campo XML:** D212
 **tipoOperacion**|**Si**|Tipo de operación(1= B2B, 2= B2C, 3= B2G, 4= B2F)<br/>**Campo XML:** D202
 direccion |No|Direccion del Cliente, Campo obligatorio cuando tipoDocumento =7 o tipoOperacion=4 <br/>**Campo XML:** D213
 numeroCasa|No|Numero de Casa del Cliente, Campo obligatorio si se informa la direccion,Cuando es contribuyente debe corresponder a lo declarado en el RUC<br/>**Campo XML:** D218
-departamento|No| Codigo del departamento,Campo obligatorio si se informa la direccion y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:** D219 
-distrito|No|Codigo del distrito del Cliente, El codigo debe seguir la Tabla 2.1 – Distritos del Manual Tecnico. <br/>**Campo XML:** D221
-ciudad|No|Codigo de la ciudad del Cliente. Campo obligatorio si se informa la direccion y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:**D223
-**pais**|**Si**|Codigo del Pais del Cliente, Segun XSD de Codificación de Países<br/>**Campo XML:**D203
+departamento|No| Código del departamento,Campo obligatorio si se informa la dirección y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:** D219 
+distrito|No|Código del distrito del Cliente, El  código debe seguir la Tabla 2.1 – Distritos del Manual Tecnico. <br/>**Campo XML:** D221
+ciudad|No|Código de la ciudad del Cliente. Campo obligatorio si se informa la dirección y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:**D223
+**pais**|**Si**|Código del Pais del Cliente, Segun XSD de Codificación de Países<br/>**Campo XML:**D203
 tipoContribuyente|No|Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false<br/>**Campo XML:**D205
 documentoTipo|No|Tipo de documento del cliente, de acuerdo a <br/><br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/>5=Innominado<br/>6=Tarjeta Diplomática de exoneración fiscal<br/>9=Informar data.documentoTipoDescripcion<br/><br/>**Campo XML:**D208
 documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
 email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en eKuatia se incluirá sólo el primero<br/><br/>**Campo XML:**D216
-codigo|No|Codigo del Cliente<br/>**Campo XML:**D217
+codigo|No|Código del Cliente<br/>**Campo XML:**D217
 
 ### Parametro del objeto data.usuario
 Parámetro | Requerido | Descripción
@@ -1820,8 +1820,8 @@ distrito|No|Código del distrito del local de salida<br/>**Campo XML:** E927
 distritoDescripcion|No|Descripción de distrito del local de salida<br/>**Campo XML:** E927
 **ciudad**|**Si**|Código de la ciudad del local de salida<br/>**Campo XML:** E929
 **ciudadDescripcion**|**Si**|Descripción de ciudad del local de salida<br/>**Campo XML:** E930
-pais|No|Código de la ciudad del local de salida
-paisDescripcion|No|Código de la ciudad del local de salida
+pais|No|Código del país del local de salida
+paisDescripcion|No|Descripción del país del local de salida
 telefonoContacto|No|Teléfono de contacto del local de salida<br/>**Campo XML:** E931 
 
 
@@ -1845,7 +1845,7 @@ telefonoContacto|No|Teléfono de contacto del local de la entrega<br/>**Campo XM
 ### Parametro del objeto data.transporte.vehiculo
 Parámetro | Requerido | Descripción
 --------- | --------- | ----------- 
-**tipo**|**Si**|Tipo de vehículo. Ejemplo: Camioneta, Barcaza, Elicoptero, Debe ser acorde al tipo de transporte<br/><br/>**Campo XML:** E961
+**tipo**|**Si**|Tipo de vehículo. Ejemplo: Camioneta, Barcaza, Elicoptero.<br/><br/>Debe ser acorde al atributo **modalidad**(E903)<br/><br/>**Campo XML:** E961
 **marca**|**Si**|Marca<br/>**Campo XML:** E962
 **documentoTipo**|**Si**|Tipo de identificación del vehículo <br/>1=Número de identificación del vehículo<br/>2=Número de matrícula del vehículo<br/>**Campo XML:** E967
 documentoNumero|No|Número de identificación del vehículo. Debe informarse cuando el documentoTipo=1<br/>**Campo XML:** E963
@@ -1915,7 +1915,7 @@ numeroRetencion|No|Número de comprobante de retención <br/>**Campo XML:** H012
 resolucionCreditoFiscal|No|Número de resolución de crédito fiscal <br/>**Campo XML:** H013
 constanciaTipo|No|Tipo de constancia<br/>**Campo XML:** H014
 constanciaNumero|No|Numero de constancia<br/>**Campo XML:** H016
-constanciaControl|No|Codigo de Control de la constancia<br/>**Campo XML:** H017
+constanciaControl|No|Código de Control de la constancia<br/>**Campo XML:** H017
 
 ## Respuesta de creación de un DE
 > Ejemplo de respuesta de creación de un DE:
@@ -1959,7 +1959,7 @@ estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>A
 respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
 xml<br>(opcional) | string | El archivo **XML** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?xml=true 
-qr<br>(opcional) | string | El valor del codigo **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
+qr<br>(opcional) | string | El valor del  código **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
@@ -2163,13 +2163,13 @@ Si el Documento Electrónico es cancelado de forma satisfactoria se enviará un 
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**cdc** | **si** | El CDC del Documento Electrónico que desea cancelar<br/>
-**motivo** | **si** | El motivo por el cual desea cancelar el documento<br/>
+**cdc** | **Si** | El CDC del Documento Electrónico que desea cancelar<br/>
+**motivo** | **Si** | El motivo por el cual desea cancelar el documento<br/>
 
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 
@@ -2243,18 +2243,18 @@ Este servicio ejecuta la inutilizacion de uno o mas numeraciones teniendo en cue
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipoDocumento** | **si** | Numero entero que representa el Tipo de Documento Electronico del 1 al 7<br/>
-**establecimiento** | **si** | String conteniendo el valor del establecimiento que corresponde a la numeracion que desea inutilizar<br/>
-**punto** | **si** | String conteniendo el valor del punto que corresponde a la numeracion que desea inutilizar<br/>
-**desde** | **si** | Numero inicial a partir del cual se deben inutilizar la numeracion<br/>
-**hasta** | **si** | Numero final a partir de la cual se deben inutilizar la numeracion<br/>
-serie | no | Numero de serie del rango de números que se desean inutilizar<br/>
-**motivo** | **si** | El motivo por el cual desea inutilizar el rango de numeraciones<br/>
+**tipoDocumento** | **Si** | Numero entero que representa el Tipo de Documento Electronico del 1 al 7<br/>
+**establecimiento** | **Si** | String conteniendo el valor del establecimiento que corresponde a la numeracion que desea inutilizar<br/>
+**punto** | **Si** | String conteniendo el valor del punto que corresponde a la numeracion que desea inutilizar<br/>
+**desde** | **Si** | Numero inicial a partir del cual se deben inutilizar la numeracion<br/>
+**hasta** | **Si** | Numero final a partir de la cual se deben inutilizar la numeracion<br/>
+serie |No| Numero de serie del rango de números que se desean inutilizar<br/>
+**motivo** | **Si** | El motivo por el cual desea inutilizar el rango de numeraciones<br/>
 
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **True** si todo ocurrio bien y se inutilizaron las numeraciones del Timbrado, **False** si ocurrio algun error
+success | boolean | **true** si todo ocurrio bien y se inutilizaron las numeraciones del Timbrado, **false** si ocurrio algun error
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Conformidad
@@ -2321,14 +2321,14 @@ Con este evento se informa a la SET que el receptor se encuentra conforme total 
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
-**tipoConformidad** | **si** | Valor numerico que indica si esta 1=Totalmente conforme o 2=Parcialmente conforme<br/>
-**fechaRecepcion** | **si** | Indica la fecha que ha recibido el documento electronico<br/>
+**cdc** | **Si** | El CDC del Documento Electrónico que desea informar<br/>
+**tipoConformidad** | **Si** | Valor numerico que indica si esta 1=Totalmente conforme o 2=Parcialmente conforme<br/>
+**fechaRecepcion** | **Si** | Indica la fecha que ha recibido el documento electronico<br/>
 
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Disconformidad
@@ -2393,13 +2393,13 @@ Con este servicio usted deja constancia en la SET que el documento electronico t
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
-**motivo** | **si** | El motivo por el cual esta disconforme con el documento<br/>
+**cdc** | **Si** | El CDC del Documento Electrónico que desea informar<br/>
+**motivo** | **Si** | El motivo por el cual esta disconforme con el documento<br/>
 
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Desconocimiento
@@ -2478,23 +2478,23 @@ Este servicio informa a la SET que usted desconoce un determinado documento elec
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
-**fechaEmision** | **si** | Fecha de emision del Documento Electronico
-**fechaRecepcion** | **si** | Fecha de recepcion del documento electronico
-**tipoReceptor** | **si** | Tipo de Receptor
-**nombre** | **si** | Nombre del Receptor
-**ruc** | **si** | RUC del Receptor con el digito verificador
-**documentoTipo** | **si** | Tipo de Documento
-**documentoNumero** | **si** | Numero de documento
-**motivo** | **si** | El motivo por el cual desea cancelar el documento<br/>
+**cdc** | **Si** | El CDC del Documento Electrónico que desea informar<br/>
+**fechaEmision** | **Si** | Fecha de emision del Documento Electronico
+**fechaRecepcion** | **Si** | Fecha de recepcion del documento electronico
+**tipoReceptor** | **Si** | Tipo de Receptor
+**nombre** | **Si** | Nombre del Receptor
+**ruc** | **Si** | RUC del Receptor con el digito verificador
+**documentoTipo** | **Si** | Tipo de Documento
+**documentoNumero** | **Si** | Numero de documento
+**motivo** | **Si** | El motivo por el cual desea cancelar el documento<br/>
 
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
-## Evento de Notificacion
+## Evento de Notificación
 Evento destinado para informar a la SET que conoce dicho documento, sin embargo, aún no tiene condiciones para manifestarse de forma conclusiva (con Conformidad, Disconformidad o Desconocimiento). 
 
 Es un evento opcional.
@@ -2572,23 +2572,152 @@ Este servicio informa a la SET que usted desconoce un determinado documento elec
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**cdc** | **si** | El CDC del Documento Electrónico que desea informar<br/>
-**fechaEmision** | **si** | Fecha de emision del Documento Electronico
-**fechaRecepcion** | **si** | Fecha de recepcion del documento electronico
-**tipoReceptor** | **si** | Tipo de Receptor
-**nombre** | **si** | Nombre del Receptor
-**ruc** | **si** | RUC del Receptor con el digito verificador
-**documentoTipo** | **si** | Tipo de Documento
-**documentoNumero** | **si** | Numero de documento
-**totalPYG** | **si** | Monto total del documento en GS<br/>
+**cdc** | **Si** | El CDC del Documento Electrónico que desea informar<br/>
+**fechaEmision** | **Si** | Fecha de emision del Documento Electronico
+**fechaRecepcion** | **Si** | Fecha de recepcion del documento electronico
+**tipoReceptor** | **Si** | Tipo de Receptor
+**nombre** | **Si** | Nombre del Receptor
+**ruc** | **Si** | RUC del Receptor con el digito verificador
+**documentoTipo** | **Si** | Tipo de Documento
+**documentoNumero** | **Si** | Numero de documento
+**totalPYG** | **Si** | Monto total del documento en GS<br/>
 
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **True** si todo ocurrio bien y se canceló el Documento Electrónico, **False** si ocurrio algun error
+success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
+## Evento de Nominación
+Evento destinado para informar a la SET el receptor de una factura, cuando la factura originalmente fue hecha a un innominado. 
 
+Es un evento que depende de la necesidad del emisor, a menudo cuando necesita realizar una nota de crédito sobre una factura que originalmente se generó a un innominado.
+
+```shell
+# Invoca el evento de nominación
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/evento/nominacion" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  --data-raw '{
+        "cdc": `01800695631001002100700812022063013102931279`,  // DTE
+        "motivo": `Se asignar el receptor correcto del DTE`,
+        "contribuyente" : true,
+        "ruc" : "2005001-1",
+        "razonSocial" : "Marcos Adrian Jara Rodriguez",
+        "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
+        "tipoOperacion" : 1,
+        "direccion" : "Avda Calle Segunda y Proyectada",
+        "numeroCasa" : "1515",
+        "departamento" : 11,
+        "departamentoDescripcion" : "ALTO PARANA",
+        "distrito" : 143,
+        "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
+        "ciudad" : 3344,
+        "ciudadDescripcion" : "PASO ITA (INDIGENA)",
+        "pais" : "PRY",
+        "paisDescripcion" : "Paraguay",
+        "tipoContribuyente" : 1,
+        "telefono" : "061874874",
+        "celular" : "595976254125",
+        "email" : "cliente@cliente.com",
+        "codigo" : "1548"
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+  "cdc": `01800695631001002100700812022063013102931279`,  // DTE
+  "motivo": `Se asignar el receptor correcto del DTE`,
+  "contribuyente" : true,
+  "ruc" : "2005001-1",
+  "razonSocial" : "Marcos Adrian Jara Rodriguez",
+  "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
+  "tipoOperacion" : 1,
+  "direccion" : "Avda Calle Segunda y Proyectada",
+  "numeroCasa" : "1515",
+  "departamento" : 11,
+  "departamentoDescripcion" : "ALTO PARANA",
+  "distrito" : 143,
+  "distritoDescripcion" : "DOMINGO MARTINEZ DE IRALA",
+  "ciudad" : 3344,
+  "ciudadDescripcion" : "PASO ITA (INDIGENA)",
+  "pais" : "PRY",
+  "paisDescripcion" : "Paraguay",
+  "tipoContribuyente" : 1,
+  "telefono" : "061874874",
+  "celular" : "595976254125",
+  "email" : "cliente@cliente.com",
+  "codigo" : "1548"
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/evento/nominacion`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+				"ns2:dEstRes" : "Aprobado",
+				"ns2:gResProc" : {
+          "ns2:dCodRes" : "",
+					"ns2:dMsgRes" : ""
+        }
+      }
+    }
+			
+  }
+}
+```
+Tenga en cuenta los parametros para enviar el evento. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **Si** | El CDC del Documento Electrónico que desea nominar. Debe existir en Facturasend<br/>
+**motivo** | **Si** | El motivo del evento de nominación
+**contribuyente** | **Si** | Campo booleano que indica si el nominado es o no un contribuyente
+ruc |No| RUC del Receptor con el digito verificador. Obligatorio si el nominado es un contribuyente.
+**razonSocial** | **Si** | Nombre o Razón Social del Receptor
+nombreFantasia |No| Nombre de Fantasía del Receptor
+**tipoOperacion** | **Si** | Tipo de Operación del Receptor, siendo: 1-B2B, 2-B2C, 4-B2F
+direccion |No| Dirección del Receptor. Obligatorio si tipoOperacion=4
+numeroCasa |No| Número de Casa del Receptor. Obligatorio si se pasa la dirección. Cuando es contribuyente debe corresponder a lo declarado en el RUC
+departamento|No| Código del departamento,Campo obligatorio si se informa la dirección y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.
+distrito|No|Código del distrito del Cliente, El  código debe seguir la Tabla 2.1 – Distritos del Manual Tecnico.
+ciudad|No|Código de la ciudad del Cliente. Campo obligatorio si se informa la dirección y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.
+**pais**|**Si**|Código del Pais del Cliente, Segun XSD de Codificación de Países
+tipoContribuyente |No| Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false
+documentoTipo |No| Tipo de documento del cliente, de acuerdo a <br/><br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/>5=Tarjeta Diplomática de exoneración fiscal<br/>9=Otro (informar data.documentoTipoDescripcion). Obligatorio si data.contribuyente = false
+documentoNumero |No| Número de documento de identidad. Obligatorio si data.contribuyente = false
+telefono |No| Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY
+celular | No | Numero de celular del cliente
+email |No| Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en eKuatia se incluirá sólo el primero
+codigo |No| Código del Cliente
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **true** si todo ocurrio bien y se nominó el Documento Electrónico, **false** si ocurrio algun error
+result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 
 
