@@ -2243,12 +2243,12 @@ Este servicio ejecuta la inutilizacion de uno o mas numeraciones teniendo en cue
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**tipoDocumento** | **Si** | Numero entero que representa el Tipo de Documento Electronico del 1 al 7<br/>
-**establecimiento** | **Si** | String conteniendo el valor del establecimiento que corresponde a la numeracion que desea inutilizar<br/>
-**punto** | **Si** | String conteniendo el valor del punto que corresponde a la numeracion que desea inutilizar<br/>
-**desde** | **Si** | Numero inicial a partir del cual se deben inutilizar la numeracion<br/>
-**hasta** | **Si** | Numero final a partir de la cual se deben inutilizar la numeracion<br/>
-serie |No| Numero de serie del rango de números que se desean inutilizar<br/>
+**tipoDocumento** | **Si** | Número entero que representa el Tipo de Documento Electronico del 1 al 7<br/>
+**establecimiento** | **Si** | String conteniendo el valor del establecimiento que corresponde a la numeración que desea inutilizar<br/>
+**punto** | **Si** | String conteniendo el valor del punto que corresponde a la numeración que desea inutilizar<br/>
+**desde** | **Si** | Número inicial a partir del cual se deben inutilizar la numeración<br/>
+**hasta** | **Si** | Número final hasta el cual se deben inutilizar la numeración<br/>
+serie |No| Valor de la Serie del rango de números que se desean inutilizar<br/>
 **motivo** | **Si** | El motivo por el cual desea inutilizar el rango de numeraciones<br/>
 
 ### Respuesta
