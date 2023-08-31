@@ -1546,7 +1546,7 @@ documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyent
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
 email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en eKuatia se incluirá sólo el primero<br/><br/>**Campo XML:**D216
-codigo|No|Código del Cliente<br/>**Campo XML:**D217
+**codigo**|**Si**|Código del Cliente. Obligatorio para FacturaSend<br/>**Campo XML:**D217
 
 ### Parametro del objeto data.usuario
 Parámetro | Requerido | Descripción
@@ -2711,7 +2711,7 @@ documentoNumero |No| Número de documento de identidad. Obligatorio si data.cont
 telefono |No| Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY
 celular | No | Numero de celular del cliente
 email |No| Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en eKuatia se incluirá sólo el primero
-codigo |No| Código del Cliente
+**codigo**|**Si**| Código del Cliente, obligatorio para FacturaSend
 
 ### Respuesta
 Atributo | Tipo | Descripción
