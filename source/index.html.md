@@ -940,7 +940,7 @@ curl \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
   -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
-    cdcList : [{
+    "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
         "cdc": "01800695631001001000000612021312917595714694"
@@ -959,7 +959,7 @@ const headers = {
 };
 
 const data = {
-    cdcList : [{
+    "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
         "cdc": "01800695631001001000000612021312917595714694"
@@ -1103,8 +1103,9 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/de/pdf" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
-    cdcList : [{
+    "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
         "cdc": "01800695631001001000000612021312917595714695"
@@ -1125,7 +1126,7 @@ const headers = {
 };
 
 const data = {
-    cdcList : [{
+    "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
         "cdc": "01800695631001001000000612021312917595714695"
@@ -1179,8 +1180,9 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/de/email" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
-    cdcList : [{
+    "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
         "cdc": "01800695631001001000000612021312917595714695"
@@ -1199,7 +1201,7 @@ const headers = {
 };
 
 const data = {
-    cdcList : [{
+    "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
         "cdc": "01800695631001001000000612021312917595714695"
@@ -2106,6 +2108,7 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/cancelacion" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
     "cdc": "01800695631001001038720612021112917595714694",
     "motivo": "Se digito erroneamente la dirección del cliente"
@@ -2182,6 +2185,7 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/inutilizacion" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
         tipoDocumento: 1,
         establecimiento: `001`,
@@ -2266,6 +2270,7 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/conformidad" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
     "cdc": "01800695631001001000000812021112910953738413",
     "tipoConformidad" : 1, //1-Parcial o 2-Total,
@@ -2340,6 +2345,7 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/disconformidad" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
     "cdc": "01800695631001001038720612021112917595714694",
     "motivo": "Se genero erroneamente este documento a nuestro nombre"
@@ -2411,6 +2417,7 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/desconocimiento" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
       "cdc": "01800695631001003000013712022010619364760029",    //DE o DTE
       "fechaEmision" : "2020-01-31T00:01:01",    //Fecha pasada
@@ -2505,6 +2512,7 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/notificacion" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
       "cdc": "01800695631001003000013712022010619364760029",    //DE o DTE
       "fechaEmision" : "2020-01-31T00:01:01",    //Fecha pasada
@@ -2599,6 +2607,7 @@ curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/nominacion" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
         "cdc": `01800695631001002100700812022063013102931279`,  // DTE
         "motivo": `Se asignar el receptor correcto del DTE`,
