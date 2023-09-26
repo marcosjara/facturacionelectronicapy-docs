@@ -2244,6 +2244,8 @@ axios.post({
 ```
 Este servicio ejecuta la inutilizacion de uno o mas numeraciones teniendo en cuenta el parametro desde y hasta incluyendo los valores limites especificados. 
 
+No es necesario específicar el timbrado, pues esta información es extraida de Datos fiscales, de la Consola de Facturasend.
+
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
