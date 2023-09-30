@@ -1903,6 +1903,8 @@ caracteristicaCarga|No|1 – Mercaderías con cadena de frío<br/>2 – Carga pe
 caracteristicaCargaDescripcion|No|Descripcion de la caracteristica de carga<br/>Solo especificar cuando caracteristicaCarga = 3<br/>**Campo XML:** G058
 
 ### Parametro del objeto data.documentoAsociado
+Objeto ({}) o Array de objetos [{}] que relacionan los documentos asociados al DE.
+
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **formato**|**Si**|Tipo de documento asociado<br/>1= Electrónico<br/>2= Impreso<br/>3= Constancia Electrónica <br/>**Campo XML:** H002
