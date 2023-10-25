@@ -780,7 +780,7 @@ qr | No | Especifique **true** para obtener en el resultado el/los QR/s generado
 Por ejemplo, la petición puede ser realizado de ésta manera:
 POST http://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?draft=true&xml=true&qr=true.
 
-Para confirmar/descartar un borrador, vea la sección XYZ
+Vea las secciones correspondientes para [Confirmar](#confirmar-un-lote-en-borrador) o [Rechazar](#rechazar-un-lote-en-borrador) un borrador.
 
 Tenga en cuenta que a diferencia del método anterior, aqui se recibe un array de objetos, por lo cual se debe empezar el JSON con corchetes [] aunque vaya a enviar 1 (un) sólo documento. El límite de objetos es hasta 50 documentos electrónicos por cada invocación.
 
@@ -1524,7 +1524,7 @@ transporte|No|Conjunto de información relacionada a los datos datos de transpor
 documentoAsociado|No|Conjunto de información relacionada a los datos documentos asociados del Documento electrónico. <br/>Ver detalle en tabla [data.documentoAsociado](#parametro-del-objeto-data-documentoasociado).<br/>
 descuentoGlobal|No|Descuento global de la Operación<br/>**Campo XML:** Relacionado a EA004
 anticipoGlobal|No|Anticipo global de la Operación<br/>**Campo XML:** Relacionado a EA007
-extras|No|Objeto de datos extras del Documento Electronico en formato **key=value** que puede ser enviado de forma adicional para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"pedidoCliente" : "2123-1", <br/>&nbsp;&nbsp;"numeroPresupuesto": "P/001", <br/>&nbsp;&nbsp;"posTicketId" : 39271<br/>}<br/><br/>Solo se acepta un nivel de JSON y en formato clave valor (no enviar el valor como otro sub JSON)<br/>
+extras|No|Objeto de datos extras del Documento Electronico en formato **key=value** que puede ser enviado de forma adicional para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"pedidoCliente" : "2123-1", <br/>&nbsp;&nbsp;"numeroPresupuesto": "P/001", <br/>&nbsp;&nbsp;"posTicketId" : 39271<br/>}<br/><br/>Solo se acepta un nivel de JSON y en formato clave valor (no enviar el valor como otro sub JSON)<br/><br/>Keys reservadas para uso del FS:<br/>"currentCopy" y "exportacion".<br/>
 format|No|Indica la configuración del formato de impresión (Factura, Ticket o Personalizado) con el cual se guardará el Documento Electrónico, y el cual será su valor por defecto. Si no se pasa éste atributo, se asumirá el configurado en el establecimiento a travez de la consola.<br/><br/>Al enviar un DE por correo o imprimir un ticket se utilizará ésta opción guardada. <br/><br/>También podrá, posteriormente, indicar explicitamente el formato que desea al momento de obtener el PDF del KUDE<br/><br/>Posibles Valores:<br/>**ticket**=Especifica que el KUDE del DE quedará guardado en modo Ticket<br/>**custom**=Especifica que el KUDE del DE quedará guardado con el formato personalizado. (Sólo vàlido para tipoDocumento=1) <br/><br/>Para emitir en formato normal ignore ésta opción<br/>
 
 ### Parametro del objeto data.cliente
