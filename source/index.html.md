@@ -181,7 +181,7 @@ A continuación se detallan los servicios que pueden ser realizados desde Factur
 ```shell
 curl \  
   -X \
-  POST "http://api.facturasend.com.py/<tenantId>/de/create" \
+  POST "https://api.facturasend.com.py/<tenantId>/de/create" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
   -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
@@ -460,7 +460,7 @@ El servicio sincrono sólo está disponible en ambiente TEST de eKuatia, no así
 
 ### Petición HTTP
 
-`POST http://api.facturasend.com.py/<tenantId>/de/create`
+`POST https://api.facturasend.com.py/<tenantId>/de/create`
 
 ### Parámetros
 
@@ -486,7 +486,7 @@ FacturaSend realizará las validaciones de los valores de los atributos, conform
 ```shell
 curl \
   -X \
-  POST "http://api.facturasend.com.py/<tenantId>/lote/create" \
+  POST "https://api.facturasend.com.py/<tenantId>/lote/create" \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
   -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '[{
@@ -746,7 +746,7 @@ Todos los documentos electrónicos enviados con ésta peticion pueden ser visual
 
 ### Petición HTTP
 
-`POST http://api.facturasend.com.py/<tenantId>/lote/create`
+`POST https://api.facturasend.com.py/<tenantId>/lote/create`
 
 > El comando de arriba, retornará lo siguiente:
 
@@ -778,7 +778,7 @@ xml | No | Especifique **true** para obtener en el resultado el/los XML/s genera
 qr | No | Especifique **true** para obtener en el resultado el/los QR/s generado/s en la operación. Su valor por defecto es **false**.
 
 Por ejemplo, la petición puede ser realizado de ésta manera:
-POST http://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?draft=true&xml=true&qr=true.
+POST https://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?draft=true&xml=true&qr=true.
 
 Vea las secciones correspondientes para [Confirmar](#confirmar-un-lote-en-borrador) o [Rechazar](#rechazar-un-lote-en-borrador) un borrador.
 
@@ -1962,8 +1962,8 @@ numero | string | Número de Documento Electrónico generado en formato 001-001-
 estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
 respuesta_codigo | string | Código de la Respuesta de la SET
 respuesta_mensaje | string | Mensaje de Respuesta de la SET
-xml<br>(opcional) | string | El archivo **XML** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?xml=true 
-qr<br>(opcional) | string | El valor del  código **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>http://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
+xml<br>(opcional) | string | El archivo **XML** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?xml=true 
+qr<br>(opcional) | string | El valor del  código **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
