@@ -3023,6 +3023,132 @@ axios.post({
 ```
 Puede utilizar este servicio para mantener actualizado los datos de los distritos en su Sistema. 
 
+## Consultar parametros del Contribuyente
+
+Devuelve los parámetros del Emisor de Facturasend utilizados en la generación de un documento electrónico.
+
+```shell
+# Obtiene versión de las librerías del proyecto
+curl \
+  GET "https://api.facturasend.com.py/<tenantId>/system/backend/params \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" 
+
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/system/backend/params`,
+  method: 'GET',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{
+    "success": true,
+    "result": {
+        "params": {
+            "ruc": "80089025-3",
+            "razonSocial": "RAZON SOCIAL S. A.",
+            "nombreFantasia": "NOMBRE FANTASIA DEL EMISOR",
+            "timbradoNumero": "78936783",
+            "timbradoFecha": "2023-10-26T03:00:00.000Z",
+            "tipoContribuyente": 2,
+            "tipoRegimen": 8,
+            "establecimientos": [
+                {
+                    "codigo": "001",
+                    "direccion": "Avda. San Blas c/Rogelio Benitez",
+                    "numeroCasa": "0",
+                    "departamento": 11,
+                    "departamentoDescripcion": "ALTO PARANA",
+                    "distrito": 145,
+                    "distritoDescripcion": "CIUDAD DEL ESTE",
+                    "ciudad": 3383,
+                    "ciudadDescripcion": "CIUDAD DEL ESTE",
+                    "telefono": "0976927315",
+                    "email": "ejemplo@empresa.com",
+                    "denominacion": "Sucursal 1"
+                }
+            ],
+            "actividadesEconomicas": [
+                {
+                    "codigo": "96031",
+                    "descripcion": "ACTIVIDAD ECONOMICA DE LA EMPRESA"
+                }
+            ],
+            "version": 150
+        },
+        "configSetApi": {
+            "errorLimit": 3,
+            "decimals": 2,
+            "taxDecimals": 2,
+            "pygDecimals": 0,
+            "pygTaxDecimals": 2,
+            "redondeoSedeco": false,
+            "test": false
+        }
+    }
+}
+```
+
+
+## Obtener versión de las Dependencias.
+
+Servicio que recupera la información de las dependencias y librerías del proyecto backend, útil para saber qué versión específicamente se utilizan para validar, generar, firmar, firmar y enviar a la SET el Documento.
+
+```shell
+# Obtiene versión de las librerías del proyecto
+curl \
+  GET "https://api.facturasend.com.py/system/backend/info
+
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/system/backend/info`,
+  method: 'GET',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá algo similar a lo siguiente (las versiones pueden variar):
+
+```json
+{
+    "success": true,
+    "dependencies": {
+        "facturacionelectronicapy-qrgen": "^1.0.7",
+        "facturacionelectronicapy-recibo-xmlgen": "^1.0.9",
+        "facturacionelectronicapy-setapi": "^1.0.28",
+        "facturacionelectronicapy-xmlgen": "^1.0.228",
+        "facturacionelectronicapy-xmlsign": "^1.0.12"
+    }
+}
+```
+Puede utilizar este servicio para comparar con otras versiones de facturasend o para comparar con la versión offline 
+
 # Glosario
 
 Parameter | Description
