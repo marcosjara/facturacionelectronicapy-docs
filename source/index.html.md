@@ -501,6 +501,7 @@ curl \
   "tipoTransaccion" : 1,
   "tipoImpuesto" : 1,
   "moneda" : "PYG",
+  "obligaciones" : [{"codigo": "700"}, {"codigo": "113"}],
   "cliente" : {
       "contribuyente" : true,
       "ruc" : "2005001-1",
@@ -1509,6 +1510,7 @@ tipoTransaccion|No|Tipo de Transacción. <br/>Valores: <br/>1=Venta de mercader�
 moneda|No|Código de la moneda de la operación de acuerdo con la norma [ISO 4217](https://www.currency-iso.org/en/home/tables/table-a1.html). Si no se pasa asume el valor por defecto "PYG"<br/><br/>**Campo XML:**  D015.
 condicionAnticipo|No|Condición del Anticipo.<br/>Valores:<br/>1=Anticipo Global. <br/>2=Anticipo por ítem.<br/>No es obligatorio informar. <br/><br/>**Campo XML:** D019.
 condicionTipoCambio|No|Condición del tipo de cambio. <br/>Valores: <br/>1=Global (un solo tipo de cambio para todo el DE). <br/>2=Por ítem (tipo de cambio distinto por ítem). <br/>Obligatorio si moneda ≠ PYG, <br/>Si la moneda es PYG no enviar éste atributo o enviar con el valor null. <br/><br/>**Campo XML:** D017.
+obligaciones|No|Obligaciones afectadas. <br/>Debe ser enviado como un array de objetos. Ver detalle en tabla [data.obligaciones](#parametro-del-objeto-data-obligaciones) <br/><br/>**Campo XML:** D030 - NT18.
 cambio|No|Valor del cambio de la moneda de la operación en la cotización del día. <br/>Ej.: 6500.00 si la moneda es USD. <br/>Si la moneda es PYG no enviar éste campo o enviar null <br/><br/>**Campo XML:** D018
 cdc|No|Código CDC de 44 dígitos que desea utilizarse para el DE. <br/><br/>En ocasiones puede ser necesario re-utilizar el mismo CDC de un DE que ha sido rechazado anteriormente, por ejemplo si el Documento KUDE ya ha sido entregado al Cliente, corrigiendo el error y volviendo a intentar la aprobación con el mismo CDC.
 **cliente**|**Si**|Datos del Receptor del Documento Electrónico. <br/>Ver detalle en tabla [data.cliente](#parametro-del-objeto-data-cliente).<br/>
@@ -1558,6 +1560,13 @@ Parámetro | Requerido | Descripción
 **nombre**|**Si**|Nombre o razón social del responsable de la generación del DE<br/>**Campo XML:**D144
 **cargo**|**Si**|Cargo del responsable de la generación del DE<br/>**Campo XML:**D145
 **email**|No|Email del responsable de la generación del DE (Esta información no se envía a la SET)<br/><br/>Si se pasa un email válido, también se notifican a éste correo los mensajes de FacturaSend.<br/>
+
+### Parametro del objeto data.obligaciones
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**codigo** |**Si**|Código de la Obligación afectada. Valores: <br/> <b>113</b>-IMPUESTO A LA RENTA IRACIS - REGÍMENES ESPECIALES<br/><b>143</b>-TRIBUTO UNICO MAQUILA<br/><b>211</b>-IMPUESTO AL VALOR AGREGADO - GRAVADAS Y EXONERADAS – EXPORTADORES<br/><b>311</b>-IMPUESTO SELECTIVO AL CONSUMO – GENERAL<br/><b>321</b>-IMPUESTO SELECTIVO AL CONSUMO COMBUSTIBLES<br/><b>700</b>-IMPUESTO A LA RENTA EMPRESARIAL - RÉGIMEN GENERAL<br/><b>701</b>-IMPUESTO A LA RENTA EMPRESARIAL – SIMPLE<br/><b>703</b>-IMPUESTO DE ZONA FRANCA<br/><b>702</b>-IMPUESTO A LA RENTA EMPRESARIAL – RESIMPLE<br/><b>715</b>-IMPUESTO A LA RENTA PERSONAL - SERVICIOS PERSONALES<br/><b>716</b>-IMPUESTO A LA RENTA PERSONAL - RENTAS Y GANANCIAS DE CAPITAL<br/><br/>**Campo XML:** D031
+descripcion|No|Descripción de la Obligación. No es necesario pasar <br/>**Campo XML:** D032
 
 ### Parametro del objeto data.factura
 
