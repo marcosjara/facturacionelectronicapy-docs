@@ -1545,7 +1545,7 @@ distrito|No|Código del distrito del Cliente, El  código debe seguir la Tabla 2
 ciudad|No|Código de la ciudad del Cliente. Campo obligatorio si se informa la dirección y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:**D223
 **pais**|**Si**|Código del Pais del Cliente, Segun XSD de Codificación de Países<br/>**Campo XML:**D203
 tipoContribuyente|No|Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false<br/>**Campo XML:**D205
-documentoTipo|No|Tipo de documento del cliente, de acuerdo a <br/><br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/>5=Innominado<br/>6=Tarjeta Diplomática de exoneración fiscal<br/>9=Informar data.documentoTipoDescripcion<br/><br/>**Campo XML:**D208
+documentoTipo|No|Tipo de documento del cliente, de acuerdo a <br/><br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/>5=Innominado<br/>6=Tarjeta Diplomática de exoneración fiscal<br/>9=Informar data.cliente.documentoTipoDescripcion<br/><br/>**Campo XML:**D208
 documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyente = false y tipoOperacion ≠ 4.<br/>En caso de DE innominado, completar con 0 (cero)<br/>**Campo XML:**D210
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
@@ -1555,7 +1555,8 @@ email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo
 ### Parametro del objeto data.usuario
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-**documentoTipo**|**Si**|Tipo de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D141
+**documentoTipo**|**Si**|Tipo de documento de identidad del responsable de la generación del DE<br/><br/>Valores:<br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/>9=Otro<br/><br/>**Campo XML:**D141
+documentoTipoDescripcion|No|Descripción del Tipo de documento de identidad del responsable de la generación del DE<br/>Solo es necesario cuando documentoTipo=9<br/>**Campo XML:**D141
 **documentoNumero**|**Si**|Número de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D143
 **nombre**|**Si**|Nombre o razón social del responsable de la generación del DE<br/>**Campo XML:**D144
 **cargo**|**Si**|Cargo del responsable de la generación del DE<br/>**Campo XML:**D145
