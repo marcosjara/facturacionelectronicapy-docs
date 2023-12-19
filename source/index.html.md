@@ -1251,7 +1251,7 @@ Recibirá una respuesta true, inmediatamente luego de ejecutado esta API
   "numero" : 4, 
   "descripcion" : "Aparece en el documento",
   "observacion" : "Cualquier informacion de marketing, publicidad, promociones, sorteos, etc. para el receptor",
-  "fecha" : "2021-10-19T10:11:00",
+  "fecha" : "2023-11-19T10:11:00",
   "tipoEmision" : 1,
   "tipoTransaccion" : 1,
   "tipoImpuesto" : 1,
@@ -1285,16 +1285,16 @@ Recibirá una respuesta true, inmediatamente luego de ejecutado esta API
       "nombre" : "Marcos Jara",
       "cargo" : "Vendedor"
   },
+  "dncp" : {
+    "modalidad" : "AB",
+    "entidad" : 1,
+    "año" : 24,
+    "secuencia" : 3377826,
+    "fecha" : "2023-10-14"
+  },
   "factura" : {
       "presencia" : 1,    
-      "fechaEnvio" : null,
-      "dncp" : {
-          "modalidad" : "ABC",
-          "entidad" : 1,
-          "año" : 2021,
-          "secuencia" : 3377,
-          "fecha" : "2020-10-14T10:11:00"
-      }
+      "fechaEnvio" : null
   },
   "condicion" : {
       "tipo" : 1,
@@ -1550,6 +1550,7 @@ documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyent
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
 email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en eKuatia se incluirá sólo el primero<br/><br/>**Campo XML:**D216
+dncp|No|Campos de informaciones de Compras Públicas.<br/><br/>Obligatorio si tipoOperacion=3<br/><br/>Ver detalle en tabla [data.dncp](#parametro-del-objeto-data-dncp)
 **codigo**|**Si**|Código del Cliente. Obligatorio para FacturaSend<br/>**Campo XML:**D217
 
 ### Parametro del objeto data.usuario
@@ -1569,15 +1570,7 @@ Parámetro | Requerido | Descripción
 **codigo** |**Si**|Código de la Obligación afectada. Valores: <br/> <b>113</b>-IMPUESTO A LA RENTA IRACIS - REGÍMENES ESPECIALES<br/><b>143</b>-TRIBUTO UNICO MAQUILA<br/><b>211</b>-IMPUESTO AL VALOR AGREGADO - GRAVADAS Y EXONERADAS – EXPORTADORES<br/><b>311</b>-IMPUESTO SELECTIVO AL CONSUMO – GENERAL<br/><b>321</b>-IMPUESTO SELECTIVO AL CONSUMO COMBUSTIBLES<br/><b>700</b>-IMPUESTO A LA RENTA EMPRESARIAL - RÉGIMEN GENERAL<br/><b>701</b>-IMPUESTO A LA RENTA EMPRESARIAL – SIMPLE<br/><b>703</b>-IMPUESTO DE ZONA FRANCA<br/><b>702</b>-IMPUESTO A LA RENTA EMPRESARIAL – RESIMPLE<br/><b>715</b>-IMPUESTO A LA RENTA PERSONAL - SERVICIOS PERSONALES<br/><b>716</b>-IMPUESTO A LA RENTA PERSONAL - RENTAS Y GANANCIAS DE CAPITAL<br/><br/>**Campo XML:** D031
 descripcion|No|Descripción de la Obligación. No es necesario pasar <br/>**Campo XML:** D032
 
-### Parametro del objeto data.factura
-
-Parámetro | Requerido | Descripción
---------- | --------- | -----------
-presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:** E011
-fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:** E013
-dncp|No|Campos de informaciones de Compras Públicas.Ver detalle en tabla [data.factura.dncp]
-
-### Parametro del objeto data.factura.dncp
+### Parametro del objeto data.dncp
 
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
@@ -1586,6 +1579,13 @@ Parámetro | Requerido | Descripción
 **año**|**Si**|Año - Código emitido por la DNCP<br/>**Campo XML:** E023
 **secuencia**|**Si**|Secuencia - emitido por la DNCP <br/>**Campo XML:** E024
 **fecha**|**Si**|Fecha de emisión del código de contratación por la DNCP<br/>**Campo XML:** E025
+
+### Parametro del objeto data.factura
+
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+presencia|Si|Indicador de presencia<br/>1= Operación presencial<br/>2= Operación electrónica<br/>3= Operación telemarketing<br/>4= Venta a domicilio<br/>5= Operación bancaria<br/>6= Operación cíclica<br/>9= Otro<br/>**Campo XML:** E011
+fechaEnvio|No|Fecha futura del traslado de mercadería<br/>**Campo XML:** E013
 
 ### Parametro del objeto data.autoFactura
 
