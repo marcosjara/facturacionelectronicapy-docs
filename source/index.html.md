@@ -1526,6 +1526,7 @@ transporte|No|Conjunto de información relacionada a los datos datos de transpor
 documentoAsociado|No|Conjunto de información relacionada a los datos documentos asociados del Documento electrónico. <br/>Ver detalle en tabla [data.documentoAsociado](#parametro-del-objeto-data-documentoasociado).<br/>
 descuentoGlobal|No|Descuento global de la Operación<br/>**Campo XML:** Relacionado a EA004
 anticipoGlobal|No|Anticipo global de la Operación<br/>**Campo XML:** Relacionado a EA007
+dncp|No|Campos de informaciones de Compras Públicas.<br/><br/>Obligatorio si tipoOperacion=3<br/><br/>Ver detalle en tabla [data.dncp](#parametro-del-objeto-data-dncp)
 extras|No|Objeto de datos extras del Documento Electronico en formato **key=value** que puede ser enviado de forma adicional para cualquier necesidad del emisor. <br/><br/>El mismo puede ser utilizado para mostrar en el **KUDE** o para fines de integracion ya que envia en el **Webhook**.<br/><br/>Ej.:<br/>"extras" : {<br/>&nbsp;&nbsp;"pedidoCliente" : "2123-1", <br/>&nbsp;&nbsp;"numeroPresupuesto": "P/001", <br/>&nbsp;&nbsp;"posTicketId" : 39271<br/>}<br/><br/>Solo se acepta un nivel de JSON y en formato clave valor (no enviar el valor como otro sub JSON)<br/><br/>Keys reservadas para uso del FS:<br/>"currentCopy" y "exportacion".<br/>
 format|No|Indica la configuración del formato de impresión (Factura, Ticket o Personalizado) con el cual se guardará el Documento Electrónico, y el cual será su valor por defecto. Si no se pasa éste atributo, se asumirá el configurado en el establecimiento a travez de la consola.<br/><br/>Al enviar un DE por correo o imprimir un ticket se utilizará ésta opción guardada. <br/><br/>También podrá, posteriormente, indicar explicitamente el formato que desea al momento de obtener el PDF del KUDE<br/><br/>Posibles Valores:<br/>**ticket**=Especifica que el KUDE del DE quedará guardado en modo Ticket<br/>**custom**=Especifica que el KUDE del DE quedará guardado con el formato personalizado. (Sólo vàlido para tipoDocumento=1) <br/><br/>Para emitir en formato normal ignore ésta opción<br/>
 
@@ -1537,7 +1538,7 @@ Parámetro | Requerido | Descripción
 ruc |No| R.U.C. del Cliente, Obligarorio si es contribuyente. <br/>**Campo XML:** D206
 **razonSocial**|**Si**| Nombre o Razon social del cliente,En caso de DE innominado,completar con “Sin Nombre” <br/>**Campo XML:** D211
 nombreFantasia |No|Nombre de fantasia del cliente <br/>**Campo XML:** D212
-**tipoOperacion**|**Si**|Tipo de operación(1= B2B, 2= B2C, 3= B2G, 4= B2F)<br/>**Campo XML:** D202
+**tipoOperacion**|**Si**|Tipo de operación(1= B2B, 2= B2C, 3= B2G, 4= B2F)<br/><br/>Se debe enviar 3=B2G solo si tiene datos de licitacion de la DNCP, caso contrario enviar como 1=B2B**<br/>Campo XML:** D202
 direccion |No|Direccion del Cliente, Campo obligatorio cuando tipoDocumento =7 o tipoOperacion=4 <br/>**Campo XML:** D213
 numeroCasa|No|Numero de Casa del Cliente, Campo obligatorio si se informa la direccion,Cuando es contribuyente debe corresponder a lo declarado en el RUC<br/>**Campo XML:** D218
 departamento|No| Código del departamento,Campo obligatorio si se informa la dirección y tipoOperacion ≠ 4, no se debe informar cuando tipoOperacion = 4.<br/>**Campo XML:** D219 
@@ -1550,7 +1551,6 @@ documentoNumero|No|Número de documento de identidad.Obligatorio si contribuyent
 telefono|No|Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY<br/>**Campo XML:**D214
 celular|No|Numero de celular del cliente <br/>**Campo XML:**D215
 email|No|Correo electronico del cliente<br/><br/>Si se le pasa más de un correo (separado por comas) en eKuatia se incluirá sólo el primero<br/><br/>**Campo XML:**D216
-dncp|No|Campos de informaciones de Compras Públicas.<br/><br/>Obligatorio si tipoOperacion=3<br/><br/>Ver detalle en tabla [data.dncp](#parametro-del-objeto-data-dncp)
 **codigo**|**Si**|Código del Cliente. Obligatorio para FacturaSend<br/>**Campo XML:**D217
 
 ### Parametro del objeto data.usuario
