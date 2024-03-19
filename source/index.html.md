@@ -757,9 +757,10 @@ Todos los documentos electrónicos enviados con ésta peticion pueden ser visual
   "deList" : [{
     "cdc": "01800695631001002100694612021112410311184194",
     "numero": "001-001-0000001",
-    "estado": "Aprobado",
-    "respuesta_codigo": "",
-    "respuesta_mensaje": ""
+    "xml": "",
+    "qr": "",
+    "dIVA5": "",
+    "dIVA10": ""
   }]
 }
 ```
@@ -1970,11 +1971,12 @@ Atributos | Tipo | Description
 --------- | ---- | -----------
 cdc | string | Id único de 44 dígitos generado para el Documento Electrónico
 numero | string | Número de Documento Electrónico generado en formato 001-001-0000001
-estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado
-respuesta_codigo | string | Código de la Respuesta de la SET
-respuesta_mensaje | string | Mensaje de Respuesta de la SET
+estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado<br><br> (Solo en el caso que se envía como síncrono). Si el documento se envia por lote el Estado siempre será 0=Generado
+respuesta_codigo | string | Código de la Respuesta de la SET (Solo en el caso que se envía como síncrono)
+respuesta_mensaje | string | Mensaje de Respuesta de la SET (Solo en el caso que se envía como síncrono)
 xml<br>(opcional) | string | El archivo **XML** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?xml=true 
-qr<br>(opcional) | string | El valor del  código **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
+qr<br>(opcional) | string | El valor del código **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
+dIVA5<br>dIVA10<br>(opcional) | number | El valor del impuesto IVA 5 e IVA 10 del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *tax* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?tax=true
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
