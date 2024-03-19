@@ -777,9 +777,10 @@ Parámetro | Requerido | Descripción
 draft | No | Especifique **true** para generar el documento electrónico en borrador. Un DE en borrador no se envia a la SET hasta que se cofnirma. Su valor por defecto es **false**.
 xml | No | Especifique **true** para obtener en el resultado el/los XML/s generado/s en la operación. Su valor por defecto es **false**.
 qr | No | Especifique **true** para obtener en el resultado el/los QR/s generado/s en la operación. Su valor por defecto es **false**.
+tax | No | Especifique **true** para obtener en el resultado el valor total de los impuestos Iva 5 e Iva 10 del XML. Su valor por defecto es **false**.
 
 Por ejemplo, la petición puede ser realizado de ésta manera:
-POST https://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?draft=true&xml=true&qr=true.
+POST https://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?draft=true&xml=true&qr=true&tax=true.
 
 Vea las secciones correspondientes para [Confirmar](#confirmar-un-lote-en-borrador) o [Rechazar](#rechazar-un-lote-en-borrador) un borrador.
 
@@ -2158,15 +2159,16 @@ axios.post({
     "ns2:rRetEnviEventoDe" : {
       "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
       "ns2:gResProcEVe" : {
-				"ns2:dEstRes" : "Aprobado",
-				"ns2:gResProc" : {
-          "ns2:dCodRes" : "",
-					"ns2:dMsgRes" : ""
+        "ns2:dEstRes" : "Aprobado",
+        "ns2:dProtAut": "974149",
+        "ns2:gResProc" : {
+          "ns2:dCodRes" : "0600",
+          "ns2:dMsgRes" : "Evento registrado correctamente"
         }
       }
     }
-			
-  }
+  },
+  "cdc" : "01800695631001001038720612021112917595714694"
 }
 ```
 Este servicio ejecuta la cancelación de un documento específico teniendo como parámetro el valor de su CDC. 
