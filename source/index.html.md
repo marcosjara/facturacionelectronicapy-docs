@@ -1185,6 +1185,7 @@ curl \
   -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
   -H 'Content-Type: application/json; charset=utf-8' \
   --data-raw '{
+    "email" : "destino@email.com",
     "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
@@ -1204,6 +1205,7 @@ const headers = {
 };
 
 const data = {
+    "email" : "destino@email.com",
     "cdcList" : [{
         "cdc": "01800695631001001038720612021112917595714694"
     }, {
@@ -1227,7 +1229,7 @@ axios.post({
 
 Reenvia un correo electrónico al receptor. Utilice en aquellos casos donde el correo no llego al destinatario.
 
-No es posible cambiar la dirección de destino.
+Se permite cambiar la dirección de correo de destino, en ese caso el correo no se enviará al que recibió originalmente el Documento Electrónico, sólo al que se especifica por medio de éste endpoint. La condición para cambiar el correo de destino es que se envíe 1 (un) único CDC por vez.
 
 Tenga en cuenta que al Crear el DE, y si el parámetro de envio de email está activo, ya se envía el correo a los destinatarios del DE, cuyas direcciones se especificand en data.cliente.
 
@@ -1236,6 +1238,7 @@ Por lo general, el re-envio de email no es necesario, si su receptor no recibe s
 ### Parámetros
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
+email | No | Dirección(es) de destino a donde enviar el correo, separados por comas si hay más de uno. Si no se especifica se envía al correo original del Cliente del Documento Electrónico<br/>
 **cdcList** | **Si** | Array de códigos CDC de los cuales se desea enviar el email<br/><br/>
 
 ### Respuesta
@@ -2188,7 +2191,7 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 
@@ -2351,7 +2354,7 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Disconformidad
@@ -2423,7 +2426,7 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Desconocimiento
@@ -2516,7 +2519,7 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Notificación
@@ -2611,7 +2614,7 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si todo ocurrio bien y se canceló el Documento Electrónico, **false** si ocurrio algun error
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Nominación
