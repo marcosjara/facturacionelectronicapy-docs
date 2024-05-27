@@ -801,6 +801,222 @@ En éste caso existen técnicas que se deben manejar para no alterar el CDC (Có
 - Todos los documentos que se envían utilizando éste método, deben ser del mismo tipo, por ejemplo todos ellos factura electrónica.
 - Puede enviar como mínimo 1 documento y como máximo 50 por llamada, si tienen más debe realizarlo en una siguiente llamada.
 
+
+
+
+
+
+
+
+
+
+## Creación de recibo
+
+```shell
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/recibo/create" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>"
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data-raw '{
+    "fecha": "2023-10-26T15:59:43",
+    "establecimiento": 1,
+    "punto": 1017,
+    "numero": 3,
+    "concepto" : "Pago de Cuota XYZ - Manzana MANDUVIRA(100.000GS), Lote 10. - Pago de Interes XYZ - Manzana MANDUVIRA, Lote 10.(50.000GS)",
+    "total": 150000,
+    "cliente": {
+      "codigo": "00001",
+      "contribuyente": false,
+      "documentoNumero": "0",
+      "documentoTipo": 5,
+      "email": "",
+      "pais": "PRY",
+      "razonSocial": "CONSUMIDOR FINAL",
+      "tipoOperacion": 2,
+      "celular": "595973527155"
+    },
+    "condicion": {
+      "entregas": [
+        {
+          "cambio": 0,
+          "moneda": "PYG",
+          "monto": 45000,
+          "tipo": 1
+        }
+      ],
+      "tipo": 1
+    },
+    "usuario": {
+        "cargo": "Vendedor",
+        "documentoNumero": "0",
+        "documentoTipo": 9,
+        "nombre": "admin"
+    },
+    "documentoAsociado": [{
+      "formato": 1,
+      "cdc": "55800695631001001000000112023102610001111110",
+      "monto": 185000,
+      "montoRetencionIva" : 10000,
+      "montoRetencionRenta" : 5000
+    }, {
+      "formato": 2,
+      "tipoDocumentoImpreso": 1,
+      "timbrado": "12345678",
+      "establecimiento": "002",
+      "punto": "002",
+      "numero": "0000003",
+      "serie": null,
+      "fecha": "2024-09-01",
+      "monto": 186000
+    }]
+}'
+```
+
+```javascript
+import axios from 'axios';
+const data = {
+  "fecha": "2023-10-26T15:59:43",
+  "establecimiento": 1,
+  "punto": 1017,
+  "numero": 3,
+  "concepto" : "Pago de Cuota XYZ - Manzana MANDUVIRA(100.000GS), Lote 10. - Pago de Interes XYZ - Manzana MANDUVIRA, Lote 10.(50.000GS)",
+  "total": 150000,
+  "cliente": {
+    "codigo": "00001",
+    "contribuyente": false,
+    "documentoNumero": "0",
+    "documentoTipo": 5,
+    "email": "",
+    "pais": "PRY",
+    "razonSocial": "CONSUMIDOR FINAL",
+    "tipoOperacion": 2,
+    "celular": "595973527155"
+  },
+  "condicion": {
+    "entregas": [
+      {
+        "cambio": 0,
+        "moneda": "PYG",
+        "monto": 45000,
+        "tipo": 1
+      }
+    ],
+    "tipo": 1
+  },
+  "usuario": {
+      "cargo": "Vendedor",
+      "documentoNumero": "0",
+      "documentoTipo": 9,
+      "nombre": "admin"
+  },
+  "documentoAsociado": [{
+    "formato": 1,
+    "cdc": "55800695631001001000000112023102610001111110",
+    "monto": 185000,
+    "montoRetencionIva" : 10000,
+    "montoRetencionRenta" : 5000
+  }, {
+    "formato": 2,
+    "tipoDocumentoImpreso": 1,
+    "timbrado": "12345678",
+    "establecimiento": "002",
+    "punto": "002",
+    "numero": "0000003",
+    "serie": null,
+    "fecha": "2024-09-01",
+    "monto": 186000
+  }]
+};
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+axios.post(`https://api.facturasend.com.py/<tenantId>/recibo/create`, 
+  data, 
+  {headers}
+)
+.then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+El recibo electrónico oficial de SIFEN aun está pendiente por parte de SIFEN. No obstante FacturaSend proporciona su propia versión del recibo electrónico, el cual soluciona la mayoría de las necesidades internas de una Empresa. El recibo de FacturaSend, también ya implementa muchas de las validaciones que implementa SIFEN con otros tipos de documentos electrónicos y cumple con la estructura de XML y Firma Digital, lo cual implica que si SIFEN lo implementa más adelante, probablemente habrá muy pocas modificaciones a ser realizadas para adaptar la versión actual de FacturaSend a la versión del SIFEN 
+
+El recibo queda completamente aprobado una vez enviado a FacturaSend, ya que éste no pasa a SIFEN.
+
+El CDC de un recibo electrónico inicia con 55. 
+
+Cuando va a crear un recibo, puede especificar uno a varios documentos asociados, o puede no especificar ninguno.
+
+Si el Recibo posee documentos asociados, debe especificar el monto de cada documento asociado, y no es necesario informar el data.total, pues este será recalculado con la sumatoria de los montos de cada documento asociado involucrado.
+
+Si el Recibo no tiene documentos asociados, es obligatorio informar el data.total.
+
+### Petición HTTP
+
+`POST https://api.facturasend.com.py/<tenantId>/recibo/create`
+
+> El comando de arriba, retornará lo siguiente:
+
+```json
+{ 
+  "success" : true,
+  "reciboList" : [{
+    "cdc": "55800695631001001000001612021112410311184194",
+    "numero": "001-001-0000001",
+    "xml": "",
+    "estado": "Aprobado",
+    "respuesta_codigo": "0260",
+    "respuesta_mensaje": "Aprobado"
+  }]
+}
+```
+
+### Parámetros
+
+Los parámetros del Recibo Electrónico se envían en formato JSON y tienen casi la misma estructura que un Documento electrónico. Solo se debe enviar 1 (un) recibo por vez. 
+
+Solicite al equipo de FacturaSend, los modelos de JSON para el recibo.
+
+### Respuesta
+La respuesta de creación de un documento electrónico, representa la estructura de datos JSON que retorna la API de FacturaSend luego de haber solicitado la creación de un DE.
+
+Abajo se describe el detalles de los atributos.
+
+### Respuesta
+La respuesta de éste Servicio:
+
+Atributos | Tipo | Description
+--------- | ---- | -----------
+success | boolean | true si no hubo errores en la transacción
+error | string | El mensaje de Error, en el caso de que el success = false, entonces aquí se especificará el mensaje de error.
+reciboList | array | El array con la respuesta del recibo procesado. Este array siempre devolverá 1 (un), pero es del tipo array por compatibilidad con otros servicios<br><br>Los atributos de éste array se describen en Respuesta [reciboList](#atributos-de-la-respuesta-recibolist)
+
+### Atributos de la Respuesta reciboList
+
+Atributos | Tipo | Description
+--------- | ---- | -----------
+cdc | string | Id único de 44 dígitos, que inicia con 55 generado para el Recibo Electrónico
+numero | string | Número de Recibo Electrónico generado en formato 001-001-0000001
+estado | string | Estado del Recibo Electrónico generado, con el valor Aprobado
+respuesta_codigo | string | Mensaje de Respuesta de la SET (Se incluye con el valor 260 por compatibilidad)
+respuesta_mensaje | string | Se incluye con el valor Aprobado por compatibilidad
+xml<br>(opcional) | string | El archivo **XML** generado del recibo electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el Recibo, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?xml=true 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Consulta DE por ID
 
 > Para consultar el DE:
@@ -2115,9 +2331,9 @@ respuesta_mensaje | string | Mensaje de respuesta de la consulta. <br/>Valores: 
 xml | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el XML obtenido desde el eKuatia.
 protocolo | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará el Protocolo de Autorización obtenido desde el eKuatia.
 
-# Eventos del DE
+# Eventos
 
-## Evento de Cancelación
+## Cancelación del DE
 > Evento disponible para cancelar un Documento Electrónico que ya ha sido aprobado en la SET:
 
 ```shell
@@ -2193,6 +2409,96 @@ Atributo | Tipo | Descripción
 --------- | --------- | -----------
 success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
+
+
+
+
+
+
+
+
+
+## Cancelación del Recibo
+> Evento disponible para cancelar un Recibo Electrónico:
+
+```shell
+# Cancela un Recibo electronico emitido
+curl \
+  -X \
+  POST "https://api.facturasend.com.py/<tenantId>/recibo/evento/cancelacion" \
+  -H "Authorization: Bearer api_key_<hdiweuw-92jwwle...>" \
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data-raw '{
+    "cdc": "55800695631001001038720612021112917595714694",
+    "motivo": "Se digito erroneamente la dirección del cliente"
+  }'
+```
+
+```javascript
+# El ejemplo se muestra utilizando AXIOS
+import axios from 'axios';
+
+const headers = {
+  `Authorization` : `Bearer api_key_<hdiweuw-92jwwle...>`
+};
+
+const data = {
+  "cdc": "55800695631001001038720612021112917595714694",
+  "motivo": "Se digito erroneamente la dirección del cliente"
+};
+
+axios.post({
+  url: `https://api.facturasend.com.py/<tenantId>/recibo/evento/cancelacion`,
+  method: 'POST',
+  {headers}
+}
+).then( respuesta => {
+  console.log(respuesta);
+});
+```
+
+> Como respuesta obtendrá lo siguiente:
+
+```json
+{ "success" : true,
+  "result" : {
+    "ns2:rRetEnviEventoDe" : {
+      "ns2:gResProcEVe" : "2022-02-08T14:39:00", 
+      "ns2:gResProcEVe" : {
+        "ns2:dEstRes" : "Aprobado",
+        "ns2:dProtAut": "974149",
+        "ns2:gResProc" : {
+          "ns2:dCodRes" : "0600",
+          "ns2:dMsgRes" : "Evento registrado correctamente"
+        }
+      }
+    }
+  },
+  "cdc" : "55800695631001001038720612021112917595714694"
+}
+```
+Este servicio ejecuta la cancelación de un recibo específico teniendo como parámetro el valor de su CDC. 
+
+Si el Recibo Electrónico es cancelado de forma satisfactoria se enviará un email al cliente, avisando del evento junto con el recibo electrónico cancelado. 
+
+### Parámetros
+Parámetro | Requerido | Descripción
+--------- | --------- | -----------
+**cdc** | **Si** | El CDC del Recibo Electrónico que desea cancelar<br/>
+**motivo** | **Si** | El motivo por el cual desea cancelar el recibo<br/>
+
+### Respuesta
+Atributo | Tipo | Descripción
+--------- | --------- | -----------
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
+result | object | Objeto resultante de la operación del evento (por compatibilidad en el formato de SIFEN)
+
+
+
+
+
+
+
 
 
 ## Evento de Inutilizacion
