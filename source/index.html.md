@@ -1383,7 +1383,7 @@ Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **cdcList** | **Si** | Array de códigos CDC de los cuales se desea obtener el Documento PDF KUDE<br/><br/>Los atributos de éste array, son iguales a la Consulta de Estados, que se pueden encontrar en la [lista de arriba](#parametros-de-cdclist)
 type | No | Tipo de información que se desea obtener<br/><br/>Por defecto el Documento se recupera en formato Binario.<br/><br/>La opción alternativa es 'base64'
-format | No | Especifique el formato de impresión para el Documento Electrónico, "ticket" o "custom". Si desea obtener el PDF en el formato normal de Factura (especificado en el establecimiento) ignore ésta opción.
+format | No | Especifique el formato de impresión para el Documento Electrónico específico, "ticket" o "custom". <br/><br/>Si desea obtener el PDF en el formato por defecto del Sistema (especificado en el establecimiento) ignore ésta opción.<br/><br/>Si en el establecimiento se especificó como "ticket" puede establecer format=a4 para generar dicho documento específico en formato A4.
 
 ### Respuesta
 Atributo | Tipo | Descripción
