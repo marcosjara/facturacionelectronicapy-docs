@@ -2939,6 +2939,7 @@ curl \
         "cdc": `01800695631001002100700812022063013102931279`,  // DTE
         "motivo": `Se asignar el receptor correcto del DTE`,
         "contribuyente" : true,
+        "tipoReceptor" : 1,
         "ruc" : "2005001-1",
         "razonSocial" : "Marcos Adrian Jara Rodriguez",
         "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
@@ -2953,7 +2954,6 @@ curl \
         "ciudadDescripcion" : "PASO ITA (INDIGENA)",
         "pais" : "PRY",
         "paisDescripcion" : "Paraguay",
-        "tipoContribuyente" : 1,
         "telefono" : "061874874",
         "celular" : "595976254125",
         "email" : "cliente@cliente.com",
@@ -2973,6 +2973,7 @@ const data = {
   "cdc": `01800695631001002100700812022063013102931279`,  // DTE
   "motivo": `Se asignar el receptor correcto del DTE`,
   "contribuyente" : true,
+  "tipoReceptor" : 1,
   "ruc" : "2005001-1",
   "razonSocial" : "Marcos Adrian Jara Rodriguez",
   "nombreFantasia" : "Marcos Adrian Jara Rodriguez",
@@ -2987,7 +2988,6 @@ const data = {
   "ciudadDescripcion" : "PASO ITA (INDIGENA)",
   "pais" : "PRY",
   "paisDescripcion" : "Paraguay",
-  "tipoContribuyente" : 1,
   "telefono" : "061874874",
   "celular" : "595976254125",
   "email" : "cliente@cliente.com",
@@ -3031,6 +3031,7 @@ Parámetro | Requerido | Descripción
 **cdc** | **Si** | El CDC del Documento Electrónico que desea nominar. Debe existir en Facturasend<br/>
 **motivo** | **Si** | El motivo del evento de nominación
 **contribuyente** | **Si** | Campo booleano que indica si el nominado es o no un contribuyente
+tipoReceptor | No | Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false
 ruc |No| RUC del Receptor con el digito verificador. Obligatorio si el nominado es un contribuyente.
 **razonSocial** | **Si** | Nombre o Razón Social del Receptor
 nombreFantasia |No| Nombre de Fantasía del Receptor
@@ -3041,7 +3042,6 @@ departamento|No| Código del departamento,Campo obligatorio si se informa la dir
 distrito|No|Código del distrito del Cliente, El  código debe seguir la Tabla 2.1 – Distritos del Manual Tecnico.
 ciudad|No|Código de la ciudad del Cliente. Campo obligatorio si se informa la dirección y tipoOperacion≠4, no se debe informar cuando tipoOperacion = 4.
 **pais**|**Si**|Código del Pais del Cliente, Segun XSD de Codificación de Países
-tipoContribuyente |No| Tipo de contribuyente Ej.: 1= Persona Física, 2= Persona Jurídica<br/>Obligatorio si contribuyente = true, No informar si contribuyente = false
 documentoTipo |No| Tipo de documento del cliente, de acuerdo a <br/><br/>1=Cédula paraguaya<br/>2=Pasaporte<br/>3=Cédula extranjera<br/>4=Carnet de residencia<br/>5=Tarjeta Diplomática de exoneración fiscal<br/>9=Otro (informar data.documentoTipoDescripcion). Obligatorio si data.contribuyente = false
 documentoNumero |No| Número de documento de identidad. Obligatorio si data.contribuyente = false
 telefono |No| Número de teléfono. Debe incluir el prefijo de la ciudad si pais = PRY
