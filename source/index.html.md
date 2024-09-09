@@ -2151,6 +2151,7 @@ resolucionCreditoFiscal|No|Número de resolución de crédito fiscal <br/>**Camp
 constanciaTipo|No|Tipo de constancia<br/>**Campo XML:** H014
 constanciaNumero|No|Numero de constancia<br/>**Campo XML:** H016
 constanciaControl|No|Código de Control de la constancia<br/>**Campo XML:** H017
+rucFusionado|No|Cuando el formato es 1-Electrónico y el CDC del Documento Referenciado es de un Receptor fusionado, entonces especificar el RUC de la Empresa fusionada, sin el DV<br/>**Campo XML:** H018 (NT. 23)
 
 ## Respuesta de creación de un DE
 > Ejemplo de respuesta de creación de un DE:
