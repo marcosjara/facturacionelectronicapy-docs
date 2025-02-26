@@ -1792,7 +1792,7 @@ Parámetro | Requerido | Descripción
 descripcion|No|Descripción de la Obligación. No es necesario pasar <br/>**Campo XML:** D032
 
 ### Parametro del objeto data.dncp
-
+Los campos son requeridos cuando el tipo de operacion (data.tipoOperacion) = 3-B2G.<br/>En caso de no tener licitación regulada por la DNCP, podrán informar con ceros (0) o en su defecto uno (1), los campos de informaciones públicas a fin de que el documento pueda superar las validaciones.<br/>
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
 **modalidad**|**Si**|Modalidad - Código emitido por la DNCP <br/>**Campo XML:** E021
