@@ -13,3 +13,8 @@ maquina lucas
 docker run --rm --name slate -v /home/lucasf/pgfxDev/git/facturacionelectronicapy-docs/build:/srv/slate/build -v /home/lucasf/pgfxDev/git/facturacionelectronicapy-docs/source:/srv/slate/source slatedocs/slate
 
 
+
+maquina milciades
+docker run --rm --name slate -v /home/tips/github/facturacionelectronicapy-docs/build:/srv/slate/build -v /home/tips/github/facturacionelectronicapy-docs/source:/srv/slate/source slatedocs/slate
+
+
