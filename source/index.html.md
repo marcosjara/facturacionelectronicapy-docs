@@ -23,27 +23,27 @@ meta:
 # Introducción
 Bienvenido a la documentación de **FacturaSend**. 
 
-La **API paraguaya** de Facturación Electrónica con el cual podrás implementar rapidamente la `integración` de tu software con la SET (Subsecretaría de Estado de Tributación) para generar, validar, firmar y enviar archivos XML de documentos electrónicos y generar el PDF KUDE para tu Empresa o tus Clientes.
+La **API paraguaya** de Facturación Electrónica con el cual podrás implementar rapidamente la `integración` de tu software con SIFEN (Subsecretaría de Estado de Tributación) para generar, validar, firmar y enviar archivos XML de documentos electrónicos y generar el PDF KUDE para tu Empresa o tus Clientes.
 
 ## Componentes de FacturaSend 
-**FacturaSend** es una plataforma compuesta de una Aplicación Web que actua como una **consola** o **panel de control** para configurar los datos del contribuyente, visualizar los documentos generados, invocar los eventos de la SET y obtener diferentes tipos de reportes y gráficos.
+**FacturaSend** es una plataforma compuesta de una Aplicación Web que actua como una **consola** o **panel de control** para configurar los datos del contribuyente, visualizar los documentos generados, invocar los eventos de SIFEN y obtener diferentes tipos de reportes y gráficos.
 
-**FacturaSend** tambien esta compuesto de una **capa de nivel de servicios** que permite al integrador poder invocar las funciones mediante llamadas a la API REST, lo cual facilita la integración de cualquier Sistema o Aplicativo ya desarrollado sea este Escritorio, Web o móvil con el fin de emitir documentos electrónicos (Facturas, Autofacturas, Notas de Débitos y Créditos y Notas de retención electrónicas) validados por la SET y el poder realizar todas las operaciones vinculadas con la Facturacion Electronica (Sifen) como por ejemplo la invocación de eventos de cancelación o inutilización de documentos.
+**FacturaSend** tambien esta compuesto de una **capa de nivel de servicios** que permite al integrador poder invocar las funciones mediante llamadas a la API REST, lo cual facilita la integración de cualquier Sistema o Aplicativo ya desarrollado sea este Escritorio, Web o móvil con el fin de emitir documentos electrónicos (Facturas, Autofacturas, Notas de Débitos y Créditos y Notas de retención electrónicas) validados por SIFEN y el poder realizar todas las operaciones vinculadas con la Facturacion Electronica (Sifen) como por ejemplo la invocación de eventos de cancelación o inutilización de documentos.
 
 Con **FacturaSend** podrás administrar varias empresas cada una de ellas para cada uno de los clientes especifícos que posees, manteniendo un control sencillo e independiente de los datos e invitando a otros usuarios con diferentes roles para acceder de forma controlada a los recursos, por ejemplo, puedes brindar el acceso al Contador, para visualizar los datos de su propio entorno, visualizando solamente los datos de la o las empresas asignadas.
 
 **FacturaSend** contempla todos los procesos requeridos para la generación de documentos electrónicos, como ser:
 
-1. Generación del documento XML segín el manual técnico de la SET.
+1. Generación del documento XML segín el manual técnico de SIFEN.
 2. Firma del documento XML, utilizando el certificado digital de la Empresa contribuyente.
 3. Generación de la URL del Código QR dentro del documento XML.
-4. Comunicación con la SET (Envío de documentos XML, generación de lotes de envio, consulta de documentos, etc.)
+4. Comunicación con SIFEN (Envío de documentos XML, generación de lotes de envio, consulta de documentos, etc.)
 5. Generacion del Documento KUDE (Archivo PDF de la Factura o Documento electronico, personalizado de acuerdo al Logo del Emisor).
 6. Envío de email del documento electrónico al contribuyente receptor.
-7. Invocación de eventos de la SET (Cancelación, inutilización, etc.)
+7. Invocación de eventos de SIFEN (Cancelación, inutilización, etc.)
 8. Consulta de RUC.
 
-Para encontrar más información en el [Manual Técnico PDF de la SET](https://ekuatia.set.gov.py/portal/ekuatia/detail?content-id=/repository/collaboration/sites/ekuatia/documents/documentacion/documentacion-tecnica/Manual%20T%C3%A9cnico%20Versi%C3%B3n%20150.pdf) y en el [Portal de eKuatia](https://ekuatia.set.gov.py/portal/ekuatia/).
+Para encontrar más información en el [Manual Técnico PDF de SIFEN](https://ekuatia.set.gov.py/portal/ekuatia/detail?content-id=/repository/collaboration/sites/ekuatia/documents/documentacion/documentacion-tecnica/Manual%20T%C3%A9cnico%20Versi%C3%B3n%20150.pdf) y en el [Portal de eKuatia](https://ekuatia.set.gov.py/portal/ekuatia/).
 
 ## Para quien fue pensado FacturaSend
 
@@ -62,17 +62,17 @@ Finalmente FacturaSend tambien puede ser utilizado por **proveedores de software
 
 Ofrecemos **trazabilidad* sobre todas las operaciones realizadas, cambios en la eliminación de datos que puedan ser realizados, donde el administrador puede visualizar todos los eventos mediante un log.
 
-Brindamos **confidencialidad** de los datos almacenados, mediante un **contrato** no obligatorio que puede ser firmado para generar una mayor **confianza** una vez que los documentos electrónicos emitidos sean reales y válidos, es decir al pasar al ambiente de producción de la SET.
+Brindamos **confidencialidad** de los datos almacenados, mediante un **contrato** no obligatorio que puede ser firmado para generar una mayor **confianza** una vez que los documentos electrónicos emitidos sean reales y válidos, es decir al pasar al ambiente de producción de SIFEN.
 
 ## Como empiezo a generar Documentos Electrónicos
 
-El **proceso** normal para generar documentos electrónicos y realizar todos los eventos involucrados con la SET es **obtener un timbrado de prueba** y una **habilitacion de acceso** para el uso del SIFEN del ambiente de test, ademas de un **certificado digital** para `firmar` los documentos, si, incluso en ambiente de Test. Luego de esa primera condicion se debe realizar la **integracion de tu sistema** y validar una bateria de test de todas las funcionalidades solicitadas por la SET, se libera el ambiente a produccion y ya se pueden emitir documentos tributarios electronicos reales y validos.
+El **proceso** normal para generar documentos electrónicos y realizar todos los eventos involucrados con SIFEN es **obtener un timbrado de prueba** y una **habilitacion de acceso** para el uso del SIFEN del ambiente de test, ademas de un **certificado digital** para `firmar` los documentos, si, incluso en ambiente de Test. Luego de esa primera condicion se debe realizar la **integracion de tu sistema** y validar una bateria de test de todas las funcionalidades solicitadas por SIFEN, se libera el ambiente a produccion y ya se pueden emitir documentos tributarios electronicos reales y validos.
 
 Si bien este es el camino establecido por ahora, el proceso de **incluirte** como **empresa habilitada** o a tus clientes en ambiente de test puede **demorar** un tiempo.
 
-Para evitar esa espera, con **FacturaSend** puedes empezar a integrar tu sistema hoy mismo y emitir tus documentos electronicos de test rapidamente validando de forma temprana tu sistema o aplicacion, **no necesitas** ser un contribuyente **habilitado** por la SET para ser facturador electrónico ni poseer un Certificado Digital para empezar emitir comprobantes electrónicos desde nuestra API, no te preocupes por eso, trabajarás en un ambiente desconectado de la SET pero simularás todos los mismos procesos como si ya estuvieras habilitado utilizando un **certificado digital de prueba** para firmar los documentos.
+Para evitar esa espera, con **FacturaSend** puedes empezar a integrar tu sistema hoy mismo y emitir tus documentos electronicos de test rapidamente validando de forma temprana tu sistema o aplicacion, **no necesitas** ser un contribuyente **habilitado** por SIFEN para ser facturador electrónico ni poseer un Certificado Digital para empezar emitir comprobantes electrónicos desde nuestra API, no te preocupes por eso, trabajarás en un ambiente desconectado de SIFEN pero simularás todos los mismos procesos como si ya estuvieras habilitado utilizando un **certificado digital de prueba** para firmar los documentos.
 
-Los documentos electrónicos emitidos en ambiente desconectado desde FacturaSend no tienen validez tributaria, y el **PDF** del **KUDE** impreso llevara la leyenda `Generado desde un Ambiente no conectado a la SET`, por eso recomendamos que apenas inicies la **integracion de tu sistema** con FacturaSend inicies el proceso de solicitar la inclusion de tu empresa o la de tus clientes para emitir documentos electronicos en la SET.
+Los documentos electrónicos emitidos en ambiente desconectado desde FacturaSend no tienen validez tributaria, y el **PDF** del **KUDE** impreso llevara la leyenda `Generado desde un Ambiente no conectado a SIFEN`, por eso recomendamos que apenas inicies la **integracion de tu sistema** con FacturaSend inicies el proceso de solicitar la inclusion de tu empresa o la de tus clientes para emitir documentos electronicos en SIFEN.
 
 ## Versiones de FacturaSend
 **FacturaSend** cuenta con **2 versiones** siendo la primera la versión **on-line**, que permite la integración temprana de tu aplicación pudiendo empezar a generar documentos de prueba sin ningun costo.
@@ -85,15 +85,15 @@ En su **versión on-line**, facturaSend tiene un costo que depende de la **canti
 En su **versión empresarial**, tiene un costo que depende del **tiempo** y **periodo** de implementación, así como la cantidad de recursos necesarios, puede ponerse en contacto con nostros para una cotización acorde a su empresa.
 
 ### Cuando empiezo a pagar por el Servicio
-Parar la versión **on-line** FacturaSend no tiene costo de adhesión, puedes empezar a utilizarlo inmediatamente sin pagar nada, ya que en un primer momento tendrás acceso a un ambiente **"No conectado a la SET"** donde podrás realizar todos los pasos para integrar tu sistema conforme la API REST descrita mas abajo, enviando y recibiendo objetos JSON. 
+Parar la versión **on-line** FacturaSend no tiene costo de adhesión, puedes empezar a utilizarlo inmediatamente sin pagar nada, ya que en un primer momento tendrás acceso a un ambiente **"No conectado a SIFEN"** donde podrás realizar todos los pasos para integrar tu sistema conforme la API REST descrita mas abajo, enviando y recibiendo objetos JSON. 
 
 Al empezar tendrás acceso a **todas** las **funcionalidades** de la aplicacion, podras **ver** e **imprimir** el PDF del Documento Electrónico **(KUDE)** y tus Documentos Electrónicos **firmados** con el certificado digital de prueba (XML) se **guardaran** en un lugar seguro en la nube por 5 años, no pagarás nada en absoluto hasta este punto.
 
-Luego que hayas **realizado** toda tu **integración** y hayas obtenido tu empresa o la empresa de tu cliente la **habilitación** como facturador electrónico por parte de la SET, pasarás a un ambiente conectado de test, a través de una opción que podrás cambiarlo desde la Consola.
+Luego que hayas **realizado** toda tu **integración** y hayas obtenido tu empresa o la empresa de tu cliente la **habilitación** como facturador electrónico por parte de SIFEN, pasarás a un ambiente conectado de test, a través de una opción que podrás cambiarlo desde la Consola.
 
-En el **ambiente conectado a la SET de test**, tus documentos ya se envían a la SET, y se obtienen las respuestas de esos envíos corespondientes, allí podrás seguir generando más documentos electrónicos ya con tu sistema integrado mientras que **FacturaSend** irá recolectando dicha información para remitirla en formato resumido posteriormente, pues la SET te pedirá dicha información. Aún ya estando en ambiente conectado **no tendrás** que **abonar** nada a FacturaSend, pues los documentos electrónicos creados en esta instancia aun no son documentos electrónicos reales validos.
+En el **ambiente conectado a SIFEN de test**, tus documentos ya se envían a SIFEN, y se obtienen las respuestas de esos envíos corespondientes, allí podrás seguir generando más documentos electrónicos ya con tu sistema integrado mientras que **FacturaSend** irá recolectando dicha información para remitirla en formato resumido posteriormente, pues SIFEN te pedirá dicha información. Aún ya estando en ambiente conectado **no tendrás** que **abonar** nada a FacturaSend, pues los documentos electrónicos creados en esta instancia aun no son documentos electrónicos reales validos.
 
-Empezarás a **abonar por el uso del servicio** y de la API cuando hayas creado tu primer documento electrónico en **ambiente de producción de la SET**.
+Empezarás a **abonar por el uso del servicio** y de la API cuando hayas creado tu primer documento electrónico en **ambiente de producción de SIFEN**.
 
 ## Pasos para utilizar FacturaSend
 
@@ -446,9 +446,9 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/de/create`,
 }
 ```
 
-Esta invocación, crea un documento electrónico y lo envía de forma síncrona a la SET, sólo es posible enviar el dato de 1 (un) Documento Electrónico por vez.
+Esta invocación, crea un documento electrónico y lo envía de forma síncrona a SIFEN, sólo es posible enviar el dato de 1 (un) Documento Electrónico por vez.
 
-Se denomina proceso síncrono, cuando la SET valida e informa de forma inmediata la aprobación del documento electrónico, o el rechazo.
+Se denomina proceso síncrono, cuando SIFEN valida e informa de forma inmediata la aprobación del documento electrónico, o el rechazo.
 
 Mediante el proceso síncrono es posible conocer en línea si el Documento Electrónico fue aprobado o rechazado por algún error y saber qué error es para poder corregirlo, gracias a la respuesta del servicio.
 
@@ -476,10 +476,10 @@ La respuesta obtenida luego de llamar a éste servicio se describe en la secció
 ### Recomendaciones
 Se recomienda almacenar el identificador único del Documento electrónico o CDC (Código de Control) en su sistema, junto con la operación o movimiento que generó el Comprobante, ya sea que éste haya sido una Compra, Venta, Cobro, Pago, etc. 
 
-El valor de éste CDC será muy útil más adelante, cuando desee obtener una copia del XML del Documento o incluso si desea obtener el PDF KUDE para imprimirlo desde su aplicación. Otras operaciones importantes que podrá realizar son la de Cancelar el Documento Electrónico o informara a la SET sobre otros eventos.
+El valor de éste CDC será muy útil más adelante, cuando desee obtener una copia del XML del Documento o incluso si desea obtener el PDF KUDE para imprimirlo desde su aplicación. Otras operaciones importantes que podrá realizar son la de Cancelar el Documento Electrónico o informara a SIFEN sobre otros eventos.
 
 ### Validaciones
-FacturaSend realizará las validaciones de los valores de los atributos, conforme las especificaciones del manual técnico, antes de enviar a la SET, retornando el mensaje de error en la respuesta de invocación de éste servicio.
+FacturaSend realizará las validaciones de los valores de los atributos, conforme las especificaciones del manual técnico, antes de enviar a SIFEN, retornando el mensaje de error en la respuesta de invocación de éste servicio.
 
 ## Creación de varios DEs 
 
@@ -737,11 +737,11 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/lote/create`,
 });
 ```
 
-Esta invocación, crea varios documentos electrónicos (hasta un máximo de 50 del mismo tipo) y los envía a la SET utilizando el proceso por lotes o asíncrono. 
+Esta invocación, crea varios documentos electrónicos (hasta un máximo de 50 del mismo tipo) y los envía a SIFEN utilizando el proceso por lotes o asíncrono. 
 
-Se denomina proceso asíncrono, cuando no hay una respuesta inmediata de aprobación o rechazo desde la SET sobre los documentos enviados. Esto debe consultarse mediante otro proceso.
+Se denomina proceso asíncrono, cuando no hay una respuesta inmediata de aprobación o rechazo desde SIFEN sobre los documentos enviados. Esto debe consultarse mediante otro proceso.
 
-En éste caso NO es posible obtener en la respuesta, la información de si el Documento Electrónico fue Aprobado o Rechazado aún, pero FacturaSend se encargará de consultar esa información más tarde, invocando otro Servicio a la SET. 
+En éste caso NO es posible obtener en la respuesta, la información de si el Documento Electrónico fue Aprobado o Rechazado aún, pero FacturaSend se encargará de consultar esa información más tarde, invocando otro Servicio a SIFEN. 
 
 Todos los documentos electrónicos enviados con ésta peticion pueden ser visualizados en la consola de FacturaSend.
 
@@ -775,7 +775,7 @@ También se pueden especificar algunos parametros de consulta junto con la URL:
 ### Parámetros de Consulta (QueryParam)
 Parámetro | Requerido | Descripción
 --------- | --------- | -----------
-draft | No | Especifique **true** para generar el documento electrónico en borrador. Un DE en borrador no se envia a la SET hasta que se cofnirma. Su valor por defecto es **false**.
+draft | No | Especifique **true** para generar el documento electrónico en borrador. Un DE en borrador no se envia a SIFEN hasta que se cofnirma. Su valor por defecto es **false**.
 xml | No | Especifique **true** para obtener en el resultado el/los XML/s generado/s en la operación. Su valor por defecto es **false**.
 qr | No | Especifique **true** para obtener en el resultado el/los QR/s generado/s en la operación. Su valor por defecto es **false**.
 tax | No | Especifique **true** para obtener en el resultado el valor total de los impuestos Iva 5 e Iva 10 del XML. Su valor por defecto es **false**.
@@ -791,10 +791,10 @@ Tenga en cuenta que a diferencia del método anterior, aqui se recibe un array d
 El formato de la respuesta es igual al método anterior y se describe en la sección [Respuesta de Creación de un DE](#respuesta-de-creacion-de-un-de)
 
 ### Recomendaciones
-- El implementador es libre de utilizar el método más conveniente del servicio a implementar en su sistema, sea el sincrono o el asíncrono, de todas formas dada la similitud entre ambos, se recomienda implementar los dos tipos en su sistema y parametrizar uno u otro de forma opcional, ya que a veces la SET establece que sólo pueda utilizarse el asincrono (ésto podrá cambiar más adelante.)
+- El implementador es libre de utilizar el método más conveniente del servicio a implementar en su sistema, sea el sincrono o el asíncrono, de todas formas dada la similitud entre ambos, se recomienda implementar los dos tipos en su sistema y parametrizar uno u otro de forma opcional, ya que a veces SIFEN establece que sólo pueda utilizarse el asincrono (ésto podrá cambiar más adelante.)
 
 - Una situación que se dá con el proceso asíncrono es que como se realiza en dos tiempos, se puede entregar al Cliente, por ejemplo, una Factura Electrónica que sin nuestro conocimiento sufrió un rechazo por algún motivo y tenga que ser corregido en un paso siguiente. 
-En éste caso existen técnicas que se deben manejar para no alterar el CDC (Código de Control) evitando que el Cliente tenga que devolver el Comprobante para un cambio. Además la SET brinda un plazo de 72 horas para realizar cualquier cambio o modificación sobre el comprobante.
+En éste caso existen técnicas que se deben manejar para no alterar el CDC (Código de Control) evitando que el Cliente tenga que devolver el Comprobante para un cambio. Además SIFEN brinda un plazo de 72 horas para realizar cualquier cambio o modificación sobre el comprobante.
 
 ### Validaciones
 
@@ -1000,7 +1000,7 @@ Atributos | Tipo | Description
 cdc | string | Id único de 44 dígitos, que inicia con 55 generado para el Recibo Electrónico
 numero | string | Número de Recibo Electrónico generado en formato 001-001-0000001
 estado | string | Estado del Recibo Electrónico generado, con el valor Aprobado
-respuesta_codigo | string | Mensaje de Respuesta de la SET (Se incluye con el valor 260 por compatibilidad)
+respuesta_codigo | string | Mensaje de Respuesta de SIFEN (Se incluye con el valor 260 por compatibilidad)
 respuesta_mensaje | string | Se incluye con el valor Aprobado por compatibilidad
 xml<br>(opcional) | string | El archivo **XML** generado del recibo electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el Recibo, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/lote/create?xml=true 
 
@@ -1257,8 +1257,8 @@ cdc | string | Id único de 44 dígitos del Documento Electrónico consultado
 fecha | date-time | Fecha de Proceso en el SIFEN en formato yyyy-MM-ddThh:mm:ss
 numero | string | Número de Documento Electrónico en formato 001-001-0000001
 situacion | number | Situacion numerica en FacturaSend, con los posibles valores:<br>-1 = Borrador<br>0 = Generado DE<br>1 = Enviado en un Lote<br>2 = Aprobado (Caso sea sincrono es inmediato)<br>3 = Aprobado con observacion<br>4 = Rechazado<br>98 = Inexistente<br>99 = Cancelado.<br>Puede utilizar estos mismos estados en su Sistema<br>
-respuesta_codigo | string | Código de la Respuesta de la SET
-respuesta_mensaje | string | Mensaje de Respuesta de la SET
+respuesta_codigo | string | Código de la Respuesta de SIFEN
+respuesta_mensaje | string | Mensaje de Respuesta de SIFEN
 
 ## Obtener XML del DE
 > Para consultar el XML de un DTE:
@@ -1782,7 +1782,7 @@ documentoTipoDescripcion|No|Descripción del Tipo de documento de identidad del 
 **documentoNumero**|**Si**|Número de documento de identidad del responsable de la generación del DE<br/>**Campo XML:**D143
 **nombre**|**Si**|Nombre o razón social del responsable de la generación del DE<br/>**Campo XML:**D144
 **cargo**|**Si**|Cargo del responsable de la generación del DE<br/>**Campo XML:**D145
-**email**|No|Email del responsable de la generación del DE (Esta información no se envía a la SET)<br/><br/>Si se pasa un email válido, también se notifican a éste correo los mensajes de FacturaSend.<br/>
+**email**|No|Email del responsable de la generación del DE (Esta información no se envía a SIFEN)<br/><br/>Si se pasa un email válido, también se notifican a éste correo los mensajes de FacturaSend.<br/>
 
 ### Parametro del objeto data.obligaciones
 
@@ -2192,15 +2192,15 @@ Atributos | Tipo | Description
 cdc | string | Id único de 44 dígitos generado para el Documento Electrónico
 numero | string | Número de Documento Electrónico generado en formato 001-001-0000001
 estado | string | Estado del Documento Electrónico generado, pudiendo ser:<br>Aprobado<br>Aprobado con observación<br>Rechazado<br><br> (Solo en el caso que se envía como síncrono). Si el documento se envia por lote el Estado siempre será 0=Generado
-respuesta_codigo | string | Código de la Respuesta de la SET (Solo en el caso que se envía como síncrono)
-respuesta_mensaje | string | Mensaje de Respuesta de la SET (Solo en el caso que se envía como síncrono)
+respuesta_codigo | string | Código de la Respuesta de SIFEN (Solo en el caso que se envía como síncrono)
+respuesta_mensaje | string | Mensaje de Respuesta de SIFEN (Solo en el caso que se envía como síncrono)
 xml<br>(opcional) | string | El archivo **XML** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?xml=true 
 qr<br>(opcional) | string | El valor del código **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
 dIVA5<br>dIVA10<br>(opcional) | number | El valor del impuesto IVA 5 e IVA 10 del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *tax* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?tax=true
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
-# Consultas de la SET
+# Consultas de SIFEN
 
 ## Consulta DE RUC
 
@@ -2250,7 +2250,7 @@ El RUC informado como parámetro no debe contener el díto verificador.
 
 Esta consulta por RUC también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
 
-Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
+Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a SIFEN, y también se requiere de un Certificado Digital válido.
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -2313,7 +2313,7 @@ Este servicio consulta la existencia de un documento electrónico directamente e
 
 Esta consulta también puede realizarse desde el panel de FacturaSend, todas las consultas anteriores realizadas quedan almacenadas y se despliegan en un listado.
 
-Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a la SET, y también se requiere de un Certificado Digital válido.
+Para invocar éste servicio se requiere que la empresa relacionada al tenant esté conectada a SIFEN, y también se requiere de un Certificado Digital válido.
 
 
 ### Parámetros
@@ -2335,7 +2335,7 @@ protocolo | string | Si la respuesta_codigo = 0422, entonces aqui se mostrará e
 # Eventos
 
 ## Cancelación del DE
-> Evento disponible para cancelar un Documento Electrónico que ya ha sido aprobado en la SET:
+> Evento disponible para cancelar un Documento Electrónico que ya ha sido aprobado en SIFEN:
 
 ```shell
 # Cancela un Documento electronico emitido
@@ -2503,7 +2503,7 @@ result | object | Objeto resultante de la operación del evento (por compatibili
 
 
 ## Evento de Inutilizacion
-> Evento destinado para inutilizar las numeraciones del timbrado que no fueron utilizados, para dejar constancia de su no utilizacion en la SET:
+> Evento destinado para inutilizar las numeraciones del timbrado que no fueron utilizados, para dejar constancia de su no utilizacion en SIFEN:
 
 ```shell
 # Cancela un Documento electronico emitido
@@ -2649,7 +2649,7 @@ axios.post({
   }
 }
 ```
-Con este evento se informa a la SET que el receptor se encuentra conforme total o parcialmente con el documento electronico recibido por parte de su Proveedor asi como tambien que ha recibido la mercaderia o servicio especificado en el documento. 
+Con este evento se informa a SIFEN que el receptor se encuentra conforme total o parcialmente con el documento electronico recibido por parte de su Proveedor asi como tambien que ha recibido la mercaderia o servicio especificado en el documento. 
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -2661,11 +2661,11 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en SIFEN debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Disconformidad
-> Evento destinado para informar a la SET de una Disconformidad sobre un Documento Electronico recibido por parte de un tercero o un proveedor:
+> Evento destinado para informar a SIFEN de una Disconformidad sobre un Documento Electronico recibido por parte de un tercero o un proveedor:
 
 ```shell
 # Evento de disconformidad
@@ -2722,7 +2722,7 @@ axios.post({
   }
 }
 ```
-Con este servicio usted deja constancia en la SET que el documento electronico tiene algun inconveniente o que no le corresponde haber recibido como empresa. 
+Con este servicio usted deja constancia en SIFEN que el documento electronico tiene algun inconveniente o que no le corresponde haber recibido como empresa. 
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -2733,14 +2733,14 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en SIFEN debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Desconocimiento
-> Evento destinado para informar a la SET que usted no debio haber recibido dicho documento o que desconoce su origen y generacion:
+> Evento destinado para informar a SIFEN que usted no debio haber recibido dicho documento o que desconoce su origen y generacion:
 
 ```shell
-# Informa a la SET de un Desconocimiento de un DTE
+# Informa a SIFEN de un Desconocimiento de un DTE
 curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/desconocimiento" \
@@ -2808,7 +2808,7 @@ axios.post({
   }
 }
 ```
-Este servicio informa a la SET que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
+Este servicio informa a SIFEN que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -2826,16 +2826,16 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en SIFEN debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Notificación
-Evento destinado para informar a la SET que conoce dicho documento, sin embargo, aún no tiene condiciones para manifestarse de forma conclusiva (con Conformidad, Disconformidad o Desconocimiento). 
+Evento destinado para informar a SIFEN que conoce dicho documento, sin embargo, aún no tiene condiciones para manifestarse de forma conclusiva (con Conformidad, Disconformidad o Desconocimiento). 
 
 Es un evento opcional.
 
 ```shell
-# Notifica a la SET de que se ha recepcionado un DTE
+# Notifica a SIFEN de que se ha recepcionado un DTE
 curl \
   -X \
   POST "https://api.facturasend.com.py/<tenantId>/evento/notificacion" \
@@ -2903,7 +2903,7 @@ axios.post({
   }
 }
 ```
-Este servicio informa a la SET que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
+Este servicio informa a SIFEN que usted desconoce un determinado documento electronico y que ha sido generado erroneamente a su nombre o a su empresa. 
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -2921,11 +2921,11 @@ Parámetro | Requerido | Descripción
 ### Respuesta
 Atributo | Tipo | Descripción
 --------- | --------- | -----------
-success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en la SET debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
+success | boolean | **true** si no hubo error en el servicio, **false** si ocurrio algun error. Para asegurar que el documento se haya procesado en SIFEN debe verificar que el campo "ns2:dEstRes" sea igual a "Aprobado"
 result | object | Objeto resultante de la operación del evento, directamente en el formato que devuelve el eKuatia
 
 ## Evento de Nominación
-Evento destinado para informar a la SET el receptor de una factura, cuando la factura originalmente fue hecha a un innominado. 
+Evento destinado para informar a SIFEN el receptor de una factura, cuando la factura originalmente fue hecha a un innominado. 
 
 Es un evento que depende de la necesidad del emisor, a menudo cuando necesita realizar una nota de crédito sobre una factura que originalmente se generó a un innominado.
 
@@ -3061,11 +3061,11 @@ result | object | Objeto resultante de la operación del evento, directamente en
 # Lote en Borrador
 Un lote puede ser enviado como borrador a FacturaSend, indicando el parametro de consulta **draft=true**, al crear el Lote.
 
-Un lote en borrador no se envia a la SET hasta que se envie un comando de Confirmación. 
+Un lote en borrador no se envia a SIFEN hasta que se envie un comando de Confirmación. 
 
-Esta opción es muy util para simular el comportamiento completo de un envio de lote, como asi también el flujo que sigue dentro de su sistema, asi como también para poder visualizar el KUDE y estar seguro de sus datos, antes de enviar a la SET.
+Esta opción es muy util para simular el comportamiento completo de un envio de lote, como asi también el flujo que sigue dentro de su sistema, asi como también para poder visualizar el KUDE y estar seguro de sus datos, antes de enviar a SIFEN.
 
-Un lote en borrador puede ser CONFIRMADO o DESCARTADO, Si se Confirma, entonces se da la señal para que este lote se envie a la SET y si se Descarta nunca se envia ese Lote a la SET.
+Un lote en borrador puede ser CONFIRMADO o DESCARTADO, Si se Confirma, entonces se da la señal para que este lote se envie a SIFEN y si se Descarta nunca se envia ese Lote a SIFEN.
 
 ## Confirmar un Lote en Borrador
 
@@ -3103,7 +3103,7 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/lote/draft-confirm/<loteId
   "success": true
 }
 ```
-Este servicio confirma un lote que habia sido enviado originalmente como borrador a FacturaSend, procesandolo y enviandolo a la SET para su proceso.
+Este servicio confirma un lote que habia sido enviado originalmente como borrador a FacturaSend, procesandolo y enviandolo a SIFEN para su proceso.
 
 Debe tener en cuenta que un lote en borrador no puede ser confirmado despues de las 72hs. de su creación, por motivo de la Firma Digital.
 
@@ -3147,7 +3147,7 @@ axios.post(`https://api.facturasend.com.py/<tenantId>/lote/draft-reject/<loteId>
 });
 ```
 
-Este servicio rechaza/descarta un lote que habia sido enviado originalmente como borrador a FacturaSend, no enviandolo finalmente a la SET y de esta forma dando por cerrado al envio de lote.
+Este servicio rechaza/descarta un lote que habia sido enviado originalmente como borrador a FacturaSend, no enviandolo finalmente a SIFEN y de esta forma dando por cerrado al envio de lote.
 
 ### Parámetros
 Parámetro | Requerido | Descripción
@@ -3431,7 +3431,7 @@ axios.post({
 
 ## Obtener versión de las Dependencias.
 
-Servicio que recupera la información de las dependencias y librerías del proyecto backend, útil para saber qué versión específicamente se utilizan para validar, generar, firmar, firmar y enviar a la SET el Documento.
+Servicio que recupera la información de las dependencias y librerías del proyecto backend, útil para saber qué versión específicamente se utilizan para validar, generar, firmar, firmar y enviar a SIFEN el Documento.
 
 ```shell
 # Obtiene versión de las librerías del proyecto

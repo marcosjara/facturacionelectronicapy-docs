@@ -22,26 +22,26 @@ meta:
 ---
 
 # Introduccion
-Bienvenido a la documentacion de referencia de **FacturApi**. La API paraguaya de Facturacion Electronica con el cual podras implementar rapidamente la integracion de tu software con la SET para generar, validar, firmar e imprimir documentos electronicos para tu Empresa o tus Clientes.
+Bienvenido a la documentacion de referencia de **FacturApi**. La API paraguaya de Facturacion Electronica con el cual podras implementar rapidamente la integracion de tu software con SIFEN para generar, validar, firmar e imprimir documentos electronicos para tu Empresa o tus Clientes.
 
 La API esta desarrollada con una plataforma que brinda seguridad de autenticacion y autorizacion, permitiendo el acceso a recursos, siguiendo los estandares recomendados y utilizando Single Sign On para el acceso a la Aplicacion Web, no almacenando contrasenas del password y utilizando tokens de actualizacion para evitar acceso no autorizado y clasificando los datos en ambientes diferentes para cada cliente.
 
 ## Que es FacturApi 
-**FacturApi** es una plataforma compuesta de una Aplicacion Web que actua como una consola o panel de control para configurar los datos del contribuyente, visualizar los documentos generados, invocar los eventos de la SET y obtener diferentes tipos de reportes y graficos.
+**FacturApi** es una plataforma compuesta de una Aplicacion Web que actua como una consola o panel de control para configurar los datos del contribuyente, visualizar los documentos generados, invocar los eventos de SIFEN y obtener diferentes tipos de reportes y graficos.
 
-**FacturApi** tambien esta compuesto de una capa de nivel de nivel de servicios web que permite al integrador poder invocar las funciones mediante llamadas a la API REST, lo cual facilita la integracion de cualquier Sistema o Aplicativo ya desarrollado sea este Escritorio, Web o movil con el fin de emitir documentos electronicos (Facturas, Autofacturas, Notas de Debitos y Creditos y Notas de retencion electronicas), validados por la SET y realizar todas las operaciones vinculadas con la Facturacion Electronica (Sifen).
+**FacturApi** tambien esta compuesto de una capa de nivel de nivel de servicios web que permite al integrador poder invocar las funciones mediante llamadas a la API REST, lo cual facilita la integracion de cualquier Sistema o Aplicativo ya desarrollado sea este Escritorio, Web o movil con el fin de emitir documentos electronicos (Facturas, Autofacturas, Notas de Debitos y Creditos y Notas de retencion electronicas), validados por SIFEN y realizar todas las operaciones vinculadas con la Facturacion Electronica (Sifen).
 
 Con FacturApi podras crear varias empresas cada una de ellas para cada uno de los clientes especificos que posees, manteniendo un control sencillo e independiente de los datos e invitando a usuarios con diferentes roles para acceder de forma controlada a los recursos. 
 
 FacturApi contempla todos los procesos requeridos para la generacion de documentos electronicos.
 
-1. Generacion del Documento XML segun el manual tecnico de la SET
+1. Generacion del Documento XML segun el manual tecnico de SIFEN
 2. Firma del Documento Electronico, utilizando el certificado digital de la Empresa contribuyente
 3. Generacion del Codigo QR para la Factura.
-4. Comunicacion con la SET (Envio de documentos electronicos, generacion de lotes de envio, consulta de documentos.)
+4. Comunicacion con SIFEN (Envio de documentos electronicos, generacion de lotes de envio, consulta de documentos.)
 5. Generacion del Documento KUDE (Archivo PDF de la Factura o Documento electronico, personalizado de acuerdo al Logo del Emisor).
 6. Envio de email del documento electronico al contribuyente receptor.
-7. Invocacion a todos Eventos de la SET (Cancelacion, inutilizacion, etc.)
+7. Invocacion a todos Eventos de SIFEN (Cancelacion, inutilizacion, etc.)
 8. Consulta de RUC.
 
 ## Para quien fue pensado FacturApi
@@ -56,24 +56,24 @@ FacturApi no fue pensado para los duenos de empresa, empresarios o emprendedores
 
 ## Como empiezo a generar Documentos Electronicos
 
-El camino normal para generar documentos electronicos y realizar todos los procesos involucrados con la SET es obtener un timbrado de prueba y una habilitacion de acceso para el uso del Sifen del ambiente de test, ademas de un certificado digital para firmar los documentos, si, incluso en ambiente de Test. Luego de esa primera condicion se debe realizar la integracion de tu sistema y validar una bateria de test de todas las funcionalidades solicitadas por la SET, se libera el ambiente a produccion y ya se pueden emitir documentos tributarios electronicos reales y validos.
+El camino normal para generar documentos electronicos y realizar todos los procesos involucrados con SIFEN es obtener un timbrado de prueba y una habilitacion de acceso para el uso del Sifen del ambiente de test, ademas de un certificado digital para firmar los documentos, si, incluso en ambiente de Test. Luego de esa primera condicion se debe realizar la integracion de tu sistema y validar una bateria de test de todas las funcionalidades solicitadas por SIFEN, se libera el ambiente a produccion y ya se pueden emitir documentos tributarios electronicos reales y validos.
 
 Si bien este es el camino obligado, el proceso de incluirte como empresa habilitada o a tus clientes en ambiente de test puede demorar un tiempo.
 
-Para evitar esa espera con FacturApi puedes empezar a integrar tu sistema hoy mismo y emitir tus documentos electronicos de test rapidamente validando de forma temprana tu sistema o aplicacion, no necesitas ser un contribuyente habilitado por la SET ni poseer un Certificado Digital para empezar emitir comprobantes electronicos desde nuestra Api, no te preocupes por eso, trabajaras en un ambiente desconectado de la SET pero simularas todos los mismos procesos como si ya estuvieras habilitado utilizando un certificado digital de prueba para firmar los documentos.
+Para evitar esa espera con FacturApi puedes empezar a integrar tu sistema hoy mismo y emitir tus documentos electronicos de test rapidamente validando de forma temprana tu sistema o aplicacion, no necesitas ser un contribuyente habilitado por SIFEN ni poseer un Certificado Digital para empezar emitir comprobantes electronicos desde nuestra Api, no te preocupes por eso, trabajaras en un ambiente desconectado de SIFEN pero simularas todos los mismos procesos como si ya estuvieras habilitado utilizando un certificado digital de prueba para firmar los documentos.
 
-Los documentos electronicos emitidos en ambiente desconectados desde FacturApi, no tienen validez tributaria, y el PDF del KUDE impreso llevara la leyenda "Generado desde un Ambiente no conectado a la SET", por eso recomendamos que apenas inicies la integracion de tu sistema con FacturAPI inicies el proceso de solicitar la inclusion de tu empresa o la de tus clientes para emitir documentos electronicos en la SET.
+Los documentos electronicos emitidos en ambiente desconectados desde FacturApi, no tienen validez tributaria, y el PDF del KUDE impreso llevara la leyenda "Generado desde un Ambiente no conectado a SIFEN", por eso recomendamos que apenas inicies la integracion de tu sistema con FacturAPI inicies el proceso de solicitar la inclusion de tu empresa o la de tus clientes para emitir documentos electronicos en SIFEN.
 
 ## Cuanto cuesta el Servicio
-FacturApi no tiene costo de adhesion, puedes empezar a utilizarlo inmediatamente sin pagar nada, ya que en un primer momento tendras acceso a un ambiente "No conectado a la SET" donde podras realizar todos los pasos para integrar tu sistema conforme la API Rest descrita mas abajo, enviando y recibiendo objetos JSON. 
+FacturApi no tiene costo de adhesion, puedes empezar a utilizarlo inmediatamente sin pagar nada, ya que en un primer momento tendras acceso a un ambiente "No conectado a SIFEN" donde podras realizar todos los pasos para integrar tu sistema conforme la API Rest descrita mas abajo, enviando y recibiendo objetos JSON. 
 
 Desde un primer momento tendras acceso a todas las funcionalidades de la aplicacion, podras ver e imprimir el PDF del Documento Electronico (KUDE) y tus Documentos Electronicos firmados con el certificado digital de prueba (XML) se guardaran en un lugar seguro en la nube por 5 anos, no pagaras nada en absoluto hasta este punto.
 
-Luego que hayas realizado toda tu integracion y hayas obtenido tu empresa o la empresa de tu cliente la habilitacion como Facturador electronico por parte de la SET, pasaras a un ambiente de test, a travez de una opcion que podras cambiarla tu mismo dentro de la Consola.
+Luego que hayas realizado toda tu integracion y hayas obtenido tu empresa o la empresa de tu cliente la habilitacion como Facturador electronico por parte de SIFEN, pasaras a un ambiente de test, a travez de una opcion que podras cambiarla tu mismo dentro de la Consola.
 
-En el ambiente conectado de test, tus documentos ya se envian a la SET, y se obtienen las respuestas de esos envios corespondientes, alli podras seguir imprimiendo unos cuantos documentos ya con tu sistema integrado mientras que FacturApi ira recolectando dicha informacion para remirirla en formato resumido posteriormente, pues la SET te pedira dicha informacion. Aun ya estando en ambiente conectado no tendras que pagar nada a FacturAPI, pues los documentos electronicos creados en esta instancia aun no son documentos electronicos reales validos.
+En el ambiente conectado de test, tus documentos ya se envian a SIFEN, y se obtienen las respuestas de esos envios corespondientes, alli podras seguir imprimiendo unos cuantos documentos ya con tu sistema integrado mientras que FacturApi ira recolectando dicha informacion para remirirla en formato resumido posteriormente, pues SIFEN te pedira dicha informacion. Aun ya estando en ambiente conectado no tendras que pagar nada a FacturAPI, pues los documentos electronicos creados en esta instancia aun no son documentos electronicos reales validos.
 
-Empezaras a abonar por el uso del servicio y de la API cuando hayas creado tu primero documento electronico en ambiente de produccion de la SET.
+Empezaras a abonar por el uso del servicio y de la API cuando hayas creado tu primero documento electronico en ambiente de produccion de SIFEN.
 
 
 ## Pasos para utilizar FacturApi
@@ -152,13 +152,13 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 # Lotes
 
 ## Envio de lotes
-Esta invocación, crea los documentos electrónicos y los envía a la SET.
+Esta invocación, crea los documentos electrónicos y los envía a SIFEN.
 
 ### HTTP Request
 
 `POST http://api.facturasend.com.py/<tokenId>/lote/create`
 
-Esta invocación, crea los documentos electrónicos y los envía a la SET.
+Esta invocación, crea los documentos electrónicos y los envía a SIFEN.
 
 ```shell
 curl "http://api.facturasend.com.py/<tokenId>/lote/create" \
@@ -194,7 +194,7 @@ axios.get(`https://api.facturasend.com.py/<tokenId>/lote`).then( respuesta => {
 ]
 ```
 
-Primeramente se generaran los documentos electrónicos en FacturaSend, luego se intentarán enviar a la SET.
+Primeramente se generaran los documentos electrónicos en FacturaSend, luego se intentarán enviar a SIFEN.
 
 ### HTTP Request
 
