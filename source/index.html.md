@@ -754,14 +754,19 @@ Todos los documentos electrónicos enviados con ésta peticion pueden ser visual
 ```json
 { 
   "success" : true,
-  "deList" : [{
-    "cdc": "01800695631001002100694612021112410311184194",
-    "numero": "001-001-0000001",
-    "xml": "",
-    "qr": "",
-    "dIVA5": "",
-    "dIVA10": ""
-  }]
+  result : {
+    "deList" : [{
+      "cdc": "01800695631001002100694612021112410311184194",
+      "numero": "001-001-0000001",
+      "xml": "Si se pasa el queryParam xml",
+      "qr": "Si se pasa el queryParam qr",
+      "dIVA5": "Si se pasa el queryParam tax",
+      "dIVA10": "Si se pasa el queryParam tax",
+      "fechaEmision": "2024-12-27T00:00:00",
+      "fechaFirma": "2025-04-11T14:26:14"
+    }],
+    loteId : 26
+  }
 }
 ```
 
