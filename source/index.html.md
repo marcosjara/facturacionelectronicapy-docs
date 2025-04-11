@@ -450,7 +450,7 @@ Todos los documentos electrónicos enviados con ésta peticion pueden ser visual
 ```json
 { 
   "success" : true,
-  result : {
+  "result" : {
     "deList" : [{
       "cdc": "01800695631001002100694612021112410311184194",
       "numero": "001-001-0000001",
@@ -461,7 +461,7 @@ Todos los documentos electrónicos enviados con ésta peticion pueden ser visual
       "fechaEmision": "2024-12-27T00:00:00",
       "fechaFirma": "2025-04-11T14:26:14"
     }],
-    loteId : 26
+    "loteId" : 26
   }
 }
 ```
@@ -1858,14 +1858,19 @@ rucFusionado|No|Cuando el formato es 1-Electrónico y el CDC del Documento Refer
 ```json
 { 
   "success" : true,
-  "deList" : [{
-    "cdc": "01800695631001002100694612021112410311184194",
-    "numero": "001-001-0000001",
-    "estado": "Aprobado",
-    "respuesta_codigo": "",
-    "respuesta_mensaje": ""
-  }],
-  "loteId" : 12
+  "result" : {
+    "deList" : [{
+      "cdc": "01800695631001002100694612021112410311184194",
+      "numero": "001-001-0000001",
+      "estado": "Aprobado",
+      "respuesta_codigo": "",
+      "respuesta_mensaje": "",
+      "fechaEmision": "2024-12-27T00:00:00",
+      "fechaFirma": "2025-04-11T14:26:14"
+
+    }],
+    "loteId" : 12
+  }
 }
 ```
 
@@ -1884,6 +1889,7 @@ errores | array | En el caso de haya invocado la API para crear varios DEs por e
 deList | array | El array con la respuesta de cada DE procesado.<br><br>Los atributos de éste array se describen en Respuesta [deList](#atributos-de-la-respuesta-delist)
 loteId | number | El número de lote generado para la solicitud.
 
+
 ### Atributos de la Respuesta deList
 
 Atributos | Tipo | Description
@@ -1896,6 +1902,8 @@ respuesta_mensaje | string | Mensaje de Respuesta de SIFEN (Solo en el caso que 
 xml<br>(opcional) | string | El archivo **XML** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *xml* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?xml=true 
 qr<br>(opcional) | string | El valor del código **QR** generado del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *qr* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?qr=true
 dIVA5<br>dIVA10<br>(opcional) | number | El valor del impuesto IVA 5 e IVA 10 del documento electronico.<br>Este elemento solamente se retorna cuando se le pasa el valor *true* en el atributo *tax* como **queryParam** al crear el DE o el LOTE, ej: <br>https://api.facturasend.com.py/&lt;tenantId&gt;/de/create?tax=true
+fechaEmision | string | Fecha del Servidor de emisión del documento.
+fechaFirma | string | Fecha real del Servidor en el cual se firmó el documento.
 
 En caso de errores, los atributos respuesta_codigo y respuesta_mensaje pueden ser utilizados para obtener más detalles sobre el error ocurrido. En caso de aprobación la respuesta_codigo retornará 0260. Los códigos de error se encuentran en el manual técnico.
 
